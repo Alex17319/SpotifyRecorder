@@ -24,6 +24,12 @@ namespace SpotifyRec
 		private Task _conversionTask;
 		private object _lock = new object();
 
+		public bool ConversionIsInProgress {
+			get {
+				lock (_lock) return TaskIsInProgress(_conversionTask);
+			}
+		}
+
 		public SongConverter(string outputFolder, string tempFolder, Logger logger)
 		{
 			this.OutputFolder = outputFolder;

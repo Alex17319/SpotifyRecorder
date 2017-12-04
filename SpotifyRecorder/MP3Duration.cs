@@ -19,7 +19,7 @@ namespace SpotifyRec
 		}
 
 		//Fast, low memory method that might not work or could be unreliable
-		//Eg. I don't know what units it uses
+		//Eg. I don't even know what units it uses
 		private static TimeSpan GetTotalMilliseconds_Fast(string mp3Path)
 		{
 			//Adapted from https://stackoverflow.com/a/13269914/4149474 by Daniel Mošmondor
@@ -28,7 +28,7 @@ namespace SpotifyRec
 			using (FileStream fs = File.OpenRead(mp3Path))
 			{
 				Mp3Frame frame = Mp3Frame.LoadFromStream(fs);
-				//No idea what this was for
+				//No idea what this is for - and it doesn't compile
 				//	if (frame != null)
 				//	{
 				//		_sampleFrequency = (uint)frame.SampleRate;
@@ -52,6 +52,7 @@ namespace SpotifyRec
 			return TimeSpan.FromSeconds(duration); //This is a guess - have to test to find out what the actual units are
 		}
 
+		//Method that AFAIK is relatively slow and memory intensive, but which should work
 		private static TimeSpan GetTotalMilliseconds_Safe(string mp3Path)
 		{
 			Mp3FileReader reader = new Mp3FileReader(mp3Path);

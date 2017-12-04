@@ -27,8 +27,11 @@ namespace SpotifyRec
 		private Logger _logger;
 
 		private bool _splittingCompleted = false;
+		/// <summary>
+		/// False until everything, including asynchronously splitting the recording into songs, has been completed
+		/// </summary>
 		public bool SplittingCompleted {
-			get { lock (_lock) { return _splittingCompleted; } }
+			get { lock (_lock) return _splittingCompleted; }
 		}
 		private object _lock = new object();
 
