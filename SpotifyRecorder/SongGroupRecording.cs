@@ -98,7 +98,7 @@ namespace SpotifyRec
 
 					string songPath = Path.Combine(
 						this.TempFolder, 
-						$"G#{this.GroupNumber}.S#{songNum} = {song.Artist} - {song.SongName}"
+						$"G#{this.GroupNumber}-S#{songNum} = {song.Artist} - {song.SongName}"
 					);
 					// ^ Adding in the group and song numbers avoids having to deal with
 					// duplicates (they'll be dealt with later)
