@@ -12,7 +12,7 @@ using NAudio.Gui;
 
 namespace SpotifyRec
 {
-	public class SongGroupRecording
+	public class SongGroupRecording : IDisposable
 	{
 		public string TempFolder { get; }
 		public int GroupNumber { get; }
@@ -23,6 +23,8 @@ namespace SpotifyRec
 		public DateTime RecordingStartTime { get; }
 
 		public ReadOnlyCollection<SongInfo> Songs => _songTracker.Songs;
+
+		public event EventHandler GroupFinished;
 
 		private Logger _logger;
 
@@ -35,12 +37,12 @@ namespace SpotifyRec
 		}
 		private object _lock = new object();
 
-		public SongGroupRecording(string tempFolder, int groupNumber, SpotifyProcessManager spotifyProcessManager, ISongClassifier songClassifier, int refreshInterval, Logger logger)
+		public SongGroupRecording(string tempFolder, int groupNumber, SpotifyProcessManager spotifyProcessManager, ISongClassifier songClassifier, int songRefreshInterval, Logger logger)
 		{
 			this.TempFolder = tempFolder;
 			this.GroupNumber = groupNumber;
 
-			_songTracker = new SongTracker(spotifyProcessManager, songClassifier, refreshInterval);
+			_songTracker = new SongTracker(spotifyProcessManager, songClassifier, songRefreshInterval);
 			_audioRecorder = new AudioRecorder(tempFolder, "TempGroupRec#" + groupNumber);
 
 			RecordingStartTime = DateTime.Now;
@@ -59,9 +61,20 @@ namespace SpotifyRec
 			}
 		}
 
+		public void StopRecordingEarly()
+		{
+			_songTracker.FinishTracking();
+			_songTracker.Dispose(); //Not needed *currently* but always good to do
+			_audioRecorder.RequestStopRecording();
+			_audioRecorder.Stopped += OnRecordingStopped;
+		}
+
 		private void OnRecordingStopped(object sender, EventArgs e)
 		{
 			_audioRecorder.Stopped -= OnRecordingStopped;
+			_audioRecorder.Dispose(); //Not needed *currently* but always good to do
+
+			GroupFinished?.Invoke(this, EventArgs.Empty);
 
 			Task.Run((Action)SplitSongs)
 			.ContinueWith(
@@ -147,6 +160,11 @@ namespace SpotifyRec
 				);
 				songWriter.Write(sharedTempBuffer, offset: 0, count: numRead);
 			}
+		}
+
+		public void Dispose()
+		{
+			StopRecordingEarly(); //Should work even if it's already stopped recording
 		}
 	}
 }

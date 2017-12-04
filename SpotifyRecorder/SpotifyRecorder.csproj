@@ -59,6 +59,7 @@
     <Compile Include="AttemptEventArgs.cs" />
     <Compile Include="AudioRecorder.cs" />
     <Compile Include="MP3Duration.cs" />
+    <Compile Include="RecordingSession.cs" />
     <Compile Include="SongConverter.cs" />
     <Compile Include="UI\FolderBrowsePanel.cs">
       <SubType>UserControl</SubType>
