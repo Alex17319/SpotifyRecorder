@@ -11,6 +11,9 @@ using NAudio;
 using NAudio.Wave;
 using NAudio.Lame;
 using System.Text.RegularExpressions;
+using NAudio.Vorbis;
+using NAudio.Flac;
+using SpotifyRec.SongEncoding;
 
 namespace SpotifyRec
 {
@@ -18,6 +21,7 @@ namespace SpotifyRec
 	{
 		public string OutputFolder { get; }
 		public string TempFolder { get; }
+		public ISongEncoder SongEncoder { get; }
 
 		private Logger _logger;
 
@@ -30,7 +34,7 @@ namespace SpotifyRec
 			}
 		}
 
-		public SongConverter(string outputFolder, string tempFolder, Logger logger)
+		public SongConverter(string outputFolder, string tempFolder, ISongEncoder songEncoder, Logger logger)
 		{
 			this.OutputFolder = outputFolder;
 			this.TempFolder = tempFolder;
@@ -65,21 +69,19 @@ namespace SpotifyRec
 			{
 				var spotifySongInfo = new SpotifySongInfo(songFullName);
 
-				var reader = new WaveFileReader(songPath);
-				var writer = new LameMP3FileWriter(
-					Path.Combine(this.OutputFolder, songFullName) + ".mp3",
-					reader.WaveFormat,
-					LAMEPreset.STANDARD,
-					new ID3TagData() {
-						Artist = spotifySongInfo.Artist,
-						Title = spotifySongInfo.SongName,
-					}
-				);
+				var destPath = Path.Combine(this.OutputFolder, songFullName) + SongEncoder.Extension;
 
-				while (reader.Position < reader.Length)
+				using (var source = File.OpenRead(songPath))
 				{
-					int bytesRead = reader.Read(buffer, 0, buffer.Length);
-					writer.Write(buffer, 0, bytesRead);
+					SongEncoder.Encode(
+						source,
+						destPath,
+						new SongTags(
+							title: spotifySongInfo.SongName,
+							artist: spotifySongInfo.Artist
+						),
+						buffer
+					);
 				}
 
 				File.Move(songPath, Path.ChangeExtension(songPath, ".wav-converted"));

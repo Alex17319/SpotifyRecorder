@@ -134,7 +134,7 @@ namespace SpotifyRec
 			//This also ensures that if there's an error above the file should still get deleted.
 		}
 
-		private void ExtractSongToFile(byte[] sharedTempBuffer, WaveFileReader groupReader, WaveFileWriter songWriter, SongInfo song)
+		private void ExtractSongToFile(byte[] reusedBuffer, WaveFileReader groupReader, WaveFileWriter songWriter, SongInfo song)
 		{
 			DateTime songEndTime = song.TimeStopped ?? this.RecordingStartTime + _audioRecorder.CurrentLength;
 			TimeSpan songDuration = songEndTime - song.TimeStarted;
@@ -154,11 +154,11 @@ namespace SpotifyRec
 				if (songBytesRemaining <= 0 || readerBytesRemaining <= 0) break;
 
 				int numRead = groupReader.Read(
-					sharedTempBuffer,
+					reusedBuffer,
 					offset: 0,
 					count: checked((int)Math.Min(songBytesRemaining, readerBytesRemaining))
 				);
-				songWriter.Write(sharedTempBuffer, offset: 0, count: numRead);
+				songWriter.Write(reusedBuffer, offset: 0, count: numRead);
 			}
 		}
 
