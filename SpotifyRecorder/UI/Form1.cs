@@ -23,23 +23,23 @@ namespace SpotifyRec
 		{
 			InitializeComponent();
 
-			this.AdNamesTextBox.LostFocus += delegate {
-				if (!Enumerable.SequenceEqual(Settings.AdNames, AdNamesTextBox.Lines)) {
-					AdNamesChanged?.Invoke(this, EventArgs.Empty);
-				}
-			};
-
-			this.AdKeywordsTextBox.LostFocus += delegate {
-				if (!Enumerable.SequenceEqual(Settings.AdKeywords, AdKeywordsTextBox.Lines)) {
-					AdKeywordsChanged?.Invoke(this, EventArgs.Empty);
-				}
-			};
-
-			this.SongNamesTextBox.LostFocus += delegate {
-				if (!Enumerable.SequenceEqual(Settings.SongNames, SongNamesTextBox.Lines)) {
-					SongNamesChanged?.Invoke(this, EventArgs.Empty);
-				}
-			};
+			//	this.AdNamesTextBox.LostFocus += delegate {
+			//		if (!Enumerable.SequenceEqual(Settings.AdNames, AdNamesTextBox.Lines)) {
+			//			AdNamesChanged?.Invoke(this, EventArgs.Empty);
+			//		}
+			//	};
+			//	
+			//	this.AdKeywordsTextBox.LostFocus += delegate {
+			//		if (!Enumerable.SequenceEqual(Settings.AdKeywords, AdKeywordsTextBox.Lines)) {
+			//			AdKeywordsChanged?.Invoke(this, EventArgs.Empty);
+			//		}
+			//	};
+			//	
+			//	this.SongNamesTextBox.LostFocus += delegate {
+			//		if (!Enumerable.SequenceEqual(Settings.SongNames, SongNamesTextBox.Lines)) {
+			//			SongNamesChanged?.Invoke(this, EventArgs.Empty);
+			//		}
+			//	};
 
 		}
 	}

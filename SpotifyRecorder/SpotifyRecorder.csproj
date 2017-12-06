@@ -71,6 +71,12 @@
     <Compile Include="AttemptEventArgs.cs" />
     <Compile Include="AudioRecorder.cs" />
     <Compile Include="SettingManager.cs" />
+    <Compile Include="UI\UniaxualResizePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UniaxualResizePanel.Designer.cs">
+      <DependentUpon>UniaxualResizePanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\SettingsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -135,6 +141,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\UniaxualResizePanel.resx">
+      <DependentUpon>UniaxualResizePanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\SettingsPage.resx">
       <DependentUpon>SettingsPage.cs</DependentUpon>
     </EmbeddedResource>
