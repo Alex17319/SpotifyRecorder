@@ -39,31 +39,48 @@
 			this.LogGroupBox = new System.Windows.Forms.GroupBox();
 			this.LogPanel = new System.Windows.Forms.Panel();
 			this.MainHSplitter = new System.Windows.Forms.Splitter();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
-			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.AdsTabInfo = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.splitter1 = new System.Windows.Forms.Splitter();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.AdNamesGroupBox = new System.Windows.Forms.GroupBox();
-			this.splitter2 = new System.Windows.Forms.Splitter();
-			this.AdKeywordsGroupBox = new System.Windows.Forms.GroupBox();
-			this.SongNamesGroupBox = new System.Windows.Forms.GroupBox();
 			this.AdNamesTextBox = new System.Windows.Forms.TextBox();
+			this.AdsTabInfo = new System.Windows.Forms.Label();
+			this.splitter2 = new System.Windows.Forms.Splitter();
+			this.AdKeywordsTextBox = new System.Windows.Forms.TextBox();
+			this.AdKeywordsGroupBox = new System.Windows.Forms.GroupBox();
+			this.SongNamesTextBox = new System.Windows.Forms.TextBox();
+			this.SongNamesGroupBox = new System.Windows.Forms.GroupBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.panel3 = new System.Windows.Forms.Panel();
+			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.splitter3 = new System.Windows.Forms.Splitter();
+			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.textBox2 = new System.Windows.Forms.TextBox();
+			this.splitter4 = new System.Windows.Forms.Splitter();
+			this.panel4 = new System.Windows.Forms.Panel();
+			this.groupBox4 = new System.Windows.Forms.GroupBox();
 			this.textBox3 = new System.Windows.Forms.TextBox();
+			this.OutputFormatGroupBox = new System.Windows.Forms.GroupBox();
+			this.OutputFormatBox = new System.Windows.Forms.ComboBox();
 			this.MainTabs.SuspendLayout();
 			this.AdsTab.SuspendLayout();
 			this.SettingsTab.SuspendLayout();
 			this.LogGroupBox.SuspendLayout();
 			this.LogPanel.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
+			this.groupBox1.SuspendLayout();
 			this.AdNamesGroupBox.SuspendLayout();
 			this.AdKeywordsGroupBox.SuspendLayout();
 			this.SongNamesGroupBox.SuspendLayout();
+			this.panel3.SuspendLayout();
+			this.groupBox2.SuspendLayout();
+			this.groupBox3.SuspendLayout();
+			this.panel4.SuspendLayout();
+			this.groupBox4.SuspendLayout();
+			this.OutputFormatGroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// MainTabs
@@ -85,7 +102,7 @@
 			this.RecorderTab.Location = new System.Drawing.Point(4, 22);
 			this.RecorderTab.Name = "RecorderTab";
 			this.RecorderTab.Padding = new System.Windows.Forms.Padding(3);
-			this.RecorderTab.Size = new System.Drawing.Size(347, 179);
+			this.RecorderTab.Size = new System.Drawing.Size(384, 240);
 			this.RecorderTab.TabIndex = 0;
 			this.RecorderTab.Text = "Recording";
 			this.RecorderTab.UseVisualStyleBackColor = true;
@@ -95,7 +112,7 @@
 			this.PlaylistSortTab.Location = new System.Drawing.Point(4, 22);
 			this.PlaylistSortTab.Name = "PlaylistSortTab";
 			this.PlaylistSortTab.Padding = new System.Windows.Forms.Padding(3);
-			this.PlaylistSortTab.Size = new System.Drawing.Size(347, 179);
+			this.PlaylistSortTab.Size = new System.Drawing.Size(384, 240);
 			this.PlaylistSortTab.TabIndex = 1;
 			this.PlaylistSortTab.Text = "Playlists";
 			this.PlaylistSortTab.UseVisualStyleBackColor = true;
@@ -116,11 +133,14 @@
 			// 
 			// SettingsTab
 			// 
-			this.SettingsTab.Controls.Add(this.dataGridView1);
+			this.SettingsTab.AutoScroll = true;
+			this.SettingsTab.AutoScrollMinSize = new System.Drawing.Size(0, 500);
+			this.SettingsTab.Controls.Add(this.OutputFormatGroupBox);
+			this.SettingsTab.Controls.Add(this.groupBox1);
 			this.SettingsTab.Location = new System.Drawing.Point(4, 22);
 			this.SettingsTab.Name = "SettingsTab";
 			this.SettingsTab.Padding = new System.Windows.Forms.Padding(3);
-			this.SettingsTab.Size = new System.Drawing.Size(347, 179);
+			this.SettingsTab.Size = new System.Drawing.Size(384, 240);
 			this.SettingsTab.TabIndex = 3;
 			this.SettingsTab.Text = "Settings";
 			this.SettingsTab.UseVisualStyleBackColor = true;
@@ -130,7 +150,7 @@
 			this.AboutTab.Location = new System.Drawing.Point(4, 22);
 			this.AboutTab.Name = "AboutTab";
 			this.AboutTab.Padding = new System.Windows.Forms.Padding(3);
-			this.AboutTab.Size = new System.Drawing.Size(347, 179);
+			this.AboutTab.Size = new System.Drawing.Size(384, 240);
 			this.AboutTab.TabIndex = 4;
 			this.AboutTab.Text = "About";
 			this.AboutTab.UseVisualStyleBackColor = true;
@@ -181,36 +201,6 @@
 			this.MainHSplitter.TabIndex = 5;
 			this.MainHSplitter.TabStop = false;
 			// 
-			// dataGridView1
-			// 
-			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2});
-			this.dataGridView1.Location = new System.Drawing.Point(8, 6);
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.Size = new System.Drawing.Size(240, 150);
-			this.dataGridView1.TabIndex = 0;
-			// 
-			// Column1
-			// 
-			this.Column1.HeaderText = "Keywords";
-			this.Column1.Name = "Column1";
-			// 
-			// Column2
-			// 
-			this.Column2.HeaderText = "Names";
-			this.Column2.Name = "Column2";
-			// 
-			// AdsTabInfo
-			// 
-			this.AdsTabInfo.Dock = System.Windows.Forms.DockStyle.Top;
-			this.AdsTabInfo.Location = new System.Drawing.Point(3, 3);
-			this.AdsTabInfo.Name = "AdsTabInfo";
-			this.AdsTabInfo.Padding = new System.Windows.Forms.Padding(3);
-			this.AdsTabInfo.Size = new System.Drawing.Size(378, 99);
-			this.AdsTabInfo.TabIndex = 0;
-			this.AdsTabInfo.Text = resources.GetString("AdsTabInfo.Text");
-			// 
 			// panel1
 			// 
 			this.panel1.Controls.Add(this.AdKeywordsGroupBox);
@@ -241,6 +231,20 @@
 			this.panel2.Size = new System.Drawing.Size(378, 73);
 			this.panel2.TabIndex = 3;
 			// 
+			// groupBox1
+			// 
+			this.groupBox1.Controls.Add(this.panel4);
+			this.groupBox1.Controls.Add(this.splitter4);
+			this.groupBox1.Controls.Add(this.panel3);
+			this.groupBox1.Controls.Add(this.label1);
+			this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.groupBox1.Location = new System.Drawing.Point(3, 3);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(361, 304);
+			this.groupBox1.TabIndex = 0;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Ad Classification";
+			// 
 			// AdNamesGroupBox
 			// 
 			this.AdNamesGroupBox.Controls.Add(this.AdNamesTextBox);
@@ -251,38 +255,6 @@
 			this.AdNamesGroupBox.TabIndex = 0;
 			this.AdNamesGroupBox.TabStop = false;
 			this.AdNamesGroupBox.Text = "Ad Names";
-			// 
-			// splitter2
-			// 
-			this.splitter2.BackColor = System.Drawing.SystemColors.Window;
-			this.splitter2.Location = new System.Drawing.Point(200, 0);
-			this.splitter2.MinimumSize = new System.Drawing.Size(5, 0);
-			this.splitter2.Name = "splitter2";
-			this.splitter2.Size = new System.Drawing.Size(5, 59);
-			this.splitter2.TabIndex = 1;
-			this.splitter2.TabStop = false;
-			// 
-			// AdKeywordsGroupBox
-			// 
-			this.AdKeywordsGroupBox.Controls.Add(this.textBox2);
-			this.AdKeywordsGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.AdKeywordsGroupBox.Location = new System.Drawing.Point(205, 0);
-			this.AdKeywordsGroupBox.Name = "AdKeywordsGroupBox";
-			this.AdKeywordsGroupBox.Size = new System.Drawing.Size(173, 59);
-			this.AdKeywordsGroupBox.TabIndex = 2;
-			this.AdKeywordsGroupBox.TabStop = false;
-			this.AdKeywordsGroupBox.Text = "Ad Keywords";
-			// 
-			// SongNamesGroupBox
-			// 
-			this.SongNamesGroupBox.Controls.Add(this.textBox3);
-			this.SongNamesGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.SongNamesGroupBox.Location = new System.Drawing.Point(0, 0);
-			this.SongNamesGroupBox.Name = "SongNamesGroupBox";
-			this.SongNamesGroupBox.Size = new System.Drawing.Size(378, 73);
-			this.SongNamesGroupBox.TabIndex = 0;
-			this.SongNamesGroupBox.TabStop = false;
-			this.SongNamesGroupBox.Text = "Exempt Song Names";
 			// 
 			// AdNamesTextBox
 			// 
@@ -296,6 +268,139 @@
 			this.AdNamesTextBox.Size = new System.Drawing.Size(194, 40);
 			this.AdNamesTextBox.TabIndex = 0;
 			// 
+			// AdsTabInfo
+			// 
+			this.AdsTabInfo.Dock = System.Windows.Forms.DockStyle.Top;
+			this.AdsTabInfo.Location = new System.Drawing.Point(3, 3);
+			this.AdsTabInfo.Name = "AdsTabInfo";
+			this.AdsTabInfo.Padding = new System.Windows.Forms.Padding(3);
+			this.AdsTabInfo.Size = new System.Drawing.Size(378, 99);
+			this.AdsTabInfo.TabIndex = 0;
+			this.AdsTabInfo.Text = resources.GetString("AdsTabInfo.Text");
+			// 
+			// splitter2
+			// 
+			this.splitter2.BackColor = System.Drawing.SystemColors.Window;
+			this.splitter2.Location = new System.Drawing.Point(200, 0);
+			this.splitter2.MinimumSize = new System.Drawing.Size(5, 0);
+			this.splitter2.Name = "splitter2";
+			this.splitter2.Size = new System.Drawing.Size(5, 59);
+			this.splitter2.TabIndex = 1;
+			this.splitter2.TabStop = false;
+			// 
+			// AdKeywordsTextBox
+			// 
+			this.AdKeywordsTextBox.AcceptsReturn = true;
+			this.AdKeywordsTextBox.AcceptsTab = true;
+			this.AdKeywordsTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.AdKeywordsTextBox.Location = new System.Drawing.Point(3, 16);
+			this.AdKeywordsTextBox.Multiline = true;
+			this.AdKeywordsTextBox.Name = "AdKeywordsTextBox";
+			this.AdKeywordsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.AdKeywordsTextBox.Size = new System.Drawing.Size(167, 40);
+			this.AdKeywordsTextBox.TabIndex = 0;
+			this.AdKeywordsTextBox.Text = "spotify\r\nlisten now\r\nclick here\r\nclick the banner\r\nget premium";
+			// 
+			// AdKeywordsGroupBox
+			// 
+			this.AdKeywordsGroupBox.Controls.Add(this.AdKeywordsTextBox);
+			this.AdKeywordsGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.AdKeywordsGroupBox.Location = new System.Drawing.Point(205, 0);
+			this.AdKeywordsGroupBox.Name = "AdKeywordsGroupBox";
+			this.AdKeywordsGroupBox.Size = new System.Drawing.Size(173, 59);
+			this.AdKeywordsGroupBox.TabIndex = 2;
+			this.AdKeywordsGroupBox.TabStop = false;
+			this.AdKeywordsGroupBox.Text = "Ad Keywords";
+			// 
+			// SongNamesTextBox
+			// 
+			this.SongNamesTextBox.AcceptsReturn = true;
+			this.SongNamesTextBox.AcceptsTab = true;
+			this.SongNamesTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.SongNamesTextBox.Location = new System.Drawing.Point(3, 16);
+			this.SongNamesTextBox.Multiline = true;
+			this.SongNamesTextBox.Name = "SongNamesTextBox";
+			this.SongNamesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.SongNamesTextBox.Size = new System.Drawing.Size(372, 54);
+			this.SongNamesTextBox.TabIndex = 0;
+			// 
+			// SongNamesGroupBox
+			// 
+			this.SongNamesGroupBox.Controls.Add(this.SongNamesTextBox);
+			this.SongNamesGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.SongNamesGroupBox.Location = new System.Drawing.Point(0, 0);
+			this.SongNamesGroupBox.Name = "SongNamesGroupBox";
+			this.SongNamesGroupBox.Size = new System.Drawing.Size(378, 73);
+			this.SongNamesGroupBox.TabIndex = 0;
+			this.SongNamesGroupBox.TabStop = false;
+			this.SongNamesGroupBox.Text = "Exempt Song Names";
+			// 
+			// label1
+			// 
+			this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.label1.Location = new System.Drawing.Point(3, 16);
+			this.label1.Name = "label1";
+			this.label1.Padding = new System.Windows.Forms.Padding(3);
+			this.label1.Size = new System.Drawing.Size(355, 99);
+			this.label1.TabIndex = 1;
+			this.label1.Text = resources.GetString("label1.Text");
+			// 
+			// panel3
+			// 
+			this.panel3.Controls.Add(this.groupBox2);
+			this.panel3.Controls.Add(this.splitter3);
+			this.panel3.Controls.Add(this.groupBox3);
+			this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panel3.Location = new System.Drawing.Point(3, 115);
+			this.panel3.Name = "panel3";
+			this.panel3.Size = new System.Drawing.Size(355, 59);
+			this.panel3.TabIndex = 2;
+			// 
+			// groupBox2
+			// 
+			this.groupBox2.Controls.Add(this.textBox1);
+			this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox2.Location = new System.Drawing.Point(205, 0);
+			this.groupBox2.Name = "groupBox2";
+			this.groupBox2.Size = new System.Drawing.Size(150, 59);
+			this.groupBox2.TabIndex = 2;
+			this.groupBox2.TabStop = false;
+			this.groupBox2.Text = "Ad Keywords";
+			// 
+			// textBox1
+			// 
+			this.textBox1.AcceptsReturn = true;
+			this.textBox1.AcceptsTab = true;
+			this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.textBox1.Location = new System.Drawing.Point(3, 16);
+			this.textBox1.Multiline = true;
+			this.textBox1.Name = "textBox1";
+			this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.textBox1.Size = new System.Drawing.Size(144, 40);
+			this.textBox1.TabIndex = 0;
+			this.textBox1.Text = "spotify\r\nlisten now\r\nclick here\r\nclick the banner\r\nget premium";
+			// 
+			// splitter3
+			// 
+			this.splitter3.BackColor = System.Drawing.SystemColors.Window;
+			this.splitter3.Location = new System.Drawing.Point(200, 0);
+			this.splitter3.MinimumSize = new System.Drawing.Size(5, 0);
+			this.splitter3.Name = "splitter3";
+			this.splitter3.Size = new System.Drawing.Size(5, 59);
+			this.splitter3.TabIndex = 1;
+			this.splitter3.TabStop = false;
+			// 
+			// groupBox3
+			// 
+			this.groupBox3.Controls.Add(this.textBox2);
+			this.groupBox3.Dock = System.Windows.Forms.DockStyle.Left;
+			this.groupBox3.Location = new System.Drawing.Point(0, 0);
+			this.groupBox3.Name = "groupBox3";
+			this.groupBox3.Size = new System.Drawing.Size(200, 59);
+			this.groupBox3.TabIndex = 0;
+			this.groupBox3.TabStop = false;
+			this.groupBox3.Text = "Ad Names";
+			// 
 			// textBox2
 			// 
 			this.textBox2.AcceptsReturn = true;
@@ -305,9 +410,39 @@
 			this.textBox2.Multiline = true;
 			this.textBox2.Name = "textBox2";
 			this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBox2.Size = new System.Drawing.Size(167, 40);
+			this.textBox2.Size = new System.Drawing.Size(194, 40);
 			this.textBox2.TabIndex = 0;
-			this.textBox2.Text = "spotify\r\nlisten now\r\nclick here\r\nclick the banner\r\nget premium";
+			// 
+			// splitter4
+			// 
+			this.splitter4.BackColor = System.Drawing.SystemColors.Window;
+			this.splitter4.Dock = System.Windows.Forms.DockStyle.Top;
+			this.splitter4.Location = new System.Drawing.Point(3, 174);
+			this.splitter4.MinimumSize = new System.Drawing.Size(0, 5);
+			this.splitter4.Name = "splitter4";
+			this.splitter4.Size = new System.Drawing.Size(355, 5);
+			this.splitter4.TabIndex = 3;
+			this.splitter4.TabStop = false;
+			// 
+			// panel4
+			// 
+			this.panel4.Controls.Add(this.groupBox4);
+			this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panel4.Location = new System.Drawing.Point(3, 179);
+			this.panel4.Name = "panel4";
+			this.panel4.Size = new System.Drawing.Size(355, 122);
+			this.panel4.TabIndex = 4;
+			// 
+			// groupBox4
+			// 
+			this.groupBox4.Controls.Add(this.textBox3);
+			this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox4.Location = new System.Drawing.Point(0, 0);
+			this.groupBox4.Name = "groupBox4";
+			this.groupBox4.Size = new System.Drawing.Size(355, 122);
+			this.groupBox4.TabIndex = 0;
+			this.groupBox4.TabStop = false;
+			this.groupBox4.Text = "Exempt Song Names";
 			// 
 			// textBox3
 			// 
@@ -318,8 +453,37 @@
 			this.textBox3.Multiline = true;
 			this.textBox3.Name = "textBox3";
 			this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBox3.Size = new System.Drawing.Size(372, 54);
+			this.textBox3.Size = new System.Drawing.Size(349, 103);
 			this.textBox3.TabIndex = 0;
+			// 
+			// OutputFormatGroupBox
+			// 
+			this.OutputFormatGroupBox.AutoSize = true;
+			this.OutputFormatGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.OutputFormatGroupBox.Controls.Add(this.OutputFormatBox);
+			this.OutputFormatGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.OutputFormatGroupBox.Location = new System.Drawing.Point(3, 307);
+			this.OutputFormatGroupBox.Name = "OutputFormatGroupBox";
+			this.OutputFormatGroupBox.Size = new System.Drawing.Size(361, 40);
+			this.OutputFormatGroupBox.TabIndex = 1;
+			this.OutputFormatGroupBox.TabStop = false;
+			this.OutputFormatGroupBox.Text = "Output Format";
+			// 
+			// OutputFormatBox
+			// 
+			this.OutputFormatBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.OutputFormatBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.OutputFormatBox.FormattingEnabled = true;
+			this.OutputFormatBox.Items.AddRange(new object[] {
+            "MP3",
+            "WAV",
+            "WMA",
+            "AAC",
+            "AIFF"});
+			this.OutputFormatBox.Location = new System.Drawing.Point(3, 16);
+			this.OutputFormatBox.Name = "OutputFormatBox";
+			this.OutputFormatBox.Size = new System.Drawing.Size(355, 21);
+			this.OutputFormatBox.TabIndex = 0;
 			// 
 			// MainForm
 			// 
@@ -335,17 +499,27 @@
 			this.MainTabs.ResumeLayout(false);
 			this.AdsTab.ResumeLayout(false);
 			this.SettingsTab.ResumeLayout(false);
+			this.SettingsTab.PerformLayout();
 			this.LogGroupBox.ResumeLayout(false);
 			this.LogPanel.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.panel1.ResumeLayout(false);
 			this.panel2.ResumeLayout(false);
+			this.groupBox1.ResumeLayout(false);
 			this.AdNamesGroupBox.ResumeLayout(false);
 			this.AdNamesGroupBox.PerformLayout();
 			this.AdKeywordsGroupBox.ResumeLayout(false);
 			this.AdKeywordsGroupBox.PerformLayout();
 			this.SongNamesGroupBox.ResumeLayout(false);
 			this.SongNamesGroupBox.PerformLayout();
+			this.panel3.ResumeLayout(false);
+			this.groupBox2.ResumeLayout(false);
+			this.groupBox2.PerformLayout();
+			this.groupBox3.ResumeLayout(false);
+			this.groupBox3.PerformLayout();
+			this.panel4.ResumeLayout(false);
+			this.groupBox4.ResumeLayout(false);
+			this.groupBox4.PerformLayout();
+			this.OutputFormatGroupBox.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -362,20 +536,31 @@
 		private System.Windows.Forms.TabPage AdsTab;
 		private System.Windows.Forms.TabPage SettingsTab;
 		private System.Windows.Forms.TabPage AboutTab;
-		private System.Windows.Forms.DataGridView dataGridView1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
 		private System.Windows.Forms.Panel panel2;
 		private System.Windows.Forms.Splitter splitter1;
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Label AdsTabInfo;
 		private System.Windows.Forms.GroupBox SongNamesGroupBox;
+		private System.Windows.Forms.TextBox SongNamesTextBox;
 		private System.Windows.Forms.GroupBox AdKeywordsGroupBox;
+		private System.Windows.Forms.TextBox AdKeywordsTextBox;
 		private System.Windows.Forms.Splitter splitter2;
 		private System.Windows.Forms.GroupBox AdNamesGroupBox;
-		private System.Windows.Forms.TextBox textBox3;
-		private System.Windows.Forms.TextBox textBox2;
 		private System.Windows.Forms.TextBox AdNamesTextBox;
+		private System.Windows.Forms.Label AdsTabInfo;
+		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.Panel panel4;
+		private System.Windows.Forms.GroupBox groupBox4;
+		private System.Windows.Forms.TextBox textBox3;
+		private System.Windows.Forms.Splitter splitter4;
+		private System.Windows.Forms.Panel panel3;
+		private System.Windows.Forms.GroupBox groupBox2;
+		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.Splitter splitter3;
+		private System.Windows.Forms.GroupBox groupBox3;
+		private System.Windows.Forms.TextBox textBox2;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.GroupBox OutputFormatGroupBox;
+		private System.Windows.Forms.ComboBox OutputFormatBox;
 	}
 }
 
