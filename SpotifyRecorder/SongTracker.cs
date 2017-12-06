@@ -20,7 +20,7 @@ namespace SpotifyRec
 		public SongInfo? CurrentSong => LastSong?.HasStopped == false ? LastSong : null;
 
 		public SpotifyProcessManager SpotifyProcessManager { get; }
-		public ISongClassifier SongClassifier { get; }
+		public SongClassificationInfo SongClassificationInfo { get; }
 
 		public int RefreshInterval { get; }
 
@@ -37,13 +37,13 @@ namespace SpotifyRec
 			Finished,
 		}
 
-		public SongTracker(SpotifyProcessManager spotifyProcessManager, ISongClassifier songClassifier, int refreshInterval)
+		public SongTracker(SpotifyProcessManager spotifyProcessManager, SongClassificationInfo songClassificationInfo, int refreshInterval)
 		{
 			this._songs = new List<SongInfo>();
 			this.Songs = _songs.AsReadOnly();
 
 			this.SpotifyProcessManager = spotifyProcessManager;
-			this.SongClassifier = songClassifier;
+			this.SongClassificationInfo = songClassificationInfo;
 
 			this.RefreshInterval = refreshInterval;
 		}
@@ -101,7 +101,7 @@ namespace SpotifyRec
 					songName: curSong.SongName,
 					timeStarted: curSong.TimeStarted,
 					timeStopped: DateTime.Now,
-					adClassifier: this.SongClassifier
+					isSong: curSong.IsSong
 				);
 			}
 
@@ -110,10 +110,9 @@ namespace SpotifyRec
 			{
 				_songs.Add(
 					new SongInfo(
-						spotifySongInfo: new SpotifySongInfo(newWindowTitle),
+						spotifySongInfo: new SpotifySongInfo(newWindowTitle, this.SongClassificationInfo),
 						timeStarted: DateTime.Now,
-						timeStopped: null,
-						adClassifier: this.SongClassifier
+						timeStopped: null
 					)
 				);
 			};

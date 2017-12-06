@@ -14,6 +14,11 @@ namespace SpotifyRec
 {
 	public class SongGroupRecording : IDisposable
 	{
+		public const string GroupNumberPrefix = "G#";
+		public const string SongNumberPrefix = "S#";
+		public const string GroupAndSongNumSeparator = "-";
+		public const string SongNumAndWinTitleSeparator = " = ";
+
 		public string TempFolder { get; }
 		public int GroupNumber { get; }
 
@@ -37,12 +42,13 @@ namespace SpotifyRec
 		}
 		private object _lock = new object();
 
-		public SongGroupRecording(string tempFolder, int groupNumber, SpotifyProcessManager spotifyProcessManager, ISongClassifier songClassifier, int songRefreshInterval, Logger logger)
+		public SongGroupRecording(string tempFolder, int groupNumber, SpotifyProcessManager spotifyProcessManager, SongClassificationInfo songClassificationInfo, int songRefreshInterval, Logger logger)
 		{
 			this.TempFolder = tempFolder;
 			this.GroupNumber = groupNumber;
+			this._logger = logger;
 
-			_songTracker = new SongTracker(spotifyProcessManager, songClassifier, songRefreshInterval);
+			_songTracker = new SongTracker(spotifyProcessManager, songClassificationInfo, songRefreshInterval);
 			_audioRecorder = new AudioRecorder(tempFolder, "TempGroupRec#" + groupNumber);
 
 			RecordingStartTime = DateTime.Now;
@@ -114,7 +120,13 @@ namespace SpotifyRec
 
 					string songPath = Path.Combine(
 						this.TempFolder, 
-						$"G#{this.GroupNumber}-S#{songNum} = {song.Artist} - {song.SongName}"
+						GroupNumberPrefix + this.GroupNumber
+						+ GroupAndSongNumSeparator
+						+ SongNumberPrefix + songNum
+						+ SongNumAndWinTitleSeparator
+						+ song.Artist
+						+ SpotifySongInfo.ArtistAndNameSeparator
+						+ song.SongName
 					);
 					// ^ Adding in the group and song numbers avoids having to deal with
 					// duplicates (they'll be dealt with later)

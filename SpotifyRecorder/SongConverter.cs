@@ -67,7 +67,7 @@ namespace SpotifyRec
 
 			foreach (var (songPath, songFullName) in GetSongFileNames().Select(x => ParseSongFileName(x)))
 			{
-				var spotifySongInfo = new SpotifySongInfo(songFullName);
+				(var artist, var songName) = SpotifySongInfo.ParseWindowTitle(songFullName);
 
 				var destPath = Path.Combine(this.OutputFolder, songFullName) + SongEncoder.Extension;
 
@@ -77,8 +77,8 @@ namespace SpotifyRec
 						source,
 						destPath,
 						new SongTags(
-							title: spotifySongInfo.SongName,
-							artist: spotifySongInfo.Artist
+							title: artist,
+							artist: songName
 						),
 						buffer
 					);
@@ -92,7 +92,7 @@ namespace SpotifyRec
 
 		private IEnumerable<string> GetSongFileNames()
 		{
-			var fileFilter = new Regex(@"G#\d+-S#\d+ = .* - .*\.wav");
+			var fileFilter = new Regex($@"G#\d+-S#\d+ = .*{SpotifySongInfo.ArtistAndNameSeparator}.*\.wav");
 
 			return Directory.EnumerateFiles(this.TempFolder).Where(fName => fileFilter.IsMatch(fName));
 		}

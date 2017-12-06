@@ -27,16 +27,8 @@ namespace SpotifyRec
 			this.IsSong = isSong;
 		}
 
-		public SongInfo(ISpotifySongInfo spotifySongInfo, DateTime timeStarted, DateTime? timeStopped, bool isSong)
-			: this(spotifySongInfo.Artist, spotifySongInfo.SongName, timeStarted, timeStopped, isSong)
-		{ }
-
-		public SongInfo(string artist, string songName, DateTime timeStarted, DateTime? timeStopped, ISongClassifier adClassifier)
-			: this(artist, songName, timeStarted, timeStopped, adClassifier.IsSong(artist, songName))
-		{ }
-
-		public SongInfo(ISpotifySongInfo spotifySongInfo, DateTime timeStarted, DateTime? timeStopped, ISongClassifier adClassifier)
-			: this(spotifySongInfo.Artist, spotifySongInfo.SongName, timeStarted, timeStopped, adClassifier)
+		public SongInfo(ISpotifySongInfo spotifySongInfo, DateTime timeStarted, DateTime? timeStopped)
+			: this(spotifySongInfo.Artist, spotifySongInfo.SongName, timeStarted, timeStopped, spotifySongInfo.IsSong)
 		{ }
 	}
 }

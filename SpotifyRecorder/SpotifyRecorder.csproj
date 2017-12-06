@@ -70,8 +70,13 @@
   <ItemGroup>
     <Compile Include="AttemptEventArgs.cs" />
     <Compile Include="AudioRecorder.cs" />
+    <Compile Include="Utils\EnumerableExtensions.cs" />
+    <Compile Include="ISettingProvider.cs" />
     <Compile Include="MP3Duration.cs" />
+    <Compile Include="OutputFormat.cs" />
+    <Compile Include="RawSettings.cs" />
     <Compile Include="RecordingSession.cs" />
+    <Compile Include="SettingProvider.cs" />
     <Compile Include="SongConverter.cs" />
     <Compile Include="SongEncoding\AACSongEncoder.cs" />
     <Compile Include="SongEncoding\AiffSongEncoder.cs" />
@@ -91,7 +96,7 @@
     <Compile Include="UI\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ISongClassifier.cs" />
+    <Compile Include="SongClassifier.cs" />
     <Compile Include="ISpotifySongInfo.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />
@@ -106,6 +111,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\ValidatedTextBox.Designer.cs" />
+    <Compile Include="Utils\XLinqExtensions.cs" />
     <EmbeddedResource Include="UI\FolderBrowsePanel.resx" />
     <EmbeddedResource Include="UI\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
