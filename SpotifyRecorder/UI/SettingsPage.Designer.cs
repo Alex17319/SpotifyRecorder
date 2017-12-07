@@ -30,6 +30,9 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsPage));
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.OutputFormatGroupBox = new System.Windows.Forms.GroupBox();
+			this.OutputFormatBox = new System.Windows.Forms.ComboBox();
+			this.splitter1 = new System.Windows.Forms.Splitter();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.panel4 = new System.Windows.Forms.Panel();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -42,31 +45,73 @@
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
-			this.OutputFormatGroupBox = new System.Windows.Forms.GroupBox();
-			this.OutputFormatBox = new System.Windows.Forms.ComboBox();
-			this.splitter1 = new System.Windows.Forms.Splitter();
+			this.InnerPanel = new System.Windows.Forms.Panel();
+			this.uniaxualResizePanel1 = new SpotifyRec.UI.UniaxualResizePanel();
+			this.textBox4 = new System.Windows.Forms.TextBox();
 			this.panel1.SuspendLayout();
+			this.OutputFormatGroupBox.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.panel4.SuspendLayout();
 			this.groupBox4.SuspendLayout();
 			this.panel3.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
-			this.OutputFormatGroupBox.SuspendLayout();
+			this.uniaxualResizePanel1.InnerPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panel1
 			// 
-			this.panel1.AutoSize = true;
 			this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.panel1.Controls.Add(this.uniaxualResizePanel1);
 			this.panel1.Controls.Add(this.OutputFormatGroupBox);
 			this.panel1.Controls.Add(this.splitter1);
 			this.panel1.Controls.Add(this.groupBox1);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panel1.Location = new System.Drawing.Point(3, 3);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(471, 376);
+			this.panel1.Size = new System.Drawing.Size(347, 692);
 			this.panel1.TabIndex = 10;
+			// 
+			// OutputFormatGroupBox
+			// 
+			this.OutputFormatGroupBox.AutoSize = true;
+			this.OutputFormatGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.OutputFormatGroupBox.Controls.Add(this.OutputFormatBox);
+			this.OutputFormatGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.OutputFormatGroupBox.Location = new System.Drawing.Point(0, 336);
+			this.OutputFormatGroupBox.Name = "OutputFormatGroupBox";
+			this.OutputFormatGroupBox.Size = new System.Drawing.Size(347, 40);
+			this.OutputFormatGroupBox.TabIndex = 11;
+			this.OutputFormatGroupBox.TabStop = false;
+			this.OutputFormatGroupBox.Text = "Output Format";
+			// 
+			// OutputFormatBox
+			// 
+			this.OutputFormatBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.OutputFormatBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.OutputFormatBox.FormattingEnabled = true;
+			this.OutputFormatBox.Items.AddRange(new object[] {
+            "MP3",
+            "WAV",
+            "WMA",
+            "AAC",
+            "AIFF"});
+			this.OutputFormatBox.Location = new System.Drawing.Point(3, 16);
+			this.OutputFormatBox.Name = "OutputFormatBox";
+			this.OutputFormatBox.Size = new System.Drawing.Size(341, 21);
+			this.OutputFormatBox.TabIndex = 0;
+			// 
+			// splitter1
+			// 
+			this.splitter1.Cursor = System.Windows.Forms.Cursors.SizeNS;
+			this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.splitter1.Location = new System.Drawing.Point(0, 331);
+			this.splitter1.MinExtra = 0;
+			this.splitter1.MinimumSize = new System.Drawing.Size(0, 5);
+			this.splitter1.Name = "splitter1";
+			this.splitter1.Size = new System.Drawing.Size(347, 5);
+			this.splitter1.TabIndex = 10;
+			this.splitter1.TabStop = false;
 			// 
 			// groupBox1
 			// 
@@ -77,7 +122,7 @@
 			this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.groupBox1.Location = new System.Drawing.Point(0, 0);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(471, 331);
+			this.groupBox1.Size = new System.Drawing.Size(347, 331);
 			this.groupBox1.TabIndex = 3;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Ad Classification";
@@ -88,7 +133,7 @@
 			this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel4.Location = new System.Drawing.Point(3, 240);
 			this.panel4.Name = "panel4";
-			this.panel4.Size = new System.Drawing.Size(465, 88);
+			this.panel4.Size = new System.Drawing.Size(341, 88);
 			this.panel4.TabIndex = 6;
 			// 
 			// groupBox4
@@ -97,7 +142,7 @@
 			this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.groupBox4.Location = new System.Drawing.Point(0, 0);
 			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(465, 88);
+			this.groupBox4.Size = new System.Drawing.Size(341, 88);
 			this.groupBox4.TabIndex = 1;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Exempt Song Names";
@@ -111,7 +156,7 @@
 			this.textBox3.Multiline = true;
 			this.textBox3.Name = "textBox3";
 			this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBox3.Size = new System.Drawing.Size(459, 69);
+			this.textBox3.Size = new System.Drawing.Size(335, 69);
 			this.textBox3.TabIndex = 1;
 			// 
 			// splitter4
@@ -123,7 +168,7 @@
 			this.splitter4.MinExtra = 0;
 			this.splitter4.MinimumSize = new System.Drawing.Size(0, 5);
 			this.splitter4.Name = "splitter4";
-			this.splitter4.Size = new System.Drawing.Size(465, 5);
+			this.splitter4.Size = new System.Drawing.Size(341, 5);
 			this.splitter4.TabIndex = 3;
 			this.splitter4.TabStop = false;
 			// 
@@ -135,7 +180,7 @@
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panel3.Location = new System.Drawing.Point(3, 128);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(465, 107);
+			this.panel3.Size = new System.Drawing.Size(341, 107);
 			this.panel3.TabIndex = 2;
 			// 
 			// groupBox2
@@ -144,7 +189,7 @@
 			this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.groupBox2.Location = new System.Drawing.Point(205, 0);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(260, 107);
+			this.groupBox2.Size = new System.Drawing.Size(136, 107);
 			this.groupBox2.TabIndex = 2;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Ad Keywords";
@@ -158,7 +203,7 @@
 			this.textBox1.Multiline = true;
 			this.textBox1.Name = "textBox1";
 			this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBox1.Size = new System.Drawing.Size(254, 88);
+			this.textBox1.Size = new System.Drawing.Size(130, 88);
 			this.textBox1.TabIndex = 0;
 			this.textBox1.Text = "spotify\r\nlisten now\r\nclick here\r\nclick the banner\r\nget premium";
 			// 
@@ -202,50 +247,49 @@
 			this.label1.Location = new System.Drawing.Point(3, 16);
 			this.label1.Name = "label1";
 			this.label1.Padding = new System.Windows.Forms.Padding(3);
-			this.label1.Size = new System.Drawing.Size(465, 112);
+			this.label1.Size = new System.Drawing.Size(341, 112);
 			this.label1.TabIndex = 1;
 			this.label1.Text = resources.GetString("label1.Text");
 			// 
-			// OutputFormatGroupBox
+			// InnerPanel
 			// 
-			this.OutputFormatGroupBox.AutoSize = true;
-			this.OutputFormatGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.OutputFormatGroupBox.Controls.Add(this.OutputFormatBox);
-			this.OutputFormatGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.OutputFormatGroupBox.Location = new System.Drawing.Point(0, 336);
-			this.OutputFormatGroupBox.Name = "OutputFormatGroupBox";
-			this.OutputFormatGroupBox.Size = new System.Drawing.Size(471, 40);
-			this.OutputFormatGroupBox.TabIndex = 11;
-			this.OutputFormatGroupBox.TabStop = false;
-			this.OutputFormatGroupBox.Text = "Output Format";
+			this.InnerPanel.BackColor = System.Drawing.Color.Red;
+			this.InnerPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.InnerPanel.Location = new System.Drawing.Point(0, 0);
+			this.InnerPanel.Name = "InnerPanel";
+			this.InnerPanel.Size = new System.Drawing.Size(200, 195);
+			this.InnerPanel.TabIndex = 0;
 			// 
-			// OutputFormatBox
+			// uniaxualResizePanel1
 			// 
-			this.OutputFormatBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.OutputFormatBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.OutputFormatBox.FormattingEnabled = true;
-			this.OutputFormatBox.Items.AddRange(new object[] {
-            "MP3",
-            "WAV",
-            "WMA",
-            "AAC",
-            "AIFF"});
-			this.OutputFormatBox.Location = new System.Drawing.Point(3, 16);
-			this.OutputFormatBox.Name = "OutputFormatBox";
-			this.OutputFormatBox.Size = new System.Drawing.Size(465, 21);
-			this.OutputFormatBox.TabIndex = 0;
+			this.uniaxualResizePanel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
 			// 
-			// splitter1
+			// uniaxualResizePanel1.InnerPanel
 			// 
-			this.splitter1.Cursor = System.Windows.Forms.Cursors.SizeNS;
-			this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.splitter1.Location = new System.Drawing.Point(0, 331);
-			this.splitter1.MinExtra = 0;
-			this.splitter1.MinimumSize = new System.Drawing.Size(0, 5);
-			this.splitter1.Name = "splitter1";
-			this.splitter1.Size = new System.Drawing.Size(471, 5);
-			this.splitter1.TabIndex = 10;
-			this.splitter1.TabStop = false;
+			this.uniaxualResizePanel1.InnerPanel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+			this.uniaxualResizePanel1.InnerPanel.Controls.Add(this.textBox4);
+			this.uniaxualResizePanel1.InnerPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.uniaxualResizePanel1.InnerPanel.Location = new System.Drawing.Point(0, 0);
+			this.uniaxualResizePanel1.InnerPanel.Name = "InnerPanel";
+			this.uniaxualResizePanel1.InnerPanel.Size = new System.Drawing.Size(150, 147);
+			this.uniaxualResizePanel1.InnerPanel.TabIndex = 0;
+			this.uniaxualResizePanel1.LiveResize = true;
+			this.uniaxualResizePanel1.Location = new System.Drawing.Point(98, 416);
+			this.uniaxualResizePanel1.MaxExpandStep = 1000;
+			this.uniaxualResizePanel1.MinSize = -3;
+			this.uniaxualResizePanel1.Name = "uniaxualResizePanel1";
+			this.uniaxualResizePanel1.ResizeDir = System.Windows.Forms.Orientation.Vertical;
+			this.uniaxualResizePanel1.ResizerBackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.uniaxualResizePanel1.ResizerThickness = 3;
+			this.uniaxualResizePanel1.Size = new System.Drawing.Size(150, 150);
+			this.uniaxualResizePanel1.TabIndex = 12;
+			// 
+			// textBox4
+			// 
+			this.textBox4.Location = new System.Drawing.Point(25, 26);
+			this.textBox4.Name = "textBox4";
+			this.textBox4.Size = new System.Drawing.Size(177, 20);
+			this.textBox4.TabIndex = 0;
 			// 
 			// SettingsPage
 			// 
@@ -257,9 +301,10 @@
 			this.MinimumSize = new System.Drawing.Size(370, 100);
 			this.Name = "SettingsPage";
 			this.Padding = new System.Windows.Forms.Padding(3);
-			this.Size = new System.Drawing.Size(477, 448);
+			this.Size = new System.Drawing.Size(353, 448);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
+			this.OutputFormatGroupBox.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
 			this.panel4.ResumeLayout(false);
 			this.groupBox4.ResumeLayout(false);
@@ -269,9 +314,9 @@
 			this.groupBox2.PerformLayout();
 			this.groupBox3.ResumeLayout(false);
 			this.groupBox3.PerformLayout();
-			this.OutputFormatGroupBox.ResumeLayout(false);
+			this.uniaxualResizePanel1.InnerPanel.ResumeLayout(false);
+			this.uniaxualResizePanel1.InnerPanel.PerformLayout();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
@@ -293,5 +338,8 @@
 		private System.Windows.Forms.GroupBox groupBox3;
 		private System.Windows.Forms.TextBox textBox2;
 		private System.Windows.Forms.Label label1;
+		private UniaxualResizePanel uniaxualResizePanel1;
+		private System.Windows.Forms.TextBox textBox4;
+		private System.Windows.Forms.Panel InnerPanel;
 	}
 }

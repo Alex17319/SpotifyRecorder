@@ -54,6 +54,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -84,6 +85,7 @@
       <DependentUpon>SettingsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\SettingsUI.cs" />
+    <Compile Include="UI\UniaxualResizePanelDesigner.cs" />
     <Compile Include="Utils\EnumerableExtensions.cs" />
     <Compile Include="ISettingProvider.cs" />
     <Compile Include="MP3Duration.cs" />
@@ -126,6 +128,7 @@
     </Compile>
     <Compile Include="UI\ValidatedTextBox.Designer.cs" />
     <Compile Include="Utils\EventExtensions.cs" />
+    <Compile Include="Utils\ValueChangeEventArgs.cs" />
     <Compile Include="Utils\XLinqExtensions.cs" />
     <EmbeddedResource Include="UI\FolderBrowsePanel.resx" />
     <EmbeddedResource Include="UI\Form1.resx">
