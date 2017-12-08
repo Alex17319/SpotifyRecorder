@@ -189,6 +189,28 @@ namespace SpotifyRec.UI
 				_outerPanel.BackColor = _innerPanel.BackColor;
 			};
 
+			//	//Behave as expected when the inner panel is resized (mainly in the designer)
+			//	_innerPanel.SizeChanged += delegate
+			//	{
+			//		OnResizerMoved(
+			//			this,
+			//			new SplitterEventArgs(
+			//				x: _splitter.Left,
+			//				y: _splitter.Top,
+			//				splitX: _splitter.Location.X,
+			//				splitY: _splitter.Location.Y
+			//			)
+			//		);
+			//	};
+			//This didn't work properly for some reason
+			//Instead, just don't allow the inner panel to be resized
+			//	_innerPanel.SizeChanged += delegate {
+			//		UpdateLayout();
+			//	};
+			//I think this also had problems (probably due to recursion)
+			//Instead, just ignore this issue for now (maybe create a separate class for the InnerPanel,
+			//with properties hidden from the designer, at some point).
+
 			_innerPanel.ResumeLayout(performLayout: false);
 			_splitter.ResumeLayout(performLayout: false);
 			_outerPanel.ResumeLayout(performLayout: false);
@@ -211,12 +233,12 @@ namespace SpotifyRec.UI
 		{
 			base.OnLayout(e);
 
-
+			UpdateLayout();
 		}
 
 		private void UpdateLayout()
 		{
-			Console.WriteLine("Updating layout\r\n" + new StackTrace().ToString());
+			//Console.WriteLine("Updating layout\r\n" + new StackTrace().ToString());
 
 			SuspendLayout();
 			_outerPanel.SuspendLayout();
@@ -250,7 +272,7 @@ namespace SpotifyRec.UI
 
 		private void OnResizerMoved(object sender, SplitterEventArgs e)
 		{
-			Console.WriteLine($"Resizer moved to ({e.SplitX}, {e.SplitY}), mouse = ({e.X}, {e.Y})");
+			//Console.WriteLine($"Resizer moved to ({e.SplitX}, {e.SplitY}), mouse = ({e.X}, {e.Y})");
 
 			this.Size = Orient(
 				resizeAxis: Disorient(e.SplitX, e.SplitY).ResizeAxisSize + Disorient(_splitter.Size).ResizeAxisSize,

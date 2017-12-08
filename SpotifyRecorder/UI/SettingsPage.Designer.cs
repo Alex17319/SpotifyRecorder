@@ -30,6 +30,8 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsPage));
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.uniaxualResizePanel1 = new SpotifyRec.UI.UniaxualResizePanel();
+			this.textBox4 = new System.Windows.Forms.TextBox();
 			this.OutputFormatGroupBox = new System.Windows.Forms.GroupBox();
 			this.OutputFormatBox = new System.Windows.Forms.ComboBox();
 			this.splitter1 = new System.Windows.Forms.Splitter();
@@ -46,9 +48,8 @@
 			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.InnerPanel = new System.Windows.Forms.Panel();
-			this.uniaxualResizePanel1 = new SpotifyRec.UI.UniaxualResizePanel();
-			this.textBox4 = new System.Windows.Forms.TextBox();
 			this.panel1.SuspendLayout();
+			this.uniaxualResizePanel1.InnerPanel.SuspendLayout();
 			this.OutputFormatGroupBox.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.panel4.SuspendLayout();
@@ -56,7 +57,6 @@
 			this.panel3.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
-			this.uniaxualResizePanel1.InnerPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panel1
@@ -71,6 +71,37 @@
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(347, 692);
 			this.panel1.TabIndex = 10;
+			// 
+			// uniaxualResizePanel1
+			// 
+			this.uniaxualResizePanel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+			// 
+			// uniaxualResizePanel1.InnerPanel
+			// 
+			this.uniaxualResizePanel1.InnerPanel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+			this.uniaxualResizePanel1.InnerPanel.Controls.Add(this.textBox4);
+			this.uniaxualResizePanel1.InnerPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.uniaxualResizePanel1.InnerPanel.Location = new System.Drawing.Point(0, 0);
+			this.uniaxualResizePanel1.InnerPanel.Name = "InnerPanel";
+			this.uniaxualResizePanel1.InnerPanel.Size = new System.Drawing.Size(178, 107);
+			this.uniaxualResizePanel1.InnerPanel.TabIndex = 0;
+			this.uniaxualResizePanel1.LiveResize = true;
+			this.uniaxualResizePanel1.Location = new System.Drawing.Point(30, 391);
+			this.uniaxualResizePanel1.MaxExpandStep = 1000;
+			this.uniaxualResizePanel1.MinSize = -3;
+			this.uniaxualResizePanel1.Name = "uniaxualResizePanel1";
+			this.uniaxualResizePanel1.ResizeDir = System.Windows.Forms.Orientation.Vertical;
+			this.uniaxualResizePanel1.ResizerBackColor = System.Drawing.SystemColors.ActiveCaption;
+			this.uniaxualResizePanel1.ResizerThickness = 3;
+			this.uniaxualResizePanel1.Size = new System.Drawing.Size(178, 110);
+			this.uniaxualResizePanel1.TabIndex = 12;
+			// 
+			// textBox4
+			// 
+			this.textBox4.Location = new System.Drawing.Point(25, 26);
+			this.textBox4.Name = "textBox4";
+			this.textBox4.Size = new System.Drawing.Size(177, 20);
+			this.textBox4.TabIndex = 0;
 			// 
 			// OutputFormatGroupBox
 			// 
@@ -260,37 +291,6 @@
 			this.InnerPanel.Size = new System.Drawing.Size(200, 195);
 			this.InnerPanel.TabIndex = 0;
 			// 
-			// uniaxualResizePanel1
-			// 
-			this.uniaxualResizePanel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-			// 
-			// uniaxualResizePanel1.InnerPanel
-			// 
-			this.uniaxualResizePanel1.InnerPanel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-			this.uniaxualResizePanel1.InnerPanel.Controls.Add(this.textBox4);
-			this.uniaxualResizePanel1.InnerPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.uniaxualResizePanel1.InnerPanel.Location = new System.Drawing.Point(0, 0);
-			this.uniaxualResizePanel1.InnerPanel.Name = "InnerPanel";
-			this.uniaxualResizePanel1.InnerPanel.Size = new System.Drawing.Size(150, 147);
-			this.uniaxualResizePanel1.InnerPanel.TabIndex = 0;
-			this.uniaxualResizePanel1.LiveResize = true;
-			this.uniaxualResizePanel1.Location = new System.Drawing.Point(98, 416);
-			this.uniaxualResizePanel1.MaxExpandStep = 1000;
-			this.uniaxualResizePanel1.MinSize = -3;
-			this.uniaxualResizePanel1.Name = "uniaxualResizePanel1";
-			this.uniaxualResizePanel1.ResizeDir = System.Windows.Forms.Orientation.Vertical;
-			this.uniaxualResizePanel1.ResizerBackColor = System.Drawing.SystemColors.ActiveCaption;
-			this.uniaxualResizePanel1.ResizerThickness = 3;
-			this.uniaxualResizePanel1.Size = new System.Drawing.Size(150, 150);
-			this.uniaxualResizePanel1.TabIndex = 12;
-			// 
-			// textBox4
-			// 
-			this.textBox4.Location = new System.Drawing.Point(25, 26);
-			this.textBox4.Name = "textBox4";
-			this.textBox4.Size = new System.Drawing.Size(177, 20);
-			this.textBox4.TabIndex = 0;
-			// 
 			// SettingsPage
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -304,6 +304,8 @@
 			this.Size = new System.Drawing.Size(353, 448);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
+			this.uniaxualResizePanel1.InnerPanel.ResumeLayout(false);
+			this.uniaxualResizePanel1.InnerPanel.PerformLayout();
 			this.OutputFormatGroupBox.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
 			this.panel4.ResumeLayout(false);
@@ -314,8 +316,6 @@
 			this.groupBox2.PerformLayout();
 			this.groupBox3.ResumeLayout(false);
 			this.groupBox3.PerformLayout();
-			this.uniaxualResizePanel1.InnerPanel.ResumeLayout(false);
-			this.uniaxualResizePanel1.InnerPanel.PerformLayout();
 			this.ResumeLayout(false);
 
 		}

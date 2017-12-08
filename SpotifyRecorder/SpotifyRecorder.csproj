@@ -22,7 +22,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7</LangVersion>
+    <LangVersion>7.1</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -52,6 +53,7 @@
     <Reference Include="NVorbis, Version=0.8.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NVorbis.0.8.4.0\lib\NVorbis.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -72,6 +74,19 @@
     <Compile Include="AttemptEventArgs.cs" />
     <Compile Include="AudioRecorder.cs" />
     <Compile Include="SettingManager.cs" />
+    <Compile Include="UI\CornerResizerSizes.cs" />
+    <Compile Include="UI\ResizableSides.cs" />
+    <Compile Include="UI\ResizablePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\ResizablePanel.Designer.cs">
+      <DependentUpon>ResizablePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ResizeAxis.cs" />
+    <Compile Include="UI\ResizedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Side.cs" />
     <Compile Include="UI\UniaxualResizePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -85,7 +100,9 @@
       <DependentUpon>SettingsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\SettingsUI.cs" />
+    <Compile Include="UI\SplitContainer.cs" />
     <Compile Include="UI\UniaxualResizePanelDesigner.cs" />
+    <Compile Include="Utils\CustomEnum.cs" />
     <Compile Include="Utils\EnumerableExtensions.cs" />
     <Compile Include="ISettingProvider.cs" />
     <Compile Include="MP3Duration.cs" />
@@ -144,6 +161,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\ResizablePanel.resx">
+      <DependentUpon>ResizablePanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\UniaxualResizePanel.resx">
       <DependentUpon>UniaxualResizePanel.cs</DependentUpon>
     </EmbeddedResource>
