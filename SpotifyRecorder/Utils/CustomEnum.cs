@@ -6,10 +6,25 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Collections.ObjectModel;
 
-namespace SpotifyRec
+/*
+
+namespace SpotifyRec.Utils
 {
 	public abstract class CustomEnum
 	{
+		public Type EnumType { get; }
+		public Type ValueType { get; }
+
+		public abstract CustomEnumDefinition GetUntypedDefinition();
+
+		private static Dictionary<Type, CustomEnum>
+
+		internal CustomEnum(Type enumType, Type valueType)
+		{
+			this.EnumType = enumType;
+			this.ValueType = valueType;
+		}
+
 		public static object CreateFrom(Type enumType, Type valueType, object value)
 		{
 			var customEnumType = GetCustomEnumType(enumType, valueType);
@@ -48,43 +63,44 @@ namespace SpotifyRec
 		private readonly TValue _value;
 		public TValue Value => _value;
 
-		protected CustomEnum(TValue value)
+		internal CustomEnum(TValue value, Type enumType)
+			: base(enumType: enumType, valueType: typeof(TValue))
 		{
 			this._value = value;
 		}
+
+		public abstract CustomEnumDefinition<TValue> GetDefinition();
 	}
 
 	public abstract class CustomEnum<TEnum, TValue> : CustomEnum<TValue>
 		where TEnum : CustomEnum<TEnum, TValue>
 	{
 		//[Obsolete("This contains an uninitialized object. Do not use outside CustomEnum.cs", error: false)]
-		private static TEnum _seed = (
-			(TEnum)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(TEnum))
-		);
+		private static TEnum _seed;
+		public static CustomEnumDefinition<TEnum, TValue> Definition { get; }
 
-		private static ReadOnlyCollection<(string name, TEnum value)> _definedValues = null;
+		static CustomEnum()
+		{
+			_seed = (TEnum)System.Runtime.Serialization.FormatterServices.GetUninitializedObject(typeof(TEnum));
+			Definition = _seed.GetTypedDefinition();
+		}
 
-		protected CustomEnum(TValue value) : base(value) { }
+		protected CustomEnum(TValue value)
+			: base(value: value, enumType: typeof(TEnum))
+		{ }
 
 		protected abstract TEnum CreateFrom(TValue value);
 
-		public static ReadOnlyCollection<(string name, TEnum value)> GetValues()
+		public CustomEnumDefinition<TEnum, TValue> GetTypedDefinition()
 		{
-			if (_definedValues == null) {
-				_definedValues = Array.AsReadOnly(Enumerable.ToArray(
+			return new CustomEnumDefinition<TEnum, TValue>(
+				Array.AsReadOnly(Enumerable.ToArray(
 					from field in typeof(TEnum).GetFields(BindingFlags.Public | BindingFlags.Static)
 					where field.FieldType == typeof(TEnum)
 					where field.IsInitOnly
 					select (name: field.Name, value: (TEnum)field.GetValue(obj: null))
-				));
-			}
-
-			return _definedValues;
-		}
-
-		public static bool IsDefined(TEnum value)
-		{
-			return GetValues().Any(x => object.Equals(x.value, value));
+				))
+			);
 		}
 
 		public static explicit operator CustomEnum<TEnum, TValue>(TValue x) => _seed.CreateFrom(x);
@@ -93,3 +109,5 @@ namespace SpotifyRec
 		public static explicit operator TValue(CustomEnum<TEnum, TValue> x) => x.Value;
 	}
 }
+
+*/

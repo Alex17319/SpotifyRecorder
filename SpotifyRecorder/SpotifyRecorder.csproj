@@ -103,6 +103,7 @@
     <Compile Include="UI\SplitContainer.cs" />
     <Compile Include="UI\UniaxualResizePanelDesigner.cs" />
     <Compile Include="Utils\CustomEnum.cs" />
+    <Compile Include="Utils\CustomEnumDefinition.cs" />
     <Compile Include="Utils\EnumerableExtensions.cs" />
     <Compile Include="ISettingProvider.cs" />
     <Compile Include="MP3Duration.cs" />
@@ -145,6 +146,7 @@
     </Compile>
     <Compile Include="UI\ValidatedTextBox.Designer.cs" />
     <Compile Include="Utils\EventExtensions.cs" />
+    <Compile Include="Utils\TryDelegate.cs" />
     <Compile Include="Utils\ValueChangeEventArgs.cs" />
     <Compile Include="Utils\XLinqExtensions.cs" />
     <EmbeddedResource Include="UI\FolderBrowsePanel.resx" />
