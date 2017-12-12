@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label1.Text" xml:space="preserve">
+  <data name="label2.Text" xml:space="preserve">
     <value>Specify names and keywords/phrases used to classify ads on separate lines in the boxes below. If an audio track's name is an ad name or contains an ad keyword, it is classified as an ad - unless it matches one of the exempt song names. Additionally, all tracks without a dash ('-') in the title (used to separate the artist and song name) are automatically classified as ads (unless they match an exempt song name). Note: keywords are case insensitive, names are case sensitive.</value>
   </data>
 </root>
