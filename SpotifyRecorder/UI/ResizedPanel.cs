@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace SpotifyRec.UI
 {
+	[Designer(typeof(ResizedPanelDesigner))]
 	public class ResizedPanel : Panel
 	{
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,10 @@ using System.Windows.Forms;
 
 namespace SpotifyRec.UI
 {
+	[Designer(typeof(ResizablePanelDesigner))]
 	public partial class ResizablePanel : ContainerControl
 	{
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public ResizedPanel InnerPanel { get; }
 
 		public Padding ResizerSizes {
@@ -52,6 +55,22 @@ namespace SpotifyRec.UI
 			);
 		}
 
+		public override Size MinimumSize {
+			get => InnerPanel.MinimumSize + new Size(
+				this.ResizerSizes.Top + this.ResizerSizes.Bottom,
+				this.ResizerSizes.Left + this.ResizerSizes.Right
+			);
+			set => InnerPanel.MinimumSize = value - new Size(
+				this.ResizerSizes.Top + this.ResizerSizes.Bottom,
+				this.ResizerSizes.Left + this.ResizerSizes.Right
+			);
+		}
+
+		private ResizeOperation _currentResizeOperation;
+		public event EventHandler<PanelResizeEventArgs> ResizeStarted;
+		public event EventHandler<PanelResizeEventArgs> ResizeProgressed;
+		public event EventHandler<PanelResizeEventArgs> ResizeFinished;
+
 		public ResizablePanel()
 		{
 			InitializeComponent();
@@ -76,24 +95,97 @@ namespace SpotifyRec.UI
 
 		protected override void OnMouseDown(MouseEventArgs e)
 		{
+			var resizer = GetResizerAtPosition(e.Location);
+			if (resizer != null) {
+				_currentResizeOperation = new ResizeOperation(
+					resizer: resizer,
+					initialMousePos: e.Location,
+					initialSize: this.Size,
+					initialLocation: this.Location
+				);
+			}
+
 			base.OnMouseDown(e);
 
-			var resizer = GetResizerAtPosition(e.Location);
-			System.Windows.Forms.Cursor.Current = Cursors.
+			if (resizer != null) {
+				this.ResizeStarted?.Invoke(this, new PanelResizeEventArgs(this.ClientRectangle, e.Location));
+			}
+		}
+
+		protected override void OnMouseMove(MouseEventArgs e)
+		{
+			Console.WriteLine(e.Location);
+
+			if (_currentResizeOperation == null)
+			{
+				var resizer = GetResizerAtPosition(e.Location);
+				Console.WriteLine(resizer?.Side1 + ", " + resizer?.Side2);
+				if (resizer != null) {
+					Cursor.Current = resizer.Cursor;
+				}
+			}
+			else
+			{
+				//Note: To add or subtract Points, you have to first cast one to a Size
+				//Also Points are mutable structs
+
+				Point mouseDelta = e.Location - (Size)_currentResizeOperation.InitialMousePos;
+				//Set the size, depending on which sides are being resized. The top and left
+				//sides need to have the reverse effect of the bottom and right sides.
+				//Values below the minimum should just get treated as the minimum.
+				if (_currentResizeOperation.Resizer.InvolvesSide(Side.Bottom)) this.Height = _currentResizeOperation.InitialSize.Height + mouseDelta.Y;
+				if (_currentResizeOperation.Resizer.InvolvesSide(Side.Right )) this.Width  = _currentResizeOperation.InitialSize.Width  + mouseDelta.X;
+				if (_currentResizeOperation.Resizer.InvolvesSide(Side.Top   )) this.Height = _currentResizeOperation.InitialSize.Height - mouseDelta.Y;
+				if (_currentResizeOperation.Resizer.InvolvesSide(Side.Left  )) this.Width  = _currentResizeOperation.InitialSize.Width  - mouseDelta.X;
+
+				Console.WriteLine(
+					"this.Top: " + this.Top
+					+ ", _currentResizeOperation.InitialLocation.Y: " + _currentResizeOperation.InitialLocation.Y
+					+ ", mouseDelta: " + mouseDelta
+				);
+
+				//Set the location, depending on whether the top and/or left sides are being resized.
+				//If the location can't be set (eg. because of docking), this should just get ignored.
+				if (_currentResizeOperation.Resizer.InvolvesSide(Side.Top)) {
+					var oldTop = this.Top;
+					this.Top = _currentResizeOperation.InitialLocation.Y + mouseDelta.Y;
+					//The position from where the InitialMousePos was calculated has moved, so to take that
+					//into account we get ResizeOperation to update the InitialMousePos appropriately
+					_currentResizeOperation.UpdateMouseCoordSystem(originDeltaX: 0, originDeltaY: this.Top - oldTop);
+				}
+				if (_currentResizeOperation.Resizer.InvolvesSide(Side.Left)) {
+					var oldLeft = this.Left;
+					this.Left = _currentResizeOperation.InitialLocation.X + mouseDelta.X;
+					_currentResizeOperation.UpdateMouseCoordSystem(originDeltaX: this.Left - oldLeft, originDeltaY: 0);
+				}
+			}
+
+			base.OnMouseMove(e);
+
+			this.ResizeProgressed?.Invoke(this, new PanelResizeEventArgs(this.ClientRectangle, e.Location));
+		}
+
+		protected override void OnMouseUp(MouseEventArgs e)
+		{
+			_currentResizeOperation = null;
+
+			base.OnMouseUp(e);
+
+			this.ResizeFinished?.Invoke(this, new PanelResizeEventArgs(this.ClientRectangle, e.Location));
 		}
 
 		public Resizer GetResizerAtPosition(Point point)
 		{
 			var c = CornerResizerSizes;
-			if (point.Y < c.TopLeft    .Height && point.X < c.TopLeft    .Width) return new Resizer(Side.Top   , Side.Left );
-			if (point.Y < c.TopRight   .Height && point.X > c.TopRight   .Width) return new Resizer(Side.Top   , Side.Right);
-			if (point.Y < c.BottomLeft .Height && point.X > c.BottomLeft .Width) return new Resizer(Side.Bottom, Side.Left );
-			if (point.Y < c.BottomRight.Height && point.X > c.BottomRight.Width) return new Resizer(Side.Bottom, Side.Right);
+			if (point.Y <               c.TopLeft    .Height && point.X <              c.TopLeft    .Width) return new Resizer(Side.Top   , Side.Left );
+			if (point.Y <               c.TopRight   .Height && point.X > this.Width - c.TopRight   .Width) return new Resizer(Side.Top   , Side.Right);
+			if (point.Y > this.Height - c.BottomLeft .Height && point.X <              c.BottomLeft .Width) return new Resizer(Side.Bottom, Side.Left );
+			if (point.Y > this.Height - c.BottomRight.Height && point.X > this.Width - c.BottomRight.Width) return new Resizer(Side.Bottom, Side.Right);
 
-			if (point.Y < ResizerSizes.Top   ) return new Resizer(Side.Top   , null);
-			if (point.Y > ResizerSizes.Bottom) return new Resizer(Side.Bottom, null);
-			if (point.X < ResizerSizes.Left  ) return new Resizer(Side.Left  , null);
-			if (point.X < ResizerSizes.Right ) return new Resizer(Side.Right , null);
+			if (point.Y <               ResizerSizes.Top   ) return new Resizer(Side.Top   , null);
+			if (point.Y > this.Height - ResizerSizes.Bottom) return new Resizer(Side.Bottom, null);
+			if (point.X <               ResizerSizes.Left  ) return new Resizer(Side.Left  , null);
+			if (point.X > this.Width  - ResizerSizes.Right ) return new Resizer(Side.Right , null);
 
 			return null;
 		}
@@ -103,20 +195,23 @@ namespace SpotifyRec.UI
 			public Side Side1 { get; }
 			public Side? Side2 { get; }
 
+			public ResizeAxis Axis { get; }
 			public Cursor Cursor { get; }
 
 			public Resizer(Side side1, Side? side2)
 			{
-				if (side2 == side1) {
-					throw new InvalidOperationException("Instead of specifying the same side twice, specify null as the second side");
-				}
+				if (side2 == side1) throw new InvalidOperationException(
+					"The same side was specifide twice. Instead, null should be specified as the second side."
+				);
 
 				this.Side1 = side1;
 				this.Side2 = side2;
 
-				this.Cursor = GetAxis(side1, side2);
-
+				this.Axis = GetAxis(side1, side2);
+				this.Cursor = ResizeAxis.ToCursor(Axis);
 			}
+
+			public bool InvolvesSide(Side side) => Side1 == side || Side2 == side;
 
 			public static ResizeAxis GetAxis(Side side1, Side? side2)
 			{
@@ -142,7 +237,7 @@ namespace SpotifyRec.UI
 							case Side.Bottom: return ResizeAxis.NE_SW;
 							case Side.Left: throw InvalidSidesCombEx(side1, side2);
 							case Side.Right: throw InvalidSidesCombEx(side1, side2);
-							case null: return ResizeAxis.EW;
+							case null: return ResizeAxis.WE;
 							default: throw InvalidSideValsEx(side1, side2);
 						}
 					case Side.Right: switch (side2) {
@@ -150,7 +245,7 @@ namespace SpotifyRec.UI
 							case Side.Bottom: return ResizeAxis.NW_SE;
 							case Side.Left: throw InvalidSidesCombEx(side1, side2);
 							case Side.Right: throw InvalidSidesCombEx(side1, side2);
-							case null: return ResizeAxis.EW;
+							case null: return ResizeAxis.WE;
 							default: throw InvalidSideValsEx(side1, side2);
 						}
 					default: throw InvalidSideValsEx(side1, side2);
@@ -168,12 +263,25 @@ namespace SpotifyRec.UI
 
 		private class ResizeOperation
 		{
-			public ArrowDirection Side1;
-			public ArrowDirection? Side2;
+			public Resizer Resizer { get; }
+			public Point InitialMousePos { get; private set; }
+			public Size InitialSize { get; }
+			public Point InitialLocation { get; }
 
-			public ResizeOperation()
+			public ResizeOperation(Resizer resizer, Point initialMousePos, Size initialSize, Point initialLocation)
 			{
+				this.Resizer = resizer;
+				this.InitialMousePos = initialMousePos;
+				this.InitialSize = initialSize;
+				this.InitialLocation = initialLocation;
+			}
 
+			public void UpdateMouseCoordSystem(int originDeltaX, int originDeltaY)
+			{
+				this.InitialMousePos = new Point(
+					x: this.InitialMousePos.X - originDeltaX,
+					y: this.InitialMousePos.Y - originDeltaY
+				);
 			}
 		}
 	}

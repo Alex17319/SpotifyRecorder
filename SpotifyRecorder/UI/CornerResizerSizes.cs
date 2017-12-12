@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpotifyRec.UI
 {
-	public class CornerResizerSizes
+	public struct CornerResizerSizes
 	{
 		public Size TopLeft     { get; }
 		public Size TopRight    { get; }

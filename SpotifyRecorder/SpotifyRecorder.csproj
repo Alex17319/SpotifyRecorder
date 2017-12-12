@@ -75,6 +75,9 @@
     <Compile Include="AudioRecorder.cs" />
     <Compile Include="SettingManager.cs" />
     <Compile Include="UI\CornerResizerSizes.cs" />
+    <Compile Include="UI\PanelDesigner.cs" />
+    <Compile Include="UI\PanelResizeEventArgs.cs" />
+    <Compile Include="UI\ResizablePanelDesigner.cs" />
     <Compile Include="UI\ResizableSides.cs" />
     <Compile Include="UI\ResizablePanel.cs">
       <SubType>Component</SubType>
@@ -86,6 +89,7 @@
     <Compile Include="UI\ResizedPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\ResizedPanelDesigner.cs" />
     <Compile Include="UI\Side.cs" />
     <Compile Include="UI\UniaxualResizePanel.cs">
       <SubType>UserControl</SubType>
