@@ -11,5 +11,7 @@ namespace SpotifyRec
 	{
 		SongClassificationInfo SongClassificationInfo { get; }
 		ISongEncoder SongEncoder { get; }
+		string OutputFolder { get; }
+		string TempFolder { get; }
 	}
 }

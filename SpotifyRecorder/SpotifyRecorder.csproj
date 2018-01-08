@@ -73,7 +73,10 @@
   <ItemGroup>
     <Compile Include="AttemptEventArgs.cs" />
     <Compile Include="AudioRecorder.cs" />
+    <Compile Include="ConvertedSong.cs" />
+    <Compile Include="RecordedSong.cs" />
     <Compile Include="SettingManager.cs" />
+    <Compile Include="SongBatchConverter.cs" />
     <Compile Include="UI\CornerResizerSizes.cs" />
     <Compile Include="UI\PanelDesigner.cs" />
     <Compile Include="UI\PanelResizeEventArgs.cs" />
@@ -115,7 +118,7 @@
     <Compile Include="RawSettings.cs" />
     <Compile Include="RecordingSession.cs" />
     <Compile Include="SettingProvider.cs" />
-    <Compile Include="SongConverter.cs" />
+    <Compile Include="SongConversionHost.cs" />
     <Compile Include="SongEncoding\AACSongEncoder.cs" />
     <Compile Include="SongEncoding\AiffSongEncoder.cs" />
     <Compile Include="SongEncoding\FlacSongEncoder.cs" />

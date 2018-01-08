@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpotifyRec
 {
-	public class SongClassificationInfo
+	public struct SongClassificationInfo
 	{
 		public IEnumerable<string> AdNames { get; }
 		public IEnumerable<string> AdKeywords { get; }

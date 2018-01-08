@@ -13,7 +13,9 @@ namespace SpotifyRec
 		WMA,
 		AAC,
 		AIFF,
-		[Obsolete("Not implemented - see FlacSongEncoder", error: true)]
+		/// <summary>
+		/// Not implemented - see <see cref="SpotifyRec.SongEncoding.FlacSongEncoder"/>
+		/// </summary>
 		FLAC,
 	}
 }

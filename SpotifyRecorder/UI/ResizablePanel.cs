@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DesignerSerVisAttribute = System.ComponentModel.DesignerSerializationVisibilityAttribute;
+using DesignerSerVis = System.ComponentModel.DesignerSerializationVisibility;
 
 namespace SpotifyRec.UI
 {
@@ -55,16 +57,64 @@ namespace SpotifyRec.UI
 			);
 		}
 
+
 		public override Size MinimumSize {
 			get => InnerPanel.MinimumSize + new Size(
-				this.ResizerSizes.Top + this.ResizerSizes.Bottom,
-				this.ResizerSizes.Left + this.ResizerSizes.Right
+				this.ResizerSizes.Horizontal,
+				this.ResizerSizes.Vertical
 			);
 			set => InnerPanel.MinimumSize = value - new Size(
-				this.ResizerSizes.Top + this.ResizerSizes.Bottom,
-				this.ResizerSizes.Left + this.ResizerSizes.Right
+				this.ResizerSizes.Horizontal,
+				this.ResizerSizes.Vertical
 			);
 		}
+
+		/*
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerVis(DesignerSerVis.Hidden)]
+		public override Color BackColor { get => Color.Empty; set { } }
+
+		public Color ResizerColor {
+			get => base.BackColor;
+			set => base.BackColor = value;
+		}
+
+
+		/// <summary>This property is not relevant to this control</summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerVis(DesignerSerVis.Hidden)]
+		public override bool AllowDrop { get => false; set { } }
+
+		/// <summary>This property is not relevant to this control</summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerVis(DesignerSerVis.Hidden)]
+		public override bool AutoScroll { get => false; set { } }
+		
+		/// <summary>This property is not relevant to this control</summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerVis(DesignerSerVis.Hidden)]
+		public override Point AutoScrollOffset { get => Point.Empty; set { } }
+		
+		/// <summary>This property is not relevant to this control</summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerVis(DesignerSerVis.Hidden)]
+		public override Image BackgroundImage { get => null; set { } }
+
+		/// <summary>This property is not relevant to this control</summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerVis(DesignerSerVis.Hidden)]
+		public override ImageLayout BackgroundImageLayout { get => default; set { } }
+		/#*
+		/// <summary>This property is not relevant to this control</summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerVis(DesignerSerVis.Hidden)]
+		public override Font Font { get => default; set { } }
+		*#/
+		/// <summary>This property is not relevant to this control</summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerVis(DesignerSerVis.Hidden)]
+		public override Color ForeColor { get => Color.Empty; set { } }
+
+		/// <summary>This property is not relevant to this control</summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerVis(DesignerSerVis.Hidden)]
+		public override RightToLeft RightToLeft { get => RightToLeft.Inherit; set { } }
+
+		/// <summary>This property is not relevant to this control</summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never), DesignerSerVis(DesignerSerVis.Hidden)]
+		public override string Text { get => base.Text; set => base.Text = value; }
+		*/
 
 		private ResizeOperation _currentResizeOperation;
 		public event EventHandler<PanelResizeEventArgs> ResizeStarted;
@@ -75,11 +125,10 @@ namespace SpotifyRec.UI
 		{
 			InitializeComponent();
 
-			InnerPanel = new ResizedPanel();
+			InnerPanel = new ResizedPanel(owner: this);
 
 			this.SuspendLayout();
 			InnerPanel.SuspendLayout();
-
 			InnerPanel.Dock = DockStyle.Fill;
 
 			this.Controls.Add(InnerPanel);

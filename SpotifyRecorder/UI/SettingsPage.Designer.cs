@@ -67,7 +67,6 @@
 			// 
 			// resizablePanel1
 			// 
-			this.resizablePanel1.BackColor = System.Drawing.SystemColors.Control;
 			this.resizablePanel1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.resizablePanel1.InnerPadding = new System.Windows.Forms.Padding(0);
 			// 
@@ -77,18 +76,17 @@
 			this.resizablePanel1.InnerPanel.Controls.Add(this.groupBox5);
 			this.resizablePanel1.InnerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.resizablePanel1.InnerPanel.Location = new System.Drawing.Point(0, 0);
-			this.resizablePanel1.InnerPanel.MinimumSize = new System.Drawing.Size(45, 40);
+			this.resizablePanel1.InnerPanel.MinimumSize = new System.Drawing.Size(0, 240);
 			this.resizablePanel1.InnerPanel.Name = "InnerPanel";
-			this.resizablePanel1.InnerPanel.Size = new System.Drawing.Size(364, 334);
+			this.resizablePanel1.InnerPanel.Size = new System.Drawing.Size(364, 240);
 			this.resizablePanel1.InnerPanel.TabIndex = 0;
 			this.resizablePanel1.Location = new System.Drawing.Point(3, 3);
-			this.resizablePanel1.MinimumSize = new System.Drawing.Size(50, 40);
+			this.resizablePanel1.MinimumSize = new System.Drawing.Size(0, 245);
 			this.resizablePanel1.Name = "resizablePanel1";
 			this.resizablePanel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
 			this.resizablePanel1.ResizerSizes = new System.Windows.Forms.Padding(0, 0, 0, 5);
-			this.resizablePanel1.Size = new System.Drawing.Size(364, 339);
+			this.resizablePanel1.Size = new System.Drawing.Size(364, 245);
 			this.resizablePanel1.TabIndex = 15;
-			this.resizablePanel1.Text = "resizablePanel1";
 			// 
 			// groupBox5
 			// 
@@ -100,7 +98,7 @@
 			this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.groupBox5.Location = new System.Drawing.Point(0, 0);
 			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(364, 334);
+			this.groupBox5.Size = new System.Drawing.Size(364, 240);
 			this.groupBox5.TabIndex = 4;
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "Ad Classification";
@@ -109,9 +107,9 @@
 			// 
 			this.panel2.Controls.Add(this.groupBox6);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel2.Location = new System.Drawing.Point(3, 240);
+			this.panel2.Location = new System.Drawing.Point(3, 178);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(358, 91);
+			this.panel2.Size = new System.Drawing.Size(358, 59);
 			this.panel2.TabIndex = 6;
 			// 
 			// groupBox6
@@ -120,7 +118,7 @@
 			this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.groupBox6.Location = new System.Drawing.Point(0, 0);
 			this.groupBox6.Name = "groupBox6";
-			this.groupBox6.Size = new System.Drawing.Size(358, 91);
+			this.groupBox6.Size = new System.Drawing.Size(358, 59);
 			this.groupBox6.TabIndex = 1;
 			this.groupBox6.TabStop = false;
 			this.groupBox6.Text = "Exempt Song Names";
@@ -134,17 +132,18 @@
 			this.textBox4.Multiline = true;
 			this.textBox4.Name = "textBox4";
 			this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBox4.Size = new System.Drawing.Size(352, 72);
+			this.textBox4.Size = new System.Drawing.Size(352, 40);
 			this.textBox4.TabIndex = 1;
 			// 
 			// splitter2
 			// 
-			this.splitter2.BackColor = System.Drawing.SystemColors.Window;
+			this.splitter2.BackColor = System.Drawing.SystemColors.Control;
 			this.splitter2.Cursor = System.Windows.Forms.Cursors.SizeNS;
 			this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.splitter2.Location = new System.Drawing.Point(3, 235);
-			this.splitter2.MinExtra = 0;
+			this.splitter2.Location = new System.Drawing.Point(3, 173);
+			this.splitter2.MinExtra = 60;
 			this.splitter2.MinimumSize = new System.Drawing.Size(0, 5);
+			this.splitter2.MinSize = 40;
 			this.splitter2.Name = "splitter2";
 			this.splitter2.Size = new System.Drawing.Size(358, 5);
 			this.splitter2.TabIndex = 3;
@@ -158,16 +157,16 @@
 			this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panel5.Location = new System.Drawing.Point(3, 128);
 			this.panel5.Name = "panel5";
-			this.panel5.Size = new System.Drawing.Size(358, 107);
+			this.panel5.Size = new System.Drawing.Size(358, 45);
 			this.panel5.TabIndex = 2;
 			// 
 			// groupBox7
 			// 
 			this.groupBox7.Controls.Add(this.textBox5);
 			this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.groupBox7.Location = new System.Drawing.Point(205, 0);
+			this.groupBox7.Location = new System.Drawing.Point(105, 0);
 			this.groupBox7.Name = "groupBox7";
-			this.groupBox7.Size = new System.Drawing.Size(153, 107);
+			this.groupBox7.Size = new System.Drawing.Size(253, 45);
 			this.groupBox7.TabIndex = 2;
 			this.groupBox7.TabStop = false;
 			this.groupBox7.Text = "Ad Keywords";
@@ -181,18 +180,20 @@
 			this.textBox5.Multiline = true;
 			this.textBox5.Name = "textBox5";
 			this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBox5.Size = new System.Drawing.Size(147, 88);
+			this.textBox5.Size = new System.Drawing.Size(247, 26);
 			this.textBox5.TabIndex = 0;
 			this.textBox5.Text = "spotify\r\nlisten now\r\nclick here\r\nclick the banner\r\nget premium";
 			// 
 			// splitter5
 			// 
-			this.splitter5.BackColor = System.Drawing.SystemColors.Window;
+			this.splitter5.BackColor = System.Drawing.SystemColors.Control;
 			this.splitter5.Cursor = System.Windows.Forms.Cursors.SizeWE;
-			this.splitter5.Location = new System.Drawing.Point(200, 0);
+			this.splitter5.Location = new System.Drawing.Point(100, 0);
+			this.splitter5.MinExtra = 130;
 			this.splitter5.MinimumSize = new System.Drawing.Size(5, 0);
+			this.splitter5.MinSize = 100;
 			this.splitter5.Name = "splitter5";
-			this.splitter5.Size = new System.Drawing.Size(5, 107);
+			this.splitter5.Size = new System.Drawing.Size(5, 45);
 			this.splitter5.TabIndex = 1;
 			this.splitter5.TabStop = false;
 			// 
@@ -201,8 +202,9 @@
 			this.groupBox8.Controls.Add(this.textBox6);
 			this.groupBox8.Dock = System.Windows.Forms.DockStyle.Left;
 			this.groupBox8.Location = new System.Drawing.Point(0, 0);
+			this.groupBox8.MinimumSize = new System.Drawing.Size(100, 0);
 			this.groupBox8.Name = "groupBox8";
-			this.groupBox8.Size = new System.Drawing.Size(200, 107);
+			this.groupBox8.Size = new System.Drawing.Size(100, 45);
 			this.groupBox8.TabIndex = 0;
 			this.groupBox8.TabStop = false;
 			this.groupBox8.Text = "Ad Names";
@@ -216,7 +218,7 @@
 			this.textBox6.Multiline = true;
 			this.textBox6.Name = "textBox6";
 			this.textBox6.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBox6.Size = new System.Drawing.Size(194, 88);
+			this.textBox6.Size = new System.Drawing.Size(94, 26);
 			this.textBox6.TabIndex = 0;
 			// 
 			// label2
@@ -235,7 +237,7 @@
 			this.OutputFormatGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.OutputFormatGroupBox.Controls.Add(this.OutputFormatBox);
 			this.OutputFormatGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.OutputFormatGroupBox.Location = new System.Drawing.Point(3, 342);
+			this.OutputFormatGroupBox.Location = new System.Drawing.Point(3, 248);
 			this.OutputFormatGroupBox.Name = "OutputFormatGroupBox";
 			this.OutputFormatGroupBox.Size = new System.Drawing.Size(364, 40);
 			this.OutputFormatGroupBox.TabIndex = 16;
