@@ -55,6 +55,9 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.4.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -75,11 +78,18 @@
     <Compile Include="AudioRecorder.cs" />
     <Compile Include="ConvertedSong.cs" />
     <Compile Include="RecordedSong.cs" />
-    <Compile Include="SettingManager.cs" />
+    <Compile Include="SettingsHost.cs" />
+    <Compile Include="SettingsController.cs" />
     <Compile Include="SongBatchConverter.cs" />
     <Compile Include="UI\CornerResizerSizes.cs" />
     <Compile Include="UI\PanelDesigner.cs" />
     <Compile Include="UI\PanelResizeEventArgs.cs" />
+    <Compile Include="UI\RecordingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\RecordingPage.Designer.cs">
+      <DependentUpon>RecordingPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ResizablePanelDesigner.cs" />
     <Compile Include="UI\ResizableSides.cs" />
     <Compile Include="UI\ResizablePanel.cs">
@@ -109,6 +119,7 @@
     <Compile Include="UI\SettingsUI.cs" />
     <Compile Include="UI\SplitContainer.cs" />
     <Compile Include="UI\UniaxualResizePanelDesigner.cs" />
+    <Compile Include="Utils\AdvancedEvent.cs" />
     <Compile Include="Utils\CustomEnum.cs" />
     <Compile Include="Utils\CustomEnumDefinition.cs" />
     <Compile Include="Utils\EnumerableExtensions.cs" />
@@ -153,6 +164,7 @@
     </Compile>
     <Compile Include="UI\ValidatedTextBox.Designer.cs" />
     <Compile Include="Utils\EventExtensions.cs" />
+    <Compile Include="Utils\HashCodes.cs" />
     <Compile Include="Utils\TryDelegate.cs" />
     <Compile Include="Utils\ValueChangeEventArgs.cs" />
     <Compile Include="Utils\XLinqExtensions.cs" />

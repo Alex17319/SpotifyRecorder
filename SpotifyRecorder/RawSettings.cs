@@ -1,5 +1,8 @@
-﻿using System;
+﻿using SpotifyRec.Utils;
+using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,36 +12,48 @@ namespace SpotifyRec
 {
 	public struct RawSettings
 	{
-		public IEnumerable<string> AdNames { get; }
-		public IEnumerable<string> AdKeywords { get; }
-		public IEnumerable<string> SongNames { get; }
+		public ImmutableList<string> AdNames { get; }
+		public ImmutableList<string> AdKeywords { get; }
+		public ImmutableList<string> SongNames { get; }
 		public OutputFormat OutputFormat { get; }
+		public string OutputFolder { get; }
+		public string TempFolder { get; }
 
 		public RawSettings(
-			IEnumerable<string> adNames,
-			IEnumerable<string> adKeywords,
-			IEnumerable<string> songNames,
-			OutputFormat outputFormat
+			ImmutableList<string> adNames,
+			ImmutableList<string> adKeywords,
+			ImmutableList<string> songNames,
+			OutputFormat outputFormat,
+			string outputFolder,
+			string tempFolder
 		) {
 			this.AdNames = adNames;
 			this.AdKeywords = adKeywords;
 			this.SongNames = songNames;
 			this.OutputFormat = outputFormat;
+			this.OutputFolder = outputFolder;
+			this.TempFolder = tempFolder;
 		}
 
 
 
 		public static RawSettings Default { get; } = new RawSettings(
-			adNames: Array.AsReadOnly(new string[] { }),
-			adKeywords: Array.AsReadOnly(new string[] {
+			adNames: new string[] { }.ToImmutableList(),
+			adKeywords: new string[] {
 				"spotify",
 				"listen now",
 				"click here",
 				"click the banner",
 				"get premium"
-			}),
-			songNames: Array.AsReadOnly(new string[] { }),
-			outputFormat: OutputFormat.MP3
+			}.ToImmutableList(),
+			songNames: new string[] { }.ToImmutableList(),
+			outputFormat: OutputFormat.MP3,
+			outputFolder: Path.Combine(
+				Environment.GetFolderPath(Environment.SpecialFolder.MyMusic),
+				"Spotify Recorder",
+				"[All Songs]" //Other folders should be used for each playlist, which consist of shortcuts to this folder (this is just the default though)
+			),
+			tempFolder: Path.Combine(Path.GetTempPath(), "Spotify Recorder")
 		);
 
 		//A namespace isn't needed, and just complicates things
@@ -51,13 +66,18 @@ namespace SpotifyRec
 			if (e.Name != "settings") return Default;
 
 			return new RawSettings(
-				adNames:    e.El("adNames"   )?.Els("name"   ).Select(x => x.Value).NullIfEmpty() ?? Default.AdNames   ,
-				adKeywords: e.El("adKeywords")?.Els("keyword").Select(x => x.Value).NullIfEmpty() ?? Default.AdKeywords,
-				songNames:  e.El("songNames" )?.Els("name"   ).Select(x => x.Value).NullIfEmpty() ?? Default.SongNames ,
-				outputFormat: e.El("outputFormat")?.ValueAsEnum<OutputFormat>() ?? Default.OutputFormat
+				adNames:    e.El("adNames"   )?.Els("name"   ).Select(x => x.Value).ToImmutableList().NullIfEmpty() ?? Default.AdNames   ,
+				adKeywords: e.El("adKeywords")?.Els("keyword").Select(x => x.Value).ToImmutableList().NullIfEmpty() ?? Default.AdKeywords,
+				songNames:  e.El("songNames" )?.Els("name"   ).Select(x => x.Value).ToImmutableList().NullIfEmpty() ?? Default.SongNames ,
+				outputFormat: e.El("outputFormat")?.ValueAsEnum<OutputFormat>() ?? Default.OutputFormat,
+				outputFolder: e.El("outputFolder")?.Value ?? Default.OutputFolder,
+				tempFolder:   e.El("tempFolder"  )?.Value ?? Default.TempFolder
 			);
 		}
 
+		/// <summary>
+		/// Note: Creates a new XElement on-demand - it is not cached (so is safe to mutate).
+		/// </summary>
 		public static XElement ToXml(RawSettings s)
 		{
 			return new XElement(
@@ -65,7 +85,40 @@ namespace SpotifyRec
 				new XElement("adNames"   , s.AdNames.Select(x => new XElement("name"   , x))),
 				new XElement("adKeywords", s.AdNames.Select(x => new XElement("keyword", x))),
 				new XElement("songNames" , s.AdNames.Select(x => new XElement("name"   , x))),
-				new XElement("outputFormat", s.OutputFormat.ToString())
+				new XElement("outputFormat", s.OutputFormat.ToString()),
+				new XElement("outputFolder", s.OutputFolder),
+				new XElement("tempFolder", s.TempFolder)
+			);
+		}
+
+		public override string ToString()
+		{
+			return ToXml(this).ToString();
+		}
+
+		public override bool Equals(object obj) => obj is RawSettings s && Equals(this, s);
+
+		public static bool Equals(RawSettings a, RawSettings b)
+		{
+			return (
+				Enumerable.SequenceEqual(a.AdNames, b.AdNames)
+				&& Enumerable.SequenceEqual(a.AdKeywords, b.AdKeywords)
+				&& Enumerable.SequenceEqual(a.SongNames, b.SongNames)
+				&& a.OutputFormat == b.OutputFormat
+				&& a.OutputFolder == b.OutputFolder
+				&& a.TempFolder == b.TempFolder
+			);
+		}
+
+		public override int GetHashCode()
+		{
+			return HashCodes.Combine(
+				HashCodes.CombineList(this.AdNames),
+				HashCodes.CombineList(this.AdKeywords),
+				HashCodes.CombineList(this.SongNames),
+				this.OutputFormat.GetHashCode(),
+				this.OutputFolder.GetHashCode(),
+				this.TempFolder.GetHashCode()
 			);
 		}
 	}

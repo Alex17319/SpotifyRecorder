@@ -34,14 +34,14 @@
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.groupBox6 = new System.Windows.Forms.GroupBox();
-			this.textBox4 = new System.Windows.Forms.TextBox();
+			this.SongNamesTextBox = new System.Windows.Forms.TextBox();
 			this.splitter2 = new System.Windows.Forms.Splitter();
 			this.panel5 = new System.Windows.Forms.Panel();
 			this.groupBox7 = new System.Windows.Forms.GroupBox();
-			this.textBox5 = new System.Windows.Forms.TextBox();
+			this.AdKeywordsTextBox = new System.Windows.Forms.TextBox();
 			this.splitter5 = new System.Windows.Forms.Splitter();
 			this.groupBox8 = new System.Windows.Forms.GroupBox();
-			this.textBox6 = new System.Windows.Forms.TextBox();
+			this.AdNamesTextBox = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.OutputFormatGroupBox = new System.Windows.Forms.GroupBox();
 			this.OutputFormatBox = new System.Windows.Forms.ComboBox();
@@ -76,16 +76,16 @@
 			this.resizablePanel1.InnerPanel.Controls.Add(this.groupBox5);
 			this.resizablePanel1.InnerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.resizablePanel1.InnerPanel.Location = new System.Drawing.Point(0, 0);
-			this.resizablePanel1.InnerPanel.MinimumSize = new System.Drawing.Size(0, 240);
+			this.resizablePanel1.InnerPanel.MinimumSize = new System.Drawing.Size(0, 260);
 			this.resizablePanel1.InnerPanel.Name = "InnerPanel";
-			this.resizablePanel1.InnerPanel.Size = new System.Drawing.Size(364, 240);
+			this.resizablePanel1.InnerPanel.Size = new System.Drawing.Size(364, 260);
 			this.resizablePanel1.InnerPanel.TabIndex = 0;
 			this.resizablePanel1.Location = new System.Drawing.Point(3, 3);
-			this.resizablePanel1.MinimumSize = new System.Drawing.Size(0, 245);
+			this.resizablePanel1.MinimumSize = new System.Drawing.Size(0, 265);
 			this.resizablePanel1.Name = "resizablePanel1";
 			this.resizablePanel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
 			this.resizablePanel1.ResizerSizes = new System.Windows.Forms.Padding(0, 0, 0, 5);
-			this.resizablePanel1.Size = new System.Drawing.Size(364, 245);
+			this.resizablePanel1.Size = new System.Drawing.Size(364, 265);
 			this.resizablePanel1.TabIndex = 15;
 			// 
 			// groupBox5
@@ -98,7 +98,7 @@
 			this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.groupBox5.Location = new System.Drawing.Point(0, 0);
 			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(364, 240);
+			this.groupBox5.Size = new System.Drawing.Size(364, 260);
 			this.groupBox5.TabIndex = 4;
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "Ad Classification";
@@ -109,31 +109,31 @@
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(3, 178);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(358, 59);
+			this.panel2.Size = new System.Drawing.Size(358, 79);
 			this.panel2.TabIndex = 6;
 			// 
 			// groupBox6
 			// 
-			this.groupBox6.Controls.Add(this.textBox4);
+			this.groupBox6.Controls.Add(this.SongNamesTextBox);
 			this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.groupBox6.Location = new System.Drawing.Point(0, 0);
 			this.groupBox6.Name = "groupBox6";
-			this.groupBox6.Size = new System.Drawing.Size(358, 59);
+			this.groupBox6.Size = new System.Drawing.Size(358, 79);
 			this.groupBox6.TabIndex = 1;
 			this.groupBox6.TabStop = false;
 			this.groupBox6.Text = "Exempt Song Names";
 			// 
-			// textBox4
+			// SongNamesTextBox
 			// 
-			this.textBox4.AcceptsReturn = true;
-			this.textBox4.AcceptsTab = true;
-			this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textBox4.Location = new System.Drawing.Point(3, 16);
-			this.textBox4.Multiline = true;
-			this.textBox4.Name = "textBox4";
-			this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBox4.Size = new System.Drawing.Size(352, 40);
-			this.textBox4.TabIndex = 1;
+			this.SongNamesTextBox.AcceptsReturn = true;
+			this.SongNamesTextBox.AcceptsTab = true;
+			this.SongNamesTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.SongNamesTextBox.Location = new System.Drawing.Point(3, 16);
+			this.SongNamesTextBox.Multiline = true;
+			this.SongNamesTextBox.Name = "SongNamesTextBox";
+			this.SongNamesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.SongNamesTextBox.Size = new System.Drawing.Size(352, 60);
+			this.SongNamesTextBox.TabIndex = 1;
 			// 
 			// splitter2
 			// 
@@ -162,7 +162,7 @@
 			// 
 			// groupBox7
 			// 
-			this.groupBox7.Controls.Add(this.textBox5);
+			this.groupBox7.Controls.Add(this.AdKeywordsTextBox);
 			this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.groupBox7.Location = new System.Drawing.Point(105, 0);
 			this.groupBox7.Name = "groupBox7";
@@ -171,18 +171,18 @@
 			this.groupBox7.TabStop = false;
 			this.groupBox7.Text = "Ad Keywords";
 			// 
-			// textBox5
+			// AdKeywordsTextBox
 			// 
-			this.textBox5.AcceptsReturn = true;
-			this.textBox5.AcceptsTab = true;
-			this.textBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textBox5.Location = new System.Drawing.Point(3, 16);
-			this.textBox5.Multiline = true;
-			this.textBox5.Name = "textBox5";
-			this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBox5.Size = new System.Drawing.Size(247, 26);
-			this.textBox5.TabIndex = 0;
-			this.textBox5.Text = "spotify\r\nlisten now\r\nclick here\r\nclick the banner\r\nget premium";
+			this.AdKeywordsTextBox.AcceptsReturn = true;
+			this.AdKeywordsTextBox.AcceptsTab = true;
+			this.AdKeywordsTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.AdKeywordsTextBox.Location = new System.Drawing.Point(3, 16);
+			this.AdKeywordsTextBox.Multiline = true;
+			this.AdKeywordsTextBox.Name = "AdKeywordsTextBox";
+			this.AdKeywordsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.AdKeywordsTextBox.Size = new System.Drawing.Size(247, 26);
+			this.AdKeywordsTextBox.TabIndex = 0;
+			this.AdKeywordsTextBox.Text = "spotify\r\nlisten now\r\nclick here\r\nclick the banner\r\nget premium";
 			// 
 			// splitter5
 			// 
@@ -199,7 +199,7 @@
 			// 
 			// groupBox8
 			// 
-			this.groupBox8.Controls.Add(this.textBox6);
+			this.groupBox8.Controls.Add(this.AdNamesTextBox);
 			this.groupBox8.Dock = System.Windows.Forms.DockStyle.Left;
 			this.groupBox8.Location = new System.Drawing.Point(0, 0);
 			this.groupBox8.MinimumSize = new System.Drawing.Size(100, 0);
@@ -209,17 +209,17 @@
 			this.groupBox8.TabStop = false;
 			this.groupBox8.Text = "Ad Names";
 			// 
-			// textBox6
+			// AdNamesTextBox
 			// 
-			this.textBox6.AcceptsReturn = true;
-			this.textBox6.AcceptsTab = true;
-			this.textBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textBox6.Location = new System.Drawing.Point(3, 16);
-			this.textBox6.Multiline = true;
-			this.textBox6.Name = "textBox6";
-			this.textBox6.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBox6.Size = new System.Drawing.Size(94, 26);
-			this.textBox6.TabIndex = 0;
+			this.AdNamesTextBox.AcceptsReturn = true;
+			this.AdNamesTextBox.AcceptsTab = true;
+			this.AdNamesTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.AdNamesTextBox.Location = new System.Drawing.Point(3, 16);
+			this.AdNamesTextBox.Multiline = true;
+			this.AdNamesTextBox.Name = "AdNamesTextBox";
+			this.AdNamesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.AdNamesTextBox.Size = new System.Drawing.Size(94, 26);
+			this.AdNamesTextBox.TabIndex = 0;
 			// 
 			// label2
 			// 
@@ -237,7 +237,7 @@
 			this.OutputFormatGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.OutputFormatGroupBox.Controls.Add(this.OutputFormatBox);
 			this.OutputFormatGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.OutputFormatGroupBox.Location = new System.Drawing.Point(3, 248);
+			this.OutputFormatGroupBox.Location = new System.Drawing.Point(3, 268);
 			this.OutputFormatGroupBox.Name = "OutputFormatGroupBox";
 			this.OutputFormatGroupBox.Size = new System.Drawing.Size(364, 40);
 			this.OutputFormatGroupBox.TabIndex = 16;
@@ -296,14 +296,14 @@
 		private System.Windows.Forms.GroupBox groupBox5;
 		private System.Windows.Forms.Panel panel2;
 		private System.Windows.Forms.GroupBox groupBox6;
-		private System.Windows.Forms.TextBox textBox4;
+		private System.Windows.Forms.TextBox SongNamesTextBox;
 		private System.Windows.Forms.Splitter splitter2;
 		private System.Windows.Forms.Panel panel5;
 		private System.Windows.Forms.GroupBox groupBox7;
-		private System.Windows.Forms.TextBox textBox5;
+		private System.Windows.Forms.TextBox AdKeywordsTextBox;
 		private System.Windows.Forms.Splitter splitter5;
 		private System.Windows.Forms.GroupBox groupBox8;
-		private System.Windows.Forms.TextBox textBox6;
+		private System.Windows.Forms.TextBox AdNamesTextBox;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.GroupBox OutputFormatGroupBox;
 		private System.Windows.Forms.ComboBox OutputFormatBox;

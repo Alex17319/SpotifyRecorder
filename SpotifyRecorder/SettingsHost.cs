@@ -4,30 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SpotifyRec.SongEncoding;
+using System.Collections.Immutable;
 
 namespace SpotifyRec
 {
-	public class SettingManager : ISettingProvider
+	public class SettingsHost : ISettingProvider
 	{
 		private readonly object _lock = new object();
 
 		public event EventHandler AdNamesChanged;
-		private string _adNames;
-		public string AdNames {
+		private ImmutableList<string> _adNames;
+		public ImmutableList<string> AdNames {
 			get => GetSetting(ref _adNames);
 			set => SetSetting(ref _adNames, value, AdNamesChanged);
 		}
 
 		public event EventHandler AdKeywordsChanged;
-		private string _adKeywords;
-		public string AdKeywords {
+		private ImmutableList<string> _adKeywords;
+		public ImmutableList<string> AdKeywords {
 			get => GetSetting(ref _adKeywords);
 			set => SetSetting(ref _adKeywords, value, AdKeywordsChanged);
 		}
 
 		public event EventHandler SongNamesChanged;
-		private string _songNames;
-		public string SongNames {
+		private ImmutableList<string> _songNames;
+		public ImmutableList<string> SongNames {
 			get => GetSetting(ref _songNames);
 			set => SetSetting(ref _songNames, value, SongNamesChanged);
 		}
@@ -56,11 +57,9 @@ namespace SpotifyRec
 		public SongClassificationInfo SongClassificationInfo {
 			get {
 				lock (_lock) return new SongClassificationInfo(
-					adNames: _adNames.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries),
-					adKeywords: _adKeywords.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries),
-					songNames: _songNames.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-					//Note: TextBox.Lines also splits the internal string into an array on-demand
-					//source: https://referencesource.microsoft.com/#System.Windows.Forms/winforms/Managed/System/WinForms/TextBoxBase.cs,37cabfde1449b18f
+					adNames: _adNames,
+					adKeywords: _adKeywords,
+					songNames: _songNames
 				);
 			}
 		}
@@ -90,10 +89,24 @@ namespace SpotifyRec
 
 
 
-		public SettingManager()
+		public SettingsHost(RawSettings raw)
 		{
-			
+			this._adNames = raw.AdNames;
+			this._adKeywords = raw.AdKeywords;
+			this._songNames = raw.SongNames;
+			this._outputFormat = raw.OutputFormat;
+			this._outputFolder = raw.OutputFolder;
+			this._tempFolder = raw.TempFolder;
 		}
+
+		public RawSettings ToRaw() => new RawSettings(
+			adNames: this.AdNames,
+			adKeywords: this.AdKeywords,
+			songNames: this.SongNames,
+			outputFormat: this.OutputFormat,
+			outputFolder: this.OutputFolder,
+			tempFolder: this.TempFolder
+		);
 
 		private T GetSetting<T>(ref T field)
 		{
@@ -106,9 +119,33 @@ namespace SpotifyRec
 		{
 			lock (_lock)
 			{
+				T oldValue = field;
 				field = value;
-				ev?.Invoke(this, EventArgs.Empty); //Note that all handlers will run inside the lock
+
+				//Note: only firing the event when the value actually changes seems to be the only way
+				//to do bug-free synchronisation of values (eg. between the ui and a database). Otherwise,
+				//this event would fire, then the synced object would handle it and fire it's own event, and
+				//then some other code could go and update the value inside this class. That stops any kind of
+				//'unsubscribe from the synced object while firing' or 'disable firing again while it's
+				//currently firing' strategy from working as that'll produce bugs.
+				bool equal = (
+					oldValue == null && value == null
+					|| oldValue != null && oldValue.Equals(value)
+				);
+				if (!equal) {
+					ev?.Invoke(this, EventArgs.Empty);
+					//Note that all handlers will run inside the lock (I *think* this is good, but idk)
+				}
 			}
 		}
+
+		public static IEnumerable<string> SplitIntoLines(string multilineText)
+		{
+			return multilineText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+			//Note: TextBox.Lines also splits the internal string into an array on-demand
+			//source: https://referencesource.microsoft.com/#System.Windows.Forms/winforms/Managed/System/WinForms/TextBoxBase.cs,37cabfde1449b18f
+		}
+
+
 	}
 }
