@@ -13,28 +13,30 @@ namespace SpotifyRec.UI
 {
 	public partial class SettingsPage : UserControl
 	{
-		public SettingsPage()
+		private SettingsHost _settingsHost;
+
+		public SettingsPage(SettingsHost settingsHost)
 		{
 			InitializeComponent();
 
-			var settingsHost = new SettingsHost(RawSettings.Default);
+			this._settingsHost = settingsHost;
 
-			//Use Leave no LostFocus as it works better
+			//Use Leave not LostFocus as it apparently works more sensibly
 			//Source: https://social.msdn.microsoft.com/Forums/en-US/dd023378-d700-4c5f-a5b5-072fd4de7903/lostfocus-vs-leave-events?forum=Vsexpressvb
-			this.AdNamesTextBox.Leave   += delegate { settingsHost.AdNames = this.AdNamesTextBox.Lines.ToImmutableList(); };
-			settingsHost.AdNamesChanged += delegate { this.AdNamesTextBox.Text = string.Concat(settingsHost.AdNames); };
+			AdNamesTextBox.Leave         += delegate { _settingsHost.AdNames = AdNamesTextBox.Lines.ToImmutableList(); };
+			_settingsHost.AdNamesChanged += delegate { AdNamesTextBox.Text   = string.Concat(_settingsHost.AdNames);   };
 
-			this.AdKeywordsTextBox.Leave   += delegate { settingsHost.AdNames = this.AdKeywordsTextBox.Lines.ToImmutableList(); };
-			settingsHost.AdKeywordsChanged += delegate { this.AdKeywordsTextBox.Text = string.Concat(settingsHost.AdKeywords); };
+			AdKeywordsTextBox.Leave         += delegate { _settingsHost.AdNames  = AdKeywordsTextBox.Lines.ToImmutableList(); };
+			_settingsHost.AdKeywordsChanged += delegate { AdKeywordsTextBox.Text = string.Concat(_settingsHost.AdKeywords);   };
 
-			this.SongNamesTextBox.Leave   += delegate { settingsHost.SongNames = this.SongNamesTextBox.Lines.ToImmutableList(); };
-			settingsHost.SongNamesChanged += delegate { this.SongNamesTextBox.Text = string.Concat(settingsHost.SongNames); };
+			SongNamesTextBox.Leave         += delegate { _settingsHost.SongNames = SongNamesTextBox.Lines.ToImmutableList(); };
+			_settingsHost.SongNamesChanged += delegate { SongNamesTextBox.Text   = string.Concat(_settingsHost.SongNames);   };
 
-			this.OutputFormatBox.SelectedIndexChanged += delegate {
-				settingsHost.OutputFormat = (OutputFormat)Enum.Parse(typeof(OutputFormat), this.OutputFormatBox.Text);
+			OutputFormatBox.SelectedIndexChanged += delegate {
+				_settingsHost.OutputFormat = (OutputFormat)Enum.Parse(typeof(OutputFormat), OutputFormatBox.Text);
 			};
-			settingsHost.OutputFormatChanged += delegate {
-				this.OutputFormatBox.SelectedIndex = this.OutputFormatBox.Items.IndexOf(settingsHost.OutputFormat.ToString());
+			_settingsHost.OutputFormatChanged += delegate {
+				OutputFormatBox.SelectedIndex = OutputFormatBox.Items.IndexOf(_settingsHost.OutputFormat.ToString());
 			};
 		}
 	}

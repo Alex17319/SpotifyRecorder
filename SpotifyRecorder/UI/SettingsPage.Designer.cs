@@ -76,16 +76,16 @@
 			this.resizablePanel1.InnerPanel.Controls.Add(this.groupBox5);
 			this.resizablePanel1.InnerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.resizablePanel1.InnerPanel.Location = new System.Drawing.Point(0, 0);
-			this.resizablePanel1.InnerPanel.MinimumSize = new System.Drawing.Size(0, 260);
+			this.resizablePanel1.InnerPanel.MinimumSize = new System.Drawing.Size(0, 275);
 			this.resizablePanel1.InnerPanel.Name = "InnerPanel";
-			this.resizablePanel1.InnerPanel.Size = new System.Drawing.Size(364, 260);
+			this.resizablePanel1.InnerPanel.Size = new System.Drawing.Size(364, 275);
 			this.resizablePanel1.InnerPanel.TabIndex = 0;
 			this.resizablePanel1.Location = new System.Drawing.Point(3, 3);
-			this.resizablePanel1.MinimumSize = new System.Drawing.Size(0, 265);
+			this.resizablePanel1.MinimumSize = new System.Drawing.Size(0, 280);
 			this.resizablePanel1.Name = "resizablePanel1";
 			this.resizablePanel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
 			this.resizablePanel1.ResizerSizes = new System.Windows.Forms.Padding(0, 0, 0, 5);
-			this.resizablePanel1.Size = new System.Drawing.Size(364, 265);
+			this.resizablePanel1.Size = new System.Drawing.Size(364, 280);
 			this.resizablePanel1.TabIndex = 15;
 			// 
 			// groupBox5
@@ -98,7 +98,7 @@
 			this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.groupBox5.Location = new System.Drawing.Point(0, 0);
 			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(364, 260);
+			this.groupBox5.Size = new System.Drawing.Size(364, 275);
 			this.groupBox5.TabIndex = 4;
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "Ad Classification";
@@ -109,7 +109,7 @@
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(3, 178);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(358, 79);
+			this.panel2.Size = new System.Drawing.Size(358, 94);
 			this.panel2.TabIndex = 6;
 			// 
 			// groupBox6
@@ -118,7 +118,7 @@
 			this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.groupBox6.Location = new System.Drawing.Point(0, 0);
 			this.groupBox6.Name = "groupBox6";
-			this.groupBox6.Size = new System.Drawing.Size(358, 79);
+			this.groupBox6.Size = new System.Drawing.Size(358, 94);
 			this.groupBox6.TabIndex = 1;
 			this.groupBox6.TabStop = false;
 			this.groupBox6.Text = "Exempt Song Names";
@@ -132,7 +132,7 @@
 			this.SongNamesTextBox.Multiline = true;
 			this.SongNamesTextBox.Name = "SongNamesTextBox";
 			this.SongNamesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.SongNamesTextBox.Size = new System.Drawing.Size(352, 60);
+			this.SongNamesTextBox.Size = new System.Drawing.Size(352, 75);
 			this.SongNamesTextBox.TabIndex = 1;
 			// 
 			// splitter2
@@ -237,7 +237,7 @@
 			this.OutputFormatGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.OutputFormatGroupBox.Controls.Add(this.OutputFormatBox);
 			this.OutputFormatGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.OutputFormatGroupBox.Location = new System.Drawing.Point(3, 268);
+			this.OutputFormatGroupBox.Location = new System.Drawing.Point(3, 283);
 			this.OutputFormatGroupBox.Name = "OutputFormatGroupBox";
 			this.OutputFormatGroupBox.Size = new System.Drawing.Size(364, 40);
 			this.OutputFormatGroupBox.TabIndex = 16;

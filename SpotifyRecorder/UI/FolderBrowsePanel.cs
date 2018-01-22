@@ -77,6 +77,12 @@ namespace FolioWebGen.WinForms
 		//	}
 		public event EventHandler PathChanged;
 
+		[DefaultValue("Color [Control]")]
+		// ^ Without this, the serializer thinks the default is 'Window' (white/transparent, idk),
+		// so it doesn't save that. However the default actually seems to be 'Control' - which
+		// should be fine if it doesn't get saved (as it's the default).
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+		// ^ Make sure it gets serialized (AFAIK this is the default anyway)
 		public override Color BackColor {
 			get => GroupBox.BackColor;
 			set {

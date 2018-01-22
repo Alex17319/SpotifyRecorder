@@ -18,7 +18,7 @@ namespace SpotifyRec
 
 		public bool HasStopped => TimeStopped != null;
 
-		public string CombinedName => Artist + " - " + SongName;
+		public string CombinedName => Artist + SpotifySongInfo.ArtistAndNameSeparator + SongName;
 
 		public SongInfo(string artist, string songName, DateTime timeStarted, DateTime? timeStopped, bool isSong)
 		{

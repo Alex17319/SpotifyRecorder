@@ -9,8 +9,8 @@ namespace SpotifyRec
 {
 	public class RecordingSession : IDisposable
 	{
-		private readonly List<SongGroupRecording> _groupRecordings;
-		public ReadOnlyCollection<SongGroupRecording> GroupRecordings { get; }
+		private readonly List<SongGroupRecorder> _groupRecordings;
+		public ReadOnlyCollection<SongGroupRecorder> GroupRecordings { get; }
 
 		public bool AllGroupsDoneSplitting {
 			get => GroupRecordings.All(x => x.SplittingCompleted);
@@ -26,7 +26,7 @@ namespace SpotifyRec
 
 		public RecordingSession(string tempFolder, SpotifyProcessManager spotifyProcessManager, SongClassificationInfo songClassificationInfo, int songRefreshInterval, Logger logger)
 		{
-			this._groupRecordings = new List<SongGroupRecording>();
+			this._groupRecordings = new List<SongGroupRecorder>();
 			this.GroupRecordings = this._groupRecordings.AsReadOnly();
 
 			this.TempFolder = tempFolder;
@@ -42,7 +42,7 @@ namespace SpotifyRec
 
 		private void StartNewGroupRecording()
 		{
-			var newGroup = new SongGroupRecording(
+			var newGroup = new SongGroupRecorder(
 				this.TempFolder,
 				_nextGroupNumber,
 				this.SpotifyProcessManager,
@@ -62,7 +62,7 @@ namespace SpotifyRec
 
 		private void OnGroupFinished(object sender, EventArgs e)
 		{
-			((SongGroupRecording)sender).GroupFinished -= OnGroupFinished;
+			((SongGroupRecorder)sender).GroupFinished -= OnGroupFinished;
 
 			ClearFinishedGroupRecordings();
 
