@@ -25,13 +25,18 @@ namespace SpotifyRec
 
 		public ImmutableList<RecordedSong> CompletedSongs => _asyncProcessHelper.PartialResults;
 
-		public SongGroupSplitter(RecordedSongGroup group, Logger logger)
+		public SongGroupSplitter(RecordedSongGroup group, Logger logger, bool autostart = false)
 		{
 			this.Group = group;
 
 			this._asyncProcessHelper = AsyncProcessHelper.Create<RecordedSong>(SplitGroup, logger, "split song group into songs");
+
+			if (autostart) SplitGroupAsync();
 		}
 
+		/// <summary>
+		/// Does nothing if the splitting process has completed/failed or is in progress
+		/// </summary>
 		public void SplitGroupAsync()
 		{
 			_asyncProcessHelper.RunTaskAsync();

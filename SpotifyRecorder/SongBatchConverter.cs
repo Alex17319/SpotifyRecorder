@@ -31,7 +31,7 @@ namespace SpotifyRec
 
 		public ImmutableList<ConvertedSong> ConvertedSongs => _asyncProcessHelper.PartialResults;
 
-		public SongBatchConverter(IEnumerable<RecordedSong> songs, string outputFolder, ISongEncoder songEncoder, Logger logger)
+		public SongBatchConverter(IEnumerable<RecordedSong> songs, string outputFolder, ISongEncoder songEncoder, Logger logger, bool autostart = false)
 		{
 			this.Songs = songs;
 			this.OutputFolder = outputFolder;
@@ -39,12 +39,14 @@ namespace SpotifyRec
 			this._logger = logger;
 
 			this._asyncProcessHelper = AsyncProcessHelper.Create<ConvertedSong>(ConvertSongs, logger, "convert songs");
+
+			if (autostart) ConvertSongsAsync();
 		}
 
 		/// <summary>
-		/// Does nothing if the conversion is completed or in progress
+		/// Does nothing if the conversion has completed/failed or is in progress
 		/// </summary>
-		public void ConvertSongAsync()
+		public void ConvertSongsAsync()
 		{
 			_asyncProcessHelper.RunTaskAsync();
 

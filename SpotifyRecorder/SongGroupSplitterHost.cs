@@ -43,9 +43,20 @@ namespace SpotifyRec
 				var x = _currentSplitters[i];
 				if (x.Completed) {
 					_completedGroups.Add(x.Group);
-					
+					_currentSplitters.RemoveAt(i);
 				}
 			}
+
+			_currentSplitters.AddRange(
+				_pendingGroups.Select(g => new SongGroupSplitter(g, this._logger, autostart: true))
+			);
+
+			_pendingGroups.Clear();
+		}
+
+		public void Enqueue(RecordedSongGroup group)
+		{
+			_pendingGroups.Enqueue(group);
 		}
 	}
 }

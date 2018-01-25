@@ -49,23 +49,28 @@ namespace SpotifyRec
 		{
 			if (_currentConverter != null && _currentConverter.Completed)
 			{
-				_completedSongs.AddRange(
-					_currentConverter.Songs.Select(
-						x => new ConvertedSong(
-							songInfo: x.SongInfo,
-							tempPath: x.TempPath,
-							outputPath: _currentConverter.GetDestPath(x)
-						)
-					)
-				);
+				_completedSongs.AddRange(_currentConverter.ConvertedSongs);
 			}
 
 			_currentConverter = new SongBatchConverter(
 				songs: new List<RecordedSong>(_pendingSongs),
 				outputFolder: SettingProvider.OutputFolder,
 				songEncoder: SettingProvider.SongEncoder,
-				logger: _logger
+				logger: _logger,
+				autostart: true
 			);
+
+			_pendingSongs.Clear();
+		}
+
+		public void Enqueue(RecordedSong song)
+		{
+			_pendingSongs.Enqueue(song);
+		}
+
+		public void EnqueueAll(IEnumerable<RecordedSong> songs)
+		{
+			foreach (var s in songs) _pendingSongs.Enqueue(s);
 		}
 	}
 }

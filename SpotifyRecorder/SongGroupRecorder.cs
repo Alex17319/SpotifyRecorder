@@ -111,22 +111,15 @@ namespace SpotifyRec
 			//	);
 		}
 
-		private void SplitSongs()
-		{
-			if (!_audioRecorder.HasStopped) throw new InvalidOperationException(
-				"Cannot split songs if the AudioRecorder hasn't stopped."
-			);
-			if (_songTracker.State != SongTracker.TrackState.Finished) throw new InvalidOperationException(
-				"Cannot split songs if the SongTracker hasn't finished tracking songs."
-			);
-
-			_audioRecorder.FullOutputPath;
-		}
-
-		private void ExtractSongToFile(byte[] reusedBuffer, WaveFileReader groupReader, WaveFileWriter songWriter, SongInfo song)
-		{
-			
-		}
+		//	private void SplitSongs()
+		//	{
+		//		if (!_audioRecorder.HasStopped) throw new InvalidOperationException(
+		//			"Cannot split songs if the AudioRecorder hasn't stopped."
+		//		);
+		//		if (_songTracker.State != SongTracker.TrackState.Finished) throw new InvalidOperationException(
+		//			"Cannot split songs if the SongTracker hasn't finished tracking songs."
+		//		);
+		//	}
 
 		public void Dispose()
 		{

@@ -22,8 +22,6 @@ namespace SpotifyRec
 		public int SongRefreshInterval { get; }
 		private readonly Logger _logger;
 
-		private int _nextGroupNumber;
-
 		public RecordingSession(string tempFolder, SpotifyProcessManager spotifyProcessManager, SongClassificationInfo songClassificationInfo, int songRefreshInterval, Logger logger)
 		{
 			this._groupRecordings = new List<SongGroupRecorder>();
@@ -35,8 +33,6 @@ namespace SpotifyRec
 			this.SongRefreshInterval = songRefreshInterval;
 			this._logger = logger;
 
-			this._nextGroupNumber = 1;
-
 			StartNewGroupRecording();
 		}
 
@@ -44,14 +40,11 @@ namespace SpotifyRec
 		{
 			var newGroup = new SongGroupRecorder(
 				this.TempFolder,
-				_nextGroupNumber,
 				this.SpotifyProcessManager,
 				this.SongClassificationInfo,
 				this.SongRefreshInterval,
 				this._logger
 			);
-
-			_nextGroupNumber++;
 
 			_groupRecordings.Add(
 				newGroup
