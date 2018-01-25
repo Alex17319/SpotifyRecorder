@@ -7,42 +7,51 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpotifyRec.Utils;
 
 namespace SpotifyRec
 {
 	public class SongGroupSplitter
 	{
-		public string GroupPath { get; }
-		public Guid GroupID { get; }
-		public IEnumerable<SongInfo> Songs { get; }
+		public RecordedSongGroup Group { get; }
 
-		public ImmutableList<RecordedSong> CompletedSongs { get; private set; }
-		
-		public bool IsComplete { get; private set; }
-		
-		public SongGroupSplitter(string groupPath, Guid groupID, IEnumerable<SongInfo> songs)
+		private readonly Logger _logger;
+
+		private AsyncProcessHelper<RecordedSong, ValueTuple> _asyncProcessHelper;
+
+		public bool InProgress => _asyncProcessHelper.InProgress;
+		public bool Completed => _asyncProcessHelper.Completed;
+		public bool Failed => _asyncProcessHelper.Failed;
+
+		public ImmutableList<RecordedSong> CompletedSongs => _asyncProcessHelper.PartialResults;
+
+		public SongGroupSplitter(RecordedSongGroup group, Logger logger)
 		{
-			this.GroupPath = groupPath;
-			this.GroupID = groupID;
-			this.Songs = songs;
-			this.CompletedSongs = ImmutableList.Create<RecordedSong>();
+			this.Group = group;
+
+			this._asyncProcessHelper = AsyncProcessHelper.Create<RecordedSong>(SplitGroup, logger, "split song group into songs");
 		}
 
-		private void SplitGroup()
+		public void SplitGroupAsync()
 		{
-			using (var groupReader = new WaveFileReader(GroupPath))
+			_asyncProcessHelper.RunTaskAsync();
+		}
+
+		private void SplitGroup(AsyncPartialResultCollector<RecordedSong> partialResults)
+		{
+			using (var groupReader = new WaveFileReader(Group.Path))
 			{
 				const int bufferSize = 256; //I'm guessing this power of 2 should work well
 				byte[] buffer = new byte[bufferSize];
 
 				int songNum = 1;
-				foreach (var song in Songs.Where(s => s.IsSong && s.HasStopped))
+				foreach (var song in Group.Songs.Where(s => s.IsSong && s.HasStopped))
 				{
 					//Loop through songs, ignoring ads, durations where the music is paused, and incomplete songs
 
 					string songPath = Path.Combine(
-						Path.GetDirectoryName(GroupPath), 
-						$"Song#{songNum} {song.CombinedName} (Group {GroupID})"
+						Path.GetDirectoryName(Group.Path), 
+						$"Song#{songNum} {song.CombinedName} (Group {Group.GroupID})"
 					);
 					// ^ Adding in the group id and song number avoids having to deal with
 					// duplicates (they'll be dealt with later)
@@ -52,7 +61,9 @@ namespace SpotifyRec
 						ExtractSongToFile(buffer, groupReader, songWriter, song);
 					}
 
-					File.Move(songPath + ".wav", songPath + ".wav-extracting");
+					File.Move(songPath + ".wav-extracting", songPath + ".wav");
+
+					partialResults.AddPartialResult(new RecordedSong(song, songPath + ".wav"));
 
 					songNum++;
 				}
@@ -65,9 +76,9 @@ namespace SpotifyRec
 
 		private void ExtractSongToFile(byte[] reusedBuffer, WaveFileReader groupReader, WaveFileWriter songWriter, SongInfo song)
 		{
-			DateTime songEndTime = song.TimeStopped ?? this.RecordingStartTime + _audioRecorder.CurrentLength;
-			TimeSpan songDuration = songEndTime - song.TimeStarted;
-			int bytesPerMillisecond = _audioRecorder.WaveFormat.AverageBytesPerSecond / 1000;
+			DateTime songEndTime = song.EndTime ?? Group.EndTime;
+			TimeSpan songDuration = songEndTime - song.StartTime;
+			int bytesPerMillisecond = Group.WaveFormat.AverageBytesPerSecond / 1000;
 			long songLength = (long)songDuration.TotalMilliseconds * bytesPerMillisecond;
 			long songStartPos = groupReader.Position;
 			long songEndPos = songStartPos + songLength;

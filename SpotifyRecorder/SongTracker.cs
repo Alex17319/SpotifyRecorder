@@ -99,8 +99,8 @@ namespace SpotifyRec
 				_songs[_songs.Count - 1] = new SongInfo(
 					artist: curSong.Artist,
 					songName: curSong.SongName,
-					timeStarted: curSong.TimeStarted,
-					timeStopped: DateTime.Now,
+					startTime: curSong.StartTime,
+					endTime: DateTime.Now,
 					isSong: curSong.IsSong
 				);
 			}

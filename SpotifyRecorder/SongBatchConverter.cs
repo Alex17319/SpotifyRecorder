@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using SpotifyRec.Utils;
+using System.Collections.Immutable;
 
 namespace SpotifyRec
 {
@@ -20,14 +22,14 @@ namespace SpotifyRec
 		public ISongEncoder SongEncoder { get; }
 		
 		private Logger _logger;
-		
-		private Task _conversionTask;
-		private object _lock = new object();
 
-		public bool InProgress {
-			get { lock (_lock) return TaskIsInProgress(_conversionTask); }
-		}
-		public bool Completed { get; private set; }
+		private AsyncProcessHelper<ConvertedSong, ValueTuple> _asyncProcessHelper;
+
+		public bool InProgress => _asyncProcessHelper.InProgress;
+		public bool Completed => _asyncProcessHelper.Completed;
+		public bool Failed => _asyncProcessHelper.Failed;
+
+		public ImmutableList<ConvertedSong> ConvertedSongs => _asyncProcessHelper.PartialResults;
 
 		public SongBatchConverter(IEnumerable<RecordedSong> songs, string outputFolder, ISongEncoder songEncoder, Logger logger)
 		{
@@ -35,6 +37,8 @@ namespace SpotifyRec
 			this.OutputFolder = outputFolder;
 			this.SongEncoder = songEncoder;
 			this._logger = logger;
+
+			this._asyncProcessHelper = AsyncProcessHelper.Create<ConvertedSong>(ConvertSongs, logger, "convert songs");
 		}
 
 		/// <summary>
@@ -42,24 +46,7 @@ namespace SpotifyRec
 		/// </summary>
 		public void ConvertSongAsync()
 		{
-			lock (_lock)
-			{
-				if (this.Completed) return;
-				if (this.InProgress) return;
-
-				_conversionTask = Task.Run(
-					() => {
-						try {
-							ConvertSongs();
-						} catch (Exception ex) {
-							_logger?.Invoke(
-								"An error occurred while converting songs in a separate thread:" + Environment.NewLine + ex,
-								LogType.Error
-							);
-						}
-					}
-				);
-			}
+			_asyncProcessHelper.RunTaskAsync();
 
 			//	_logger?.Invoke(
 			//		"An error occurred while converting the song \"" + Song.SongInfo.SongName + "\" "
@@ -72,18 +59,20 @@ namespace SpotifyRec
 			//	);
 		}
 
-		private void ConvertSongs()
+		private void ConvertSongs(AsyncPartialResultCollector<ConvertedSong> partialResults)
 		{
 			const int bufferSize = 256;
 			byte[] reusedBuffer = new byte[bufferSize];
 
 			foreach (var song in Songs)
 			{
-				ConvertSong(song, reusedBuffer);
+				partialResults.AddPartialResult(
+					ConvertSong(song, reusedBuffer)
+				);
 			}
 		}
 
-		private void ConvertSong(RecordedSong song, byte[] reusedBuffer)
+		private ConvertedSong ConvertSong(RecordedSong song, byte[] reusedBuffer)
 		{
 			var destPath = GetDestPath(song);
 
@@ -101,13 +90,17 @@ namespace SpotifyRec
 			}
 
 			File.Delete(song.TempPath);
-			
+
 			//With mutable settings now added (so the temp path could change), it's a pain to delete the temp file later
 			//	File.Move(song.TempPath, Path.ChangeExtension(song.TempPath, ".wav-converted"));
 			//	//Don't delete yet as it's easier to control later, and this won't be reached if there was an error
 			//	//Rename the file so that it won't be converted again
 
-			this.Completed = true;
+			return new ConvertedSong(
+				songInfo: song.SongInfo,
+				tempPath: song.TempPath,
+				outputPath: destPath
+			);
 		}
 
 		public string GetDestPath(RecordedSong song)

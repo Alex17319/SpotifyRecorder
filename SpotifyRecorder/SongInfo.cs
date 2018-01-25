@@ -10,22 +10,22 @@ namespace SpotifyRec
 	{
 		public string Artist { get; }
 		public string SongName { get; }
-		public DateTime TimeStarted { get; }
-		public DateTime? TimeStopped { get; }
+		public DateTime StartTime { get; }
+		public DateTime? EndTime { get; }
 		public bool IsSong { get; }
 
-		public TimeSpan? Duration => TimeStopped - TimeStarted;
+		public TimeSpan? Duration => EndTime - StartTime;
 
-		public bool HasStopped => TimeStopped != null;
+		public bool HasStopped => EndTime != null;
 
 		public string CombinedName => Artist + SpotifySongInfo.ArtistAndNameSeparator + SongName;
 
-		public SongInfo(string artist, string songName, DateTime timeStarted, DateTime? timeStopped, bool isSong)
+		public SongInfo(string artist, string songName, DateTime startTime, DateTime? endTime, bool isSong)
 		{
 			this.Artist = artist;
 			this.SongName = songName;
-			this.TimeStarted = timeStarted;
-			this.TimeStopped = timeStopped;
+			this.StartTime = startTime;
+			this.EndTime = endTime;
 			this.IsSong = isSong;
 		}
 

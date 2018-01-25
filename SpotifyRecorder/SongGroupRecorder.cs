@@ -9,6 +9,7 @@ using NAudio;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
 using NAudio.Gui;
+using System.Collections.Immutable;
 
 namespace SpotifyRec
 {
@@ -85,27 +86,29 @@ namespace SpotifyRec
 
 			this.RecordedGroup = new RecordedSongGroup(
 				path: _audioRecorder.FullOutputPath,
-				groupID: this.GroupID,
+				groupID: GroupID,
+				startTime: RecordingStartTime,
 				duration: _audioRecorder.CurrentLength,
-				waveFormat: _audioRecorder.WaveFormat
+				waveFormat: _audioRecorder.WaveFormat,
+				songs: Songs.ToImmutableList()
 			);
 			GroupFinished?.Invoke(this, EventArgs.Empty);
 
-			Task.Run((Action)SplitSongs)
-			.ContinueWith(
-				task => {
-					lock (_lock) {
-						_splittingCompleted = true;
-					}
-					if (task.Exception != null) {
-						_logger?.Invoke(
-							"An error occurred while splitting the recording into songs in a separate thread:\r\n"
-							+ task.Exception,
-							LogType.Error
-						);
-					}
-				}
-			);
+			//	Task.Run((Action)SplitSongs)
+			//	.ContinueWith(
+			//		task => {
+			//			lock (_lock) {
+			//				_splittingCompleted = true;
+			//			}
+			//			if (task.Exception != null) {
+			//				_logger?.Invoke(
+			//					"An error occurred while splitting the recording into songs in a separate thread:\r\n"
+			//					+ task.Exception,
+			//					LogType.Error
+			//				);
+			//			}
+			//		}
+			//	);
 		}
 
 		private void SplitSongs()

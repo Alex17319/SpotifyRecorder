@@ -81,8 +81,9 @@
     <Compile Include="RecordingHost.cs" />
     <Compile Include="SettingsHost.cs" />
     <Compile Include="SongBatchConverter.cs" />
-    <Compile Include="SongGroup.cs" />
+    <Compile Include="RecordedSongGroup.cs" />
     <Compile Include="SongGroupSplitter.cs" />
+    <Compile Include="SongGroupSplitterHost.cs" />
     <Compile Include="UI\CornerResizerSizes.cs" />
     <Compile Include="UI\PanelDesigner.cs" />
     <Compile Include="UI\PanelResizeEventArgs.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="UI\SplitContainer.cs" />
     <Compile Include="UI\UniaxualResizePanelDesigner.cs" />
     <Compile Include="Utils\AdvancedEvent.cs" />
+    <Compile Include="AsyncProcessHelper.cs" />
     <Compile Include="Utils\CustomEnum.cs" />
     <Compile Include="Utils\CustomEnumDefinition.cs" />
     <Compile Include="Utils\EnumerableExtensions.cs" />
