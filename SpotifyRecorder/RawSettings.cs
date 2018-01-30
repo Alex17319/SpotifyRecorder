@@ -18,6 +18,7 @@ namespace SpotifyRec
 		public OutputFormat OutputFormat { get; }
 		public string OutputFolder { get; }
 		public string TempFolder { get; }
+		public int SongRefreshInterval { get; }
 
 		public RawSettings(
 			ImmutableList<string> adNames,
@@ -25,7 +26,8 @@ namespace SpotifyRec
 			ImmutableList<string> songNames,
 			OutputFormat outputFormat,
 			string outputFolder,
-			string tempFolder
+			string tempFolder,
+			int songRefreshInterval
 		) {
 			this.AdNames = adNames;
 			this.AdKeywords = adKeywords;
@@ -33,6 +35,7 @@ namespace SpotifyRec
 			this.OutputFormat = outputFormat;
 			this.OutputFolder = outputFolder;
 			this.TempFolder = tempFolder;
+			this.SongRefreshInterval = songRefreshInterval;
 		}
 
 
@@ -53,7 +56,8 @@ namespace SpotifyRec
 				"Spotify Recorder",
 				"[All Songs]" //Other folders should be used for each playlist, which consist of shortcuts to this folder (this is just the default though)
 			),
-			tempFolder: Path.Combine(Path.GetTempPath(), "Spotify Recorder")
+			tempFolder: Path.Combine(Path.GetTempPath(), "Spotify Recorder"),
+			songRefreshInterval: 100
 		);
 
 		//A namespace isn't needed, and just complicates things
@@ -71,7 +75,8 @@ namespace SpotifyRec
 				songNames:  e.El("songNames" )?.Els("name"   ).Select(x => x.Value).ToImmutableList().NullIfEmpty() ?? Default.SongNames ,
 				outputFormat: e.El("outputFormat")?.ValueAsEnum<OutputFormat>() ?? Default.OutputFormat,
 				outputFolder: e.El("outputFolder")?.Value ?? Default.OutputFolder,
-				tempFolder:   e.El("tempFolder"  )?.Value ?? Default.TempFolder
+				tempFolder:   e.El("tempFolder"  )?.Value ?? Default.TempFolder,
+				songRefreshInterval: e.El("songRefreshInterval")?.ValueAsInt() ?? Default.SongRefreshInterval
 			);
 		}
 
@@ -87,7 +92,8 @@ namespace SpotifyRec
 				new XElement("songNames" , s.AdNames.Select(x => new XElement("name"   , x))),
 				new XElement("outputFormat", s.OutputFormat.ToString()),
 				new XElement("outputFolder", s.OutputFolder),
-				new XElement("tempFolder", s.TempFolder)
+				new XElement("tempFolder", s.TempFolder),
+				new XElement("songRefreshInterval", s.SongRefreshInterval)
 			);
 		}
 
@@ -107,6 +113,7 @@ namespace SpotifyRec
 				&& a.OutputFormat == b.OutputFormat
 				&& a.OutputFolder == b.OutputFolder
 				&& a.TempFolder == b.TempFolder
+				&& a.SongRefreshInterval == b.SongRefreshInterval
 			);
 		}
 
@@ -118,7 +125,8 @@ namespace SpotifyRec
 				HashCodes.CombineList(this.SongNames),
 				this.OutputFormat.GetHashCode(),
 				this.OutputFolder.GetHashCode(),
-				this.TempFolder.GetHashCode()
+				this.TempFolder.GetHashCode(),
+				this.SongRefreshInterval.GetHashCode()
 			);
 		}
 	}

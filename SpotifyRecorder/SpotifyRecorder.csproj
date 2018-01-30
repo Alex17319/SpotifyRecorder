@@ -168,6 +168,7 @@
     </Compile>
     <Compile Include="UI\ValidatedTextBox.Designer.cs" />
     <Compile Include="Utils\EventExtensions.cs" />
+    <Compile Include="Utils\EventUtils.cs" />
     <Compile Include="Utils\HashCodes.cs" />
     <Compile Include="Utils\TryDelegate.cs" />
     <Compile Include="Utils\UserErrorException.cs" />

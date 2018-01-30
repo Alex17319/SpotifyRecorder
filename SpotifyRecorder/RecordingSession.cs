@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpotifyRec.Utils;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,15 +13,15 @@ namespace SpotifyRec
 		private readonly List<SongGroupRecorder> _groupRecordings;
 		public ReadOnlyCollection<SongGroupRecorder> GroupRecordings { get; }
 
-		public bool AllGroupsDoneSplitting {
-			get => GroupRecordings.All(x => x.SplittingCompleted);
-		}
-
 		public string TempFolder { get; }
 		public SpotifyProcessManager SpotifyProcessManager { get; }
 		public SongClassificationInfo SongClassificationInfo { get; }
 		public int SongRefreshInterval { get; }
 		private readonly Logger _logger;
+
+		public bool SessionClosed { get; private set; }
+
+		public event EventHandler<SongGroupRecorder, EventArgs> GroupFinished;
 
 		public RecordingSession(string tempFolder, SpotifyProcessManager spotifyProcessManager, SongClassificationInfo songClassificationInfo, int songRefreshInterval, Logger logger)
 		{
@@ -53,35 +54,42 @@ namespace SpotifyRec
 			newGroup.GroupFinished += OnGroupFinished;
 		}
 
-		private void OnGroupFinished(object sender, EventArgs e)
+		private void OnGroupFinished(SongGroupRecorder sender, EventArgs e)
 		{
-			((SongGroupRecorder)sender).GroupFinished -= OnGroupFinished;
+			sender.GroupFinished -= OnGroupFinished;
 
-			ClearFinishedGroupRecordings();
+			this.GroupFinished.Fire(sender, e);
 
 			StartNewGroupRecording();
 		}
 
-		public void ClearFinishedGroupRecordings()
-		{
-			for (int i = _groupRecordings.Count - 1; i >= 0; i--)
-			{
-				if (_groupRecordings[i].SplittingCompleted)
-				{
-					_groupRecordings[i].Dispose();
-					_groupRecordings.RemoveAt(i);
-				}
-			}
-		}
+		//Why remove them? It's not really helpful
+		//	public void ClearFinishedGroupRecordings()
+		//	{
+		//		for (int i = _groupRecordings.Count - 1; i >= 0; i--)
+		//		{
+		//			if (_groupRecordings[i].SplittingCompleted)
+		//			{
+		//				_groupRecordings[i].Dispose();
+		//				_groupRecordings.RemoveAt(i);
+		//			}
+		//		}
+		//	}
 
 		public void CloseSession()
 		{
+			if (SessionClosed) return;
+
 			var last = _groupRecordings.LastOrDefault();
 			if (last != null) {
 				last.GroupFinished -= OnGroupFinished;
-				last.GroupFinished += delegate { ClearFinishedGroupRecordings(); };
+				last.GroupFinished += (sender, e) => {
+					this.GroupFinished.Fire(sender, e);
+				};
 				last.StopRecordingEarly();
 			};
+
+			SessionClosed = true;
 		}
 
 		public void Dispose()

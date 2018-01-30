@@ -54,6 +54,13 @@ namespace SpotifyRec
 			set => SetSetting(ref _tempFolder, value, TempFolderChanged);
 		}
 
+		public event EventHandler SongRefreshIntervalChanged;
+		private int _songRefreshInterval;
+		public int SongRefreshInterval {
+			get => GetSetting(ref _songRefreshInterval);
+			set => SetSetting(ref _songRefreshInterval, value, SongRefreshIntervalChanged);
+		}
+
 		public SongClassificationInfo SongClassificationInfo {
 			get {
 				lock (_lock) return new SongClassificationInfo(
@@ -97,16 +104,23 @@ namespace SpotifyRec
 			this._outputFormat = raw.OutputFormat;
 			this._outputFolder = raw.OutputFolder;
 			this._tempFolder = raw.TempFolder;
+			this._songRefreshInterval = raw.SongRefreshInterval;
 		}
 
-		public RawSettings ToRaw() => new RawSettings(
-			adNames: this.AdNames,
-			adKeywords: this.AdKeywords,
-			songNames: this.SongNames,
-			outputFormat: this.OutputFormat,
-			outputFolder: this.OutputFolder,
-			tempFolder: this.TempFolder
-		);
+		public RawSettings ToRaw()
+		{
+			lock (_lock) {
+				return new RawSettings(
+					adNames: this.AdNames,
+					adKeywords: this.AdKeywords,
+					songNames: this.SongNames,
+					outputFormat: this.OutputFormat,
+					outputFolder: this.OutputFolder,
+					tempFolder: this.TempFolder,
+					songRefreshInterval: this.SongRefreshInterval
+				);
+			}
+		}
 
 		private T GetSetting<T>(ref T field)
 		{

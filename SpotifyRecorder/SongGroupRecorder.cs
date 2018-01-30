@@ -10,6 +10,7 @@ using NAudio.CoreAudioApi;
 using NAudio.Wave;
 using NAudio.Gui;
 using System.Collections.Immutable;
+using SpotifyRec.Utils;
 
 namespace SpotifyRec
 {
@@ -30,21 +31,21 @@ namespace SpotifyRec
 
 		public ReadOnlyCollection<SongInfo> Songs => _songTracker.Songs;
 
-		public event EventHandler GroupFinished;
+		public event EventHandler<SongGroupRecorder, EventArgs> GroupFinished;
 		/// <summary>Note: Null when <see cref="IsGroupFinished"/> is false.</summary>
 		public RecordedSongGroup RecordedGroup { get; private set; }
 		public bool IsGroupFinished => RecordedGroup != null;
 
 		private Logger _logger;
 
-		private bool _splittingCompleted = false;
-		/// <summary>
-		/// False until everything, including asynchronously splitting the recording into songs, has been completed
-		/// </summary>
-		public bool SplittingCompleted {
-			get { lock (_lock) return _splittingCompleted; }
-		}
-		private object _lock = new object();
+		//	private bool _splittingCompleted = false;
+		//	/// <summary>
+		//	/// False until everything, including asynchronously splitting the recording into songs, has been completed
+		//	/// </summary>
+		//	public bool SplittingCompleted {
+		//		get { lock (_lock) return _splittingCompleted; }
+		//	}
+		//	private object _lock = new object();
 
 		public SongGroupRecorder(string tempFolder, SpotifyProcessManager spotifyProcessManager, SongClassificationInfo songClassificationInfo, int songRefreshInterval, Logger logger)
 		{
