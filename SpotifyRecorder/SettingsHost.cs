@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SpotifyRec.SongEncoding;
 using System.Collections.Immutable;
+using System.IO;
 
 namespace SpotifyRec
 {
@@ -43,14 +44,20 @@ namespace SpotifyRec
 		public event EventHandler OutputFolderChanged;
 		private string _outputFolder;
 		public string OutputFolder {
-			get => GetSetting(ref _outputFolder);
+			get {
+				Directory.CreateDirectory(_outputFolder);
+				return GetSetting(ref _outputFolder);
+			}
 			set => SetSetting(ref _outputFolder, value, OutputFolderChanged);
 		}
 
 		public event EventHandler TempFolderChanged;
 		private string _tempFolder;
 		public string TempFolder {
-			get => GetSetting(ref _tempFolder);
+			get {
+				Directory.CreateDirectory(_tempFolder);
+				return GetSetting(ref _tempFolder);
+			}
 			set => SetSetting(ref _tempFolder, value, TempFolderChanged);
 		}
 

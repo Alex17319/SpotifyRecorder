@@ -1,8 +1,10 @@
-﻿using System;
+﻿using SpotifyRec.Logging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,35 +14,34 @@ namespace SpotifyRec
 {
 	public partial class MainForm : Form
 	{
-		public RawSettings Settings { get; }
-
-		public event EventHandler AdNamesChanged;
-		public event EventHandler AdKeywordsChanged;
-		public event EventHandler SongNamesChanged;
-		public event EventHandler OutputFormatChanged;
+		public MainController MainController { get; }
+		public RichTextBoxLogger RichTextBoxLogger { get; }
+		public StreamLogger FileLogger { get; }
 
 		public MainForm()
 		{
 			InitializeComponent();
 
-			//	this.AdNamesTextBox.LostFocus += delegate {
-			//		if (!Enumerable.SequenceEqual(Settings.AdNames, AdNamesTextBox.Lines)) {
-			//			AdNamesChanged?.Invoke(this, EventArgs.Empty);
-			//		}
-			//	};
-			//	
-			//	this.AdKeywordsTextBox.LostFocus += delegate {
-			//		if (!Enumerable.SequenceEqual(Settings.AdKeywords, AdKeywordsTextBox.Lines)) {
-			//			AdKeywordsChanged?.Invoke(this, EventArgs.Empty);
-			//		}
-			//	};
-			//	
-			//	this.SongNamesTextBox.LostFocus += delegate {
-			//		if (!Enumerable.SequenceEqual(Settings.SongNames, SongNamesTextBox.Lines)) {
-			//			SongNamesChanged?.Invoke(this, EventArgs.Empty);
-			//		}
-			//	};
+			this.MainController = new MainController();
 
+			this.settingsPage1.MainController = this.MainController;
+			this.recordingPage1.MainController = this.MainController;
+
+			this.RichTextBoxLogger = new RichTextBoxLogger(
+				provider: MainController,
+				textBox: this.LogTextBox
+			);
+			this.FileLogger = new StreamLogger(
+				provider: MainController,
+				streamWriter: new StreamWriter(
+					File.Create(
+						Path.Combine(
+							MainController.SettingsHost.TempFolder, //TODO: Improve this
+							"Log " + DateTime.Now.ToString("yyyy-mm-dd HH-mm-ss.fff") + ".log"
+						)
+					)
+				)
+			);
 		}
 	}
 }

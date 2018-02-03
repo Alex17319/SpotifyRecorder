@@ -13,31 +13,65 @@ namespace SpotifyRec.UI
 {
 	public partial class SettingsPage : UserControl
 	{
-		private SettingsHost _settingsHost;
-
-		public SettingsPage(SettingsHost settingsHost)
+		public SettingsPage()
 		{
 			InitializeComponent();
+		}
 
-			this._settingsHost = settingsHost;
 
-			//Use Leave not LostFocus as it apparently works more sensibly
-			//Source: https://social.msdn.microsoft.com/Forums/en-US/dd023378-d700-4c5f-a5b5-072fd4de7903/lostfocus-vs-leave-events?forum=Vsexpressvb
-			AdNamesTextBox.Leave         += delegate { _settingsHost.AdNames = AdNamesTextBox.Lines.ToImmutableList(); };
-			_settingsHost.AdNamesChanged += delegate { AdNamesTextBox.Text   = string.Concat(_settingsHost.AdNames);   };
+		public SettingsHost SettingsHost => MainController.SettingsHost;
 
-			AdKeywordsTextBox.Leave         += delegate { _settingsHost.AdNames  = AdKeywordsTextBox.Lines.ToImmutableList(); };
-			_settingsHost.AdKeywordsChanged += delegate { AdKeywordsTextBox.Text = string.Concat(_settingsHost.AdKeywords);   };
+		private MainController _mainController;
+		public MainController MainController {
+			get => _mainController;
+			set {
+				if (_mainController != null)
+				{
+					//Note: Use Leave not LostFocus as it apparently works more sensibly
+					//Source: https://social.msdn.microsoft.com/Forums/en-US/dd023378-d700-4c5f-a5b5-072fd4de7903/lostfocus-vs-leave-events?forum=Vsexpressvb
 
-			SongNamesTextBox.Leave         += delegate { _settingsHost.SongNames = SongNamesTextBox.Lines.ToImmutableList(); };
-			_settingsHost.SongNamesChanged += delegate { SongNamesTextBox.Text   = string.Concat(_settingsHost.SongNames);   };
+					AdNamesTextBox.Leave        -= OnAdNamesUIChanged;
+					SettingsHost.AdNamesChanged -= OnAdNamesSettingChanged;
 
-			OutputFormatBox.SelectedIndexChanged += delegate {
-				_settingsHost.OutputFormat = (OutputFormat)Enum.Parse(typeof(OutputFormat), OutputFormatBox.Text);
-			};
-			_settingsHost.OutputFormatChanged += delegate {
-				OutputFormatBox.SelectedIndex = OutputFormatBox.Items.IndexOf(_settingsHost.OutputFormat.ToString());
-			};
+					AdKeywordsTextBox.Leave        -= OnAdKeywordsUIChanged;
+					SettingsHost.AdKeywordsChanged -= ONAdKeywordsSettingChanged;
+
+					SongNamesTextBox.Leave        -= OnSongNamesUIChanged;
+					SettingsHost.SongNamesChanged -= OnSongNamesSettingChanged;
+
+					OutputFormatBox.SelectedIndexChanged -= OnOutputFormatUIChanged;
+					SettingsHost.OutputFormatChanged     -= OnOutputFormatSettingChanged;
+				}
+
+				_mainController = value;
+
+				if (_mainController != null)
+				{
+					AdNamesTextBox.Leave        += OnAdNamesUIChanged;
+					SettingsHost.AdNamesChanged += OnAdNamesSettingChanged;
+
+					AdKeywordsTextBox.Leave        += OnAdKeywordsUIChanged;
+					SettingsHost.AdKeywordsChanged += ONAdKeywordsSettingChanged;
+
+					SongNamesTextBox.Leave        += OnSongNamesUIChanged;
+					SettingsHost.SongNamesChanged += OnSongNamesSettingChanged;
+
+					OutputFormatBox.SelectedIndexChanged += OnOutputFormatUIChanged;
+					SettingsHost.OutputFormatChanged     += OnOutputFormatSettingChanged;
+				}
+
+				void OnAdNamesUIChanged     (object sender, EventArgs e) => SettingsHost.AdNames = AdNamesTextBox.Lines.ToImmutableList();
+				void OnAdNamesSettingChanged(object sender, EventArgs e) => AdNamesTextBox.Text  = string.Concat(SettingsHost.AdNames);
+
+				void OnAdKeywordsUIChanged     (object sender, EventArgs e) => SettingsHost.AdNames   = AdKeywordsTextBox.Lines.ToImmutableList();
+				void ONAdKeywordsSettingChanged(object sender, EventArgs e) => AdKeywordsTextBox.Text = string.Concat(SettingsHost.AdKeywords);
+
+				void OnSongNamesUIChanged     (object sender, EventArgs e) => SettingsHost.SongNames = SongNamesTextBox.Lines.ToImmutableList();
+				void OnSongNamesSettingChanged(object sender, EventArgs e) => SongNamesTextBox.Text  = string.Concat(SettingsHost.SongNames);
+
+				void OnOutputFormatUIChanged     (object sender, EventArgs e) => SettingsHost.OutputFormat     = (OutputFormat)Enum.Parse(typeof(OutputFormat), OutputFormatBox.Text);
+				void OnOutputFormatSettingChanged(object sender, EventArgs e) => OutputFormatBox.SelectedIndex = OutputFormatBox.Items.IndexOf(SettingsHost.OutputFormat.ToString());
+			}
 		}
 	}
 }

@@ -28,8 +28,9 @@ namespace SpotifyRec
 		public SongGroupSplitter(RecordedSongGroup group, Logger logger, bool autostart = false)
 		{
 			this.Group = group;
+			this._logger = logger;
 
-			this._asyncProcessHelper = AsyncProcessHelper.Create<RecordedSong>(SplitGroup, logger, "split song group into songs");
+			this._asyncProcessHelper = AsyncProcessHelper.Create<RecordedSong>(SplitGroup, _logger, "split song group into songs");
 
 			if (autostart) SplitGroupAsync();
 		}

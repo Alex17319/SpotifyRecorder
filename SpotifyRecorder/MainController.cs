@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpotifyRec.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace SpotifyRec
 	//and (through events) allow communication between different parts of the backend. Something distributed
 	//(i.e. not one big class) might be better, but could easily end up much more complex especially in
 	//regard to initialisation and dependency injection.
-	public class MainController
+	public class MainController : ILogProvider
 	{
 		public SettingsHost SettingsHost { get; }
 		public RecordingHost RecordingHost { get; }
@@ -23,17 +24,16 @@ namespace SpotifyRec
 
 		public event Logger LogMessageReceived;
 
-		public MainController(SettingsHost settingsHost, SpotifyProcessManager spotifyProcessManager)
+		public MainController()
 		{
-			this.SettingsHost = settingsHost;
-
-			this._spotifyProcessManager = spotifyProcessManager;
-
 			this._logger = (mesage, messageType) => LogMessageReceived?.Invoke(mesage, messageType);
 
-			this.RecordingHost = new RecordingHost(settingsHost, spotifyProcessManager, _logger);
-			this.SongGroupSplitterHost = new SongGroupSplitterHost(settingsHost, _logger);
-			this.SongConversionHost = new SongConversionHost(settingsHost, _logger);
+
+			this.SettingsHost = new SettingsHost(RawSettings.Default);
+			this._spotifyProcessManager = new SpotifyProcessManager(_logger);
+			this.RecordingHost = new RecordingHost(SettingsHost, _spotifyProcessManager, _logger);
+			this.SongGroupSplitterHost = new SongGroupSplitterHost(SettingsHost, _logger);
+			this.SongConversionHost = new SongConversionHost(SettingsHost, _logger);
 
 			this.RecordingHost.GroupFinished += (sender, e) =>
 			{

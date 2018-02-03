@@ -52,12 +52,11 @@ namespace SpotifyRec
 			//	//	MMDeviceEnumerator enumerator = new MMDeviceEnumerator();
 			//	//	MMDevice defaultAudioDevice = enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
 
-			this.WaveFormat = new WaveFormat(); //Default format
-
-			_wasapiIn = new WasapiLoopbackCapture(); //TODO: Check if WasapuCapture should/can be used instead
-			_wasapiIn.WaveFormat = this.WaveFormat;
+			_wasapiIn = new WasapiLoopbackCapture(); //TODO: Check if WasapiCapture should/can be used instead
 			_wasapiIn.DataAvailable += this.AudioDataAvailable;
 			_wasapiIn.RecordingStopped += this.RecordingStopped;
+
+			this.WaveFormat = _wasapiIn.WaveFormat;
 
 			_wavOut = new WaveFileWriter(
 				this.FullOutputPath,

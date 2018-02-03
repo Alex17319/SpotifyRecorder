@@ -25,7 +25,7 @@ namespace SpotifyRec
 		{
 			this._logger = logger;
 
-			SetSpotifyProcess(FindSpotifyProcess());
+			_currentSpotifyProcess = null; //Initialize lazily for nicer error handling (the logger isn't set up at first)
 		}
 
 		public void ForceManualRefresh()
@@ -47,10 +47,10 @@ namespace SpotifyRec
 
 		private void SetSpotifyProcess(Process newSpotifyProcess)
 		{
-			if (CurrentSpotifyProcess != null)
+			if (_currentSpotifyProcess != null)
 			{
-				CurrentSpotifyProcess.Dispose();
-				CurrentSpotifyProcess.Exited -= OnProcessExit;
+				_currentSpotifyProcess.Dispose();
+				_currentSpotifyProcess.Exited -= OnProcessExit;
 			}
 
 			//Don't allow processes that have exited, as the exited event

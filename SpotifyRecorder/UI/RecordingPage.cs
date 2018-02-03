@@ -12,30 +12,55 @@ namespace SpotifyRec.UI
 {
 	public partial class RecordingPage : UserControl
 	{
-		public bool IsRecordingEnabled { get; private set; }
+		public bool IsRecording { get; private set; }
 
-		public event EventHandler RecordingEnabled;
-		public event EventHandler RecordingDisabled;
+		public event EventHandler RecordingStarted;
+		public event EventHandler RecordingStopped;
 
-		public SettingsHost _settingsHost;
+		public SettingsHost SettingsHost => MainController.SettingsHost;
 
-		public RecordingPage(SettingsHost settingsHost)
+		public RecordingPage()
 		{
 			InitializeComponent();
 
-			this._settingsHost = settingsHost;
-
 			StartStopButton.Click += delegate
 			{
-				IsRecordingEnabled = !IsRecordingEnabled;
+				IsRecording = !IsRecording;
 
-				if (IsRecordingEnabled) RecordingEnabled?.Invoke(this, EventArgs.Empty);
-				else RecordingDisabled?.Invoke(this, EventArgs.Empty);
+				if (IsRecording)
+				{
+					MainController?.RecordingHost.StartRecording();
+					RecordingStarted?.Invoke(this, EventArgs.Empty);
+				}
+				else
+				{
+					MainController?.RecordingHost.StopRecording();
+					RecordingStopped?.Invoke(this, EventArgs.Empty);
+				}
 			};
+		}
 
-			OuputFolderPanel.PathChanged     += delegate { _settingsHost.OutputFolder = OuputFolderPanel.Path;      };
-			settingsHost.OutputFolderChanged += delegate { OuputFolderPanel.Path      = _settingsHost.OutputFolder; };
+		private MainController _mainController;
+		public MainController MainController {
+			get => _mainController;
+			set {
+				if (_mainController != null)
+				{
+					OuputFolderPanel.PathChanged     += OnOutputFolderUIChanged;
+					SettingsHost.OutputFolderChanged += OnOutputFolderSettingChanged;
+				}
 
+				_mainController = value;
+
+				if (_mainController != null)
+				{
+					OuputFolderPanel.PathChanged     += OnOutputFolderUIChanged;
+					SettingsHost.OutputFolderChanged += OnOutputFolderSettingChanged;
+				}
+
+				void OnOutputFolderUIChanged     (object sender, EventArgs e) => SettingsHost.OutputFolder = OuputFolderPanel.Path;
+				void OnOutputFolderSettingChanged(object sender, EventArgs e) => OuputFolderPanel.Path     = SettingsHost.OutputFolder;
+			}
 		}
 	}
 }
