@@ -13,5 +13,6 @@ namespace SpotifyRec
 		ISongEncoder SongEncoder { get; }
 		string OutputFolder { get; }
 		string TempFolder { get; }
+		int SongRefreshInterval { get; }
 	}
 }

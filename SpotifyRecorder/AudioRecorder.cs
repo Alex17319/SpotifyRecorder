@@ -125,18 +125,17 @@ namespace SpotifyRec
 
 		public void ForceStopRecording()
 		{
-			if (!HasStopped)
-			{
-				_wasapiIn.StopRecording();
-				_wasapiIn.Dispose();
-				_wavOut.Dispose();
+			if (HasStopped) return;
+			
+			_wasapiIn.StopRecording();
+			_wasapiIn.Dispose();
+			_wavOut.Dispose();
 
-				File.Move(this.FullOutputPath, Path.ChangeExtension(this.FullOutputPath, ".wav-forcestopped"));
-				this.CurrentExtension = ".wav-forcestopped";
+			File.Move(this.FullOutputPath, Path.ChangeExtension(this.FullOutputPath, ".wav-forcestopped"));
+			this.CurrentExtension = ".wav-forcestopped";
 
-				this.HasStopped = true;
-				Stopped?.Invoke(this, EventArgs.Empty);
-			}
+			this.HasStopped = true;
+			Stopped?.Invoke(this, EventArgs.Empty);
 		}
 
 		public void Dispose()

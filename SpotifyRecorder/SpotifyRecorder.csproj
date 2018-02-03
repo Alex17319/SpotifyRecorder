@@ -77,6 +77,7 @@
     <Compile Include="AttemptEventArgs.cs" />
     <Compile Include="AudioRecorder.cs" />
     <Compile Include="ConvertedSong.cs" />
+    <Compile Include="MainController.cs" />
     <Compile Include="RecordedSong.cs" />
     <Compile Include="RecordingHost.cs" />
     <Compile Include="SettingsHost.cs" />

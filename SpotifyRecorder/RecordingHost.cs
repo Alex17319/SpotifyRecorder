@@ -9,7 +9,7 @@ namespace SpotifyRec
 {
 	public class RecordingHost
 	{
-		public SettingsHost SettingsHost { get; }
+		public ISettingProvider SettingProvider { get; }
 
 		private readonly SpotifyProcessManager _spotifyProcessManager;
 		private readonly Logger _logger;
@@ -19,9 +19,9 @@ namespace SpotifyRec
 
 		public EventHandler<SongGroupRecorder, EventArgs> GroupFinished;
 
-		public RecordingHost(SettingsHost settingsHost, SpotifyProcessManager spotifyProcessManager, Logger logger)
+		public RecordingHost(ISettingProvider settingProvider, SpotifyProcessManager spotifyProcessManager, Logger logger)
 		{
-			this.SettingsHost = settingsHost;
+			this.SettingProvider = settingProvider;
 
 			this._spotifyProcessManager = spotifyProcessManager;
 			this._logger = logger;
@@ -37,10 +37,10 @@ namespace SpotifyRec
 			if (IsRecording) throw new InvalidOperationException("Recording already started.");
 
 			_currentSession = new RecordingSession(
-				SettingsHost.TempFolder,
+				SettingProvider.TempFolder,
 				_spotifyProcessManager,
-				SettingsHost.SongClassificationInfo,
-				SettingsHost.SongRefreshInterval,
+				SettingProvider.SongClassificationInfo,
+				SettingProvider.SongRefreshInterval,
 				_logger
 			);
 

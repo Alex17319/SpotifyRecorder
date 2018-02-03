@@ -21,6 +21,9 @@ namespace SpotifyRec
 		public ReadOnlyCollection<RecordedSongGroup> CompletedGroups { get; }
 		private readonly List<RecordedSongGroup> _completedGroups;
 
+		public ReadOnlyCollection<RecordedSong> CompletedSongs { get; }
+		private readonly List<RecordedSong> _completedSongs;
+
 		public SongGroupSplitterHost(ISettingProvider settingProvider, Logger logger)
 		{
 			this.SettingProvider = settingProvider;
@@ -30,19 +33,22 @@ namespace SpotifyRec
 			this._pendingGroups = new Queue<RecordedSongGroup>();
 			this._completedGroups = new List<RecordedSongGroup>();
 			this.CompletedGroups = this._completedGroups.AsReadOnly();
+			this._completedSongs = new List<RecordedSong>();
+			this.CompletedSongs = this._completedSongs.AsReadOnly();
 		}
 
 		/// <summary>
 		/// Checks on and creates new async tasks, moving song groups from 'pending' to 'current',
 		/// and from 'current' to 'completed', as appropriate.
 		/// </summary>
-		public void Refresh()
+		public void RefreshOngoingProcesses()
 		{
 			for (int i = _currentSplitters.Count - 1; i >= 0; i--)
 			{
 				var x = _currentSplitters[i];
 				if (x.Completed) {
 					_completedGroups.Add(x.Group);
+					_completedSongs.AddRange(x.CompletedSongs);
 					_currentSplitters.RemoveAt(i);
 				}
 			}

@@ -45,7 +45,7 @@ namespace SpotifyRec
 		/// If the current conversion batch has completed (and is not null), updates the completed songs list.
 		/// Then, if the current conversion batch has completed or is null, starts converting a new batch of pending songs
 		/// </summary>
-		public void ContinueIfBatchCompleted()
+		public void RefreshOngoingProcesses()
 		{
 			if (_currentConverter != null && _currentConverter.Completed)
 			{
