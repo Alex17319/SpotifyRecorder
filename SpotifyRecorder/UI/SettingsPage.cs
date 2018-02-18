@@ -34,7 +34,7 @@ namespace SpotifyRec.UI
 					SettingsHost.AdNamesChanged -= OnAdNamesSettingChanged;
 
 					AdKeywordsTextBox.Leave        -= OnAdKeywordsUIChanged;
-					SettingsHost.AdKeywordsChanged -= ONAdKeywordsSettingChanged;
+					SettingsHost.AdKeywordsChanged -= OnAdKeywordsSettingChanged;
 
 					SongNamesTextBox.Leave        -= OnSongNamesUIChanged;
 					SettingsHost.SongNamesChanged -= OnSongNamesSettingChanged;
@@ -51,23 +51,29 @@ namespace SpotifyRec.UI
 					SettingsHost.AdNamesChanged += OnAdNamesSettingChanged;
 
 					AdKeywordsTextBox.Leave        += OnAdKeywordsUIChanged;
-					SettingsHost.AdKeywordsChanged += ONAdKeywordsSettingChanged;
+					SettingsHost.AdKeywordsChanged += OnAdKeywordsSettingChanged;
 
 					SongNamesTextBox.Leave        += OnSongNamesUIChanged;
 					SettingsHost.SongNamesChanged += OnSongNamesSettingChanged;
 
 					OutputFormatBox.SelectedIndexChanged += OnOutputFormatUIChanged;
 					SettingsHost.OutputFormatChanged     += OnOutputFormatSettingChanged;
+
+					//Update UI values to match settings
+					OnAdNamesSettingChanged     (this, EventArgs.Empty);
+					OnAdKeywordsSettingChanged  (this, EventArgs.Empty);
+					OnSongNamesSettingChanged   (this, EventArgs.Empty);
+					OnOutputFormatSettingChanged(this, EventArgs.Empty);
 				}
 
 				void OnAdNamesUIChanged     (object sender, EventArgs e) => SettingsHost.AdNames = AdNamesTextBox.Lines.ToImmutableList();
-				void OnAdNamesSettingChanged(object sender, EventArgs e) => AdNamesTextBox.Text  = string.Concat(SettingsHost.AdNames);
+				void OnAdNamesSettingChanged(object sender, EventArgs e) => AdNamesTextBox.Text  = string.Join(Environment.NewLine, SettingsHost.AdNames);
 
 				void OnAdKeywordsUIChanged     (object sender, EventArgs e) => SettingsHost.AdNames   = AdKeywordsTextBox.Lines.ToImmutableList();
-				void ONAdKeywordsSettingChanged(object sender, EventArgs e) => AdKeywordsTextBox.Text = string.Concat(SettingsHost.AdKeywords);
+				void OnAdKeywordsSettingChanged(object sender, EventArgs e) => AdKeywordsTextBox.Text = string.Join(Environment.NewLine, SettingsHost.AdKeywords);
 
 				void OnSongNamesUIChanged     (object sender, EventArgs e) => SettingsHost.SongNames = SongNamesTextBox.Lines.ToImmutableList();
-				void OnSongNamesSettingChanged(object sender, EventArgs e) => SongNamesTextBox.Text  = string.Concat(SettingsHost.SongNames);
+				void OnSongNamesSettingChanged(object sender, EventArgs e) => SongNamesTextBox.Text  = string.Join(Environment.NewLine, SettingsHost.SongNames);
 
 				void OnOutputFormatUIChanged     (object sender, EventArgs e) => SettingsHost.OutputFormat     = (OutputFormat)Enum.Parse(typeof(OutputFormat), OutputFormatBox.Text);
 				void OnOutputFormatSettingChanged(object sender, EventArgs e) => OutputFormatBox.SelectedIndex = OutputFormatBox.Items.IndexOf(SettingsHost.OutputFormat.ToString());

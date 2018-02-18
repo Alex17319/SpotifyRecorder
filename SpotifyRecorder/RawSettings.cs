@@ -54,7 +54,7 @@ namespace SpotifyRec
 			outputFolder: Path.Combine(
 				Environment.GetFolderPath(Environment.SpecialFolder.MyMusic),
 				"Spotify Recorder",
-				"[All Songs]" //Other folders should be used for each playlist, which consist of shortcuts to this folder (this is just the default though)
+				"[All Songs]" //Other folders should be used for each playlist, which consist of shortcuts to files in this folder (this is just the default setup though)
 			),
 			tempFolder: Path.Combine(Path.GetTempPath(), "Spotify Recorder"),
 			songRefreshInterval: 100

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using SpotifyRec.Utils;
 
 namespace FolioWebGen.WinForms
 {
@@ -116,8 +117,8 @@ namespace FolioWebGen.WinForms
 
 			PathTextBox.Predicate = p =>
 			{
-				if (string.IsNullOrEmpty(p) || Directory.Exists(p)) return ValidatedTextBox.InputValid;
-				else return ValidatedTextBox.InputInvalid("The specified path \"" + p + "\" does not point to a folder.");
+				if (string.IsNullOrEmpty(p) || Directory.Exists(p)) return Validator.Valid;
+				else return Validator.Invalid("The specified path \"" + p + "\" does not point to a folder.");
 			};
 
 			BrowseButton.Click += delegate { ShowBrowseDialog(); };
@@ -133,6 +134,7 @@ namespace FolioWebGen.WinForms
 		{
 			BrowseStarting?.Invoke(this, EventArgs.Empty);
 
+			FolderBrowserDialog.SelectedPath = 
 			DialogResult res = FolderBrowserDialog.ShowDialog();
 			if (res == DialogResult.OK)
 			{

@@ -56,6 +56,9 @@ namespace SpotifyRec.UI
 				{
 					OuputFolderPanel.PathChanged     += OnOutputFolderUIChanged;
 					SettingsHost.OutputFolderChanged += OnOutputFolderSettingChanged;
+
+					//Update UI values to match settings
+					OnOutputFolderSettingChanged(this, EventArgs.Empty);
 				}
 
 				void OnOutputFolderUIChanged     (object sender, EventArgs e) => SettingsHost.OutputFolder = OuputFolderPanel.Path;

@@ -124,7 +124,6 @@
     <Compile Include="UI\SettingsPage.Designer.cs">
       <DependentUpon>SettingsPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\SettingsUI.cs" />
     <Compile Include="UI\SplitContainer.cs" />
     <Compile Include="UI\UniaxualResizePanelDesigner.cs" />
     <Compile Include="Utils\AdvancedEvent.cs" />
@@ -178,6 +177,7 @@
     <Compile Include="Utils\TextBoxExtensions.cs" />
     <Compile Include="Utils\TryDelegate.cs" />
     <Compile Include="Utils\UserErrorException.cs" />
+    <Compile Include="Utils\Validator.cs" />
     <Compile Include="Utils\ValueChangeEventArgs.cs" />
     <Compile Include="Utils\XLinqExtensions.cs" />
     <EmbeddedResource Include="UI\FolderBrowsePanel.resx" />

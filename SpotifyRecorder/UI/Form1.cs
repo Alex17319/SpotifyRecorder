@@ -43,5 +43,8 @@ namespace SpotifyRec
 				)
 			);
 		}
+
+		//Look at this when you add lyrics:
+		//https://www.alfredforum.com/topic/5927-force-im-feeling-lucky/
 	}
 }
