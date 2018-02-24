@@ -34,6 +34,8 @@ namespace SpotifyRec
 			this.SongRefreshInterval = songRefreshInterval;
 			this._logger = logger;
 
+			_logger.Log("Starting new recording session.");
+
 			StartNewGroupRecording();
 		}
 
@@ -90,6 +92,7 @@ namespace SpotifyRec
 			};
 
 			SessionClosed = true;
+			_logger.Log("Closed recording session.");
 		}
 
 		public void Dispose()

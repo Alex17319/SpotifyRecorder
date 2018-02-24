@@ -50,6 +50,12 @@ namespace SpotifyRec
 		{
 			_asyncProcessHelper.RunTaskAsync();
 
+			_logger.Log(
+				$"Started new song conversion batch: {Songs.Count()} songs "
+				+ $"to be converted to format '{SongEncoder.Extension}'. "
+				+ $"First song: '{Songs.FirstOrDefault().SongInfo.CombinedName}'."
+			);
+
 			//	_logger?.Invoke(
 			//		"An error occurred while converting the song \"" + Song.SongInfo.SongName + "\" "
 			//		+ "by \"" + Song.SongInfo.Artist + "\" "
@@ -72,6 +78,12 @@ namespace SpotifyRec
 					ConvertSong(song, reusedBuffer)
 				);
 			}
+
+			_logger.Log(
+				$"Completed song conversion batch: {Songs.Count()} songs "
+				+ $"were converted to format '{SongEncoder.Extension}'. "
+				+ $"First song: '{Songs.FirstOrDefault().SongInfo.CombinedName}'."
+			);
 		}
 
 		private ConvertedSong ConvertSong(RecordedSong song, byte[] reusedBuffer)

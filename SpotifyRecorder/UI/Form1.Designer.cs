@@ -30,16 +30,16 @@
 		{
 			this.MainTabs = new System.Windows.Forms.TabControl();
 			this.RecorderTab = new System.Windows.Forms.TabPage();
+			this.RecordingPage = new SpotifyRec.UI.RecordingPage();
 			this.PlaylistSortTab = new System.Windows.Forms.TabPage();
 			this.AdsTab = new System.Windows.Forms.TabPage();
 			this.SettingsTab = new System.Windows.Forms.TabPage();
-			this.settingsPage1 = new SpotifyRec.UI.SettingsPage();
+			this.SettingsPage = new SpotifyRec.UI.SettingsPage();
 			this.AboutTab = new System.Windows.Forms.TabPage();
 			this.LogTextBox = new System.Windows.Forms.RichTextBox();
 			this.LogGroupBox = new System.Windows.Forms.GroupBox();
 			this.LogPanel = new System.Windows.Forms.Panel();
 			this.MainHSplitter = new System.Windows.Forms.Splitter();
-			this.recordingPage1 = new SpotifyRec.UI.RecordingPage();
 			this.MainTabs.SuspendLayout();
 			this.RecorderTab.SuspendLayout();
 			this.SettingsTab.SuspendLayout();
@@ -63,7 +63,7 @@
 			// 
 			// RecorderTab
 			// 
-			this.RecorderTab.Controls.Add(this.recordingPage1);
+			this.RecorderTab.Controls.Add(this.RecordingPage);
 			this.RecorderTab.Location = new System.Drawing.Point(4, 22);
 			this.RecorderTab.Name = "RecorderTab";
 			this.RecorderTab.Padding = new System.Windows.Forms.Padding(3);
@@ -71,6 +71,16 @@
 			this.RecorderTab.TabIndex = 0;
 			this.RecorderTab.Text = "Recording";
 			this.RecorderTab.UseVisualStyleBackColor = true;
+			// 
+			// RecordingPage
+			// 
+			this.RecordingPage.BackColor = System.Drawing.SystemColors.Window;
+			this.RecordingPage.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.RecordingPage.Location = new System.Drawing.Point(3, 3);
+			this.RecordingPage.MainController = null;
+			this.RecordingPage.Name = "RecordingPage";
+			this.RecordingPage.Size = new System.Drawing.Size(378, 234);
+			this.RecordingPage.TabIndex = 0;
 			// 
 			// PlaylistSortTab
 			// 
@@ -95,7 +105,7 @@
 			// SettingsTab
 			// 
 			this.SettingsTab.AutoScroll = true;
-			this.SettingsTab.Controls.Add(this.settingsPage1);
+			this.SettingsTab.Controls.Add(this.SettingsPage);
 			this.SettingsTab.Location = new System.Drawing.Point(4, 22);
 			this.SettingsTab.Name = "SettingsTab";
 			this.SettingsTab.Padding = new System.Windows.Forms.Padding(3);
@@ -104,17 +114,18 @@
 			this.SettingsTab.Text = "Settings";
 			this.SettingsTab.UseVisualStyleBackColor = true;
 			// 
-			// settingsPage1
+			// SettingsPage
 			// 
-			this.settingsPage1.AutoScroll = true;
-			this.settingsPage1.BackColor = System.Drawing.SystemColors.Window;
-			this.settingsPage1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.settingsPage1.Location = new System.Drawing.Point(3, 3);
-			this.settingsPage1.MinimumSize = new System.Drawing.Size(370, 100);
-			this.settingsPage1.Name = "settingsPage1";
-			this.settingsPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.settingsPage1.Size = new System.Drawing.Size(378, 234);
-			this.settingsPage1.TabIndex = 0;
+			this.SettingsPage.AutoScroll = true;
+			this.SettingsPage.BackColor = System.Drawing.SystemColors.Window;
+			this.SettingsPage.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.SettingsPage.Location = new System.Drawing.Point(3, 3);
+			this.SettingsPage.MainController = null;
+			this.SettingsPage.MinimumSize = new System.Drawing.Size(370, 100);
+			this.SettingsPage.Name = "SettingsPage";
+			this.SettingsPage.Padding = new System.Windows.Forms.Padding(3);
+			this.SettingsPage.Size = new System.Drawing.Size(378, 234);
+			this.SettingsPage.TabIndex = 0;
 			// 
 			// AboutTab
 			// 
@@ -172,14 +183,6 @@
 			this.MainHSplitter.TabIndex = 5;
 			this.MainHSplitter.TabStop = false;
 			// 
-			// recordingPage1
-			// 
-			this.recordingPage1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.recordingPage1.Location = new System.Drawing.Point(3, 3);
-			this.recordingPage1.Name = "recordingPage1";
-			this.recordingPage1.Size = new System.Drawing.Size(378, 234);
-			this.recordingPage1.TabIndex = 0;
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -190,7 +193,7 @@
 			this.Controls.Add(this.MainTabs);
 			this.MinimumSize = new System.Drawing.Size(400, 450);
 			this.Name = "MainForm";
-			this.Text = "Form1";
+			this.Text = "Spotify Recorder";
 			this.MainTabs.ResumeLayout(false);
 			this.RecorderTab.ResumeLayout(false);
 			this.SettingsTab.ResumeLayout(false);
@@ -212,8 +215,8 @@
 		private System.Windows.Forms.TabPage AdsTab;
 		private System.Windows.Forms.TabPage SettingsTab;
 		private System.Windows.Forms.TabPage AboutTab;
-		private UI.SettingsPage settingsPage1;
-		private UI.RecordingPage recordingPage1;
+		private UI.SettingsPage SettingsPage;
+		private UI.RecordingPage RecordingPage;
 	}
 }
 

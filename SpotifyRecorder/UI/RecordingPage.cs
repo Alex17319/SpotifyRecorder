@@ -25,19 +25,33 @@ namespace SpotifyRec.UI
 
 			StartStopButton.Click += delegate
 			{
-				IsRecording = !IsRecording;
-
 				if (IsRecording)
 				{
-					MainController?.RecordingHost.StartRecording();
-					RecordingStarted?.Invoke(this, EventArgs.Empty);
+					StopRecording();
 				}
 				else
 				{
-					MainController?.RecordingHost.StopRecording();
-					RecordingStopped?.Invoke(this, EventArgs.Empty);
+					StartRecording();
 				}
 			};
+		}
+
+		private void StartRecording()
+		{
+			IsRecording = true;
+			StartStopButton.Text = "Stop Recording";
+
+			MainController?.RecordingHost.StartRecording();
+			RecordingStarted?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void StopRecording()
+		{
+			IsRecording = false;
+			StartStopButton.Text = "Start Recording";
+
+			MainController?.RecordingHost.StopRecording();
+			RecordingStopped?.Invoke(this, EventArgs.Empty);
 		}
 
 		private MainController _mainController;

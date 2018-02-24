@@ -66,11 +66,14 @@ namespace SpotifyRec
 		public void Enqueue(RecordedSong song)
 		{
 			_pendingSongs.Enqueue(song);
+			_logger.Log("Enqueued song '" + song.SongInfo.CombinedName + "' for conversion.");
 		}
 
 		public void EnqueueAll(IEnumerable<RecordedSong> songs)
 		{
+			var oldCount = _pendingSongs.Count;
 			foreach (var s in songs) _pendingSongs.Enqueue(s);
+			_logger.Log($"Enqueued {_pendingSongs.Count - oldCount} songs for conversion.");
 		}
 	}
 }

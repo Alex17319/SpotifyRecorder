@@ -1,10 +1,11 @@
 ﻿using SpotifyRec.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Road = System.Int32;
+using System.Windows.Forms;
 
 namespace SpotifyRec
 {
@@ -14,7 +15,10 @@ namespace SpotifyRec
 	//regard to initialisation and dependency injection.
 	public class MainController : ILogProvider
 	{
+		public string SettingsFolder { get; }
+
 		public SettingsHost SettingsHost { get; }
+		public SettingsSaver SettingsSaver { get; }
 		public RecordingHost RecordingHost { get; }
 		public SongGroupSplitterHost SongGroupSplitterHost { get; }
 		public SongConversionHost SongConversionHost { get; }
@@ -29,7 +33,20 @@ namespace SpotifyRec
 			this._logger = (mesage, messageType) => LogMessageReceived?.Invoke(mesage, messageType);
 
 
-			this.SettingsHost = new SettingsHost(RawSettings.Default);
+			this.SettingsFolder = Application.StartupPath; //StartupPath is just the folder, not the actual exe file path
+			this.SettingsHost = new SettingsHost(
+				SettingsLoader.Load(
+					settingsFolder: this.SettingsFolder
+				)
+			);
+			this.SettingsSaver = new SettingsSaver(
+				settingsHost: this.SettingsHost,
+				settingsFolder: this.SettingsFolder,
+				saveDelay: 60000,
+				logger: _logger
+			);
+			this.SettingsHost.AnySettingChanged += delegate { this.SettingsSaver.SaveAfterWaiting(); };
+
 			this._spotifyProcessManager = new SpotifyProcessManager(_logger);
 			this.RecordingHost = new RecordingHost(SettingsHost, _spotifyProcessManager, _logger);
 			this.SongGroupSplitterHost = new SongGroupSplitterHost(SettingsHost, _logger);

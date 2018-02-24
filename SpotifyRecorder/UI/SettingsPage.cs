@@ -69,8 +69,8 @@ namespace SpotifyRec.UI
 				void OnAdNamesUIChanged     (object sender, EventArgs e) => SettingsHost.AdNames = AdNamesTextBox.Lines.ToImmutableList();
 				void OnAdNamesSettingChanged(object sender, EventArgs e) => AdNamesTextBox.Text  = string.Join(Environment.NewLine, SettingsHost.AdNames);
 
-				void OnAdKeywordsUIChanged     (object sender, EventArgs e) => SettingsHost.AdNames   = AdKeywordsTextBox.Lines.ToImmutableList();
-				void OnAdKeywordsSettingChanged(object sender, EventArgs e) => AdKeywordsTextBox.Text = string.Join(Environment.NewLine, SettingsHost.AdKeywords);
+				void OnAdKeywordsUIChanged     (object sender, EventArgs e) => SettingsHost.AdKeywords = AdKeywordsTextBox.Lines.ToImmutableList();
+				void OnAdKeywordsSettingChanged(object sender, EventArgs e) => AdKeywordsTextBox.Text  = string.Join(Environment.NewLine, SettingsHost.AdKeywords);
 
 				void OnSongNamesUIChanged     (object sender, EventArgs e) => SettingsHost.SongNames = SongNamesTextBox.Lines.ToImmutableList();
 				void OnSongNamesSettingChanged(object sender, EventArgs e) => SongNamesTextBox.Text  = string.Join(Environment.NewLine, SettingsHost.SongNames);

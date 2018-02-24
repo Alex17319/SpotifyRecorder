@@ -50,6 +50,7 @@ namespace SpotifyRec
 					_completedGroups.Add(x.Group);
 					_completedSongs.AddRange(x.CompletedSongs);
 					_currentSplitters.RemoveAt(i);
+					_logger.Log($"Cleared successfully split song group '{x.Group.GroupID}'");
 				}
 			}
 
@@ -62,6 +63,8 @@ namespace SpotifyRec
 
 		public void Enqueue(RecordedSongGroup group)
 		{
+			_logger.Log($"Enqueued song group '{group.GroupID}' for splitting.");
+
 			_pendingGroups.Enqueue(group);
 		}
 	}

@@ -53,6 +53,8 @@ namespace SpotifyRec
 			this.GroupID = Guid.NewGuid();
 			this._logger = logger;
 
+			_logger.Log("Starting new song group with ID '" + this.GroupID + "'.");
+
 			_songTracker = new SongTracker(spotifyProcessManager, songClassificationInfo, songRefreshInterval);
 			_audioRecorder = new AudioRecorder(tempFolder, "TempGroupRec#" + this.GroupID);
 
@@ -60,12 +62,18 @@ namespace SpotifyRec
 
 			_songTracker.SongChanged += this.OnSongChanged;
 			_songTracker.StartTracking();
+
+			_logger.Log("Successfully started new song group with ID '" + this.GroupID + "'.", LogType.MinorMessage);
 		}
 
 		private void OnSongChanged(object sender, SongChangeEventArgs e)
 		{
+			_logger.Log($"Song changed. Old song: {e.OldSong?.CombinedName}, New song: {e.NewSong?.CombinedName}.", LogType.MinorMessage);
+
 			if (e.NewSong == null || !e.NewSong.GetValueOrDefault().IsSong)
 			{
+				_logger.Log("New song is not a song. Finishing the current song group.");
+
 				_songTracker.FinishTracking();
 				_audioRecorder.RequestStopRecording();
 				_audioRecorder.Stopped += OnRecordingStopped;
@@ -93,6 +101,7 @@ namespace SpotifyRec
 				waveFormat: _audioRecorder.WaveFormat,
 				songs: Songs.ToImmutableList()
 			);
+			_logger.Log($"Recording for song group '{GroupID}' has stopped.", LogType.MinorMessage);
 			GroupFinished?.Invoke(this, EventArgs.Empty);
 
 			//	Task.Run((Action)SplitSongs)

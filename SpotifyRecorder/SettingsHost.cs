@@ -13,6 +13,8 @@ namespace SpotifyRec
 	{
 		private readonly object _lock = new object();
 
+		public event EventHandler AnySettingChanged;
+
 		public event EventHandler AdNamesChanged;
 		private ImmutableList<string> _adNames;
 		public ImmutableList<string> AdNames {
@@ -149,13 +151,11 @@ namespace SpotifyRec
 				//then some other code could go and update the value inside this class. That stops any kind of
 				//'unsubscribe from the synced object while firing' or 'disable firing again while it's
 				//currently firing' strategy from working as that'll produce bugs.
-				bool equal = (
-					oldValue == null && value == null
-					|| oldValue != null && oldValue.Equals(value)
-				);
-				if (!equal) {
+				if (!object.Equals(oldValue, value)) {
 					ev?.Invoke(this, EventArgs.Empty);
 					//Note that all handlers will run inside the lock (I *think* this is good, but idk)
+
+					AnySettingChanged?.Invoke(this, EventArgs.Empty);
 				}
 			}
 		}

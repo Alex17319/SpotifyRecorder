@@ -18,6 +18,7 @@ namespace SpotifyRec.Logging
 
 		protected override void LogFullMessage(string fullMessage, LogType messageType)
 		{
+			Console.WriteLine("Logging message \"" + fullMessage + "\" to disk");
 			StreamWriter.Write(fullMessage + Environment.NewLine);
 		}
 

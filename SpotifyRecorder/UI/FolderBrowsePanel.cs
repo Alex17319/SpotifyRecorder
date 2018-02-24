@@ -44,7 +44,7 @@ namespace FolioWebGen.WinForms
 				//Apply the new or old path to other child controls - which ensures that all paths
 				//(some of which are set by the user, and are validated in response to events)
 				//are valid and indentical
-				FolderBrowserDialog.SelectedPath = PathTextBox.Text;
+				FolderBrowserDialog.SelectedPath = PathTextBox.Text; //This doesn't seem to work but is still worth trying
 
 				//	if (!TrySetPath(value))
 				//	{
@@ -134,7 +134,6 @@ namespace FolioWebGen.WinForms
 		{
 			BrowseStarting?.Invoke(this, EventArgs.Empty);
 
-			FolderBrowserDialog.SelectedPath = 
 			DialogResult res = FolderBrowserDialog.ShowDialog();
 			if (res == DialogResult.OK)
 			{

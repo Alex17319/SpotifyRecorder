@@ -24,8 +24,12 @@ namespace SpotifyRec
 
 			this.MainController = new MainController();
 
-			this.settingsPage1.MainController = this.MainController;
-			this.recordingPage1.MainController = this.MainController;
+			this.SettingsPage.MainController = this.MainController;
+			this.RecordingPage.MainController = this.MainController;
+
+			this.MainTabs.SelectedIndexChanged += delegate { this.MainController.SettingsSaver.SaveNow(); };
+			this.Deactivate += delegate { this.MainController.SettingsSaver.SaveNow(); };
+			this.FormClosing += delegate { this.MainController.SettingsSaver.SaveNow(); };
 
 			this.RichTextBoxLogger = new RichTextBoxLogger(
 				provider: MainController,
@@ -34,11 +38,14 @@ namespace SpotifyRec
 			this.FileLogger = new StreamLogger(
 				provider: MainController,
 				streamWriter: new StreamWriter(
-					File.Create(
+					new FileStream(
 						Path.Combine(
 							MainController.SettingsHost.TempFolder, //TODO: Improve this
-							"Log " + DateTime.Now.ToString("yyyy-mm-dd HH-mm-ss.fff") + ".log"
-						)
+							"Log " + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".log"
+						),
+						FileMode.CreateNew,
+						FileAccess.Write,
+						FileShare.Read
 					)
 				)
 			);

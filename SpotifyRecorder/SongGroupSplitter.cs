@@ -41,6 +41,8 @@ namespace SpotifyRec
 		public void SplitGroupAsync()
 		{
 			_asyncProcessHelper.RunTaskAsync();
+
+			_logger.Log($"Started splitting song group '{Group.GroupID}' into songs");
 		}
 
 		private void SplitGroup(AsyncPartialResultCollector<RecordedSong> partialResults)
@@ -74,6 +76,8 @@ namespace SpotifyRec
 					songNum++;
 				}
 			}
+
+			_logger.Log($"Finished splitting song group '{Group.GroupID}' into songs");
 
 			//TODO: Fix this as deleting later no longer works (due to setting mutation)
 			//Don't delete yet - clear up all the files later, where it's easier to make it customiseable etc.

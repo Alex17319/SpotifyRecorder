@@ -39,7 +39,7 @@ namespace SpotifyRec
 		}
 
 
-
+		//Note to self: This is only set once - look carefully at the syntax
 		public static RawSettings Default { get; } = new RawSettings(
 			adNames: new string[] { }.ToImmutableList(),
 			adKeywords: new string[] {
@@ -87,15 +87,16 @@ namespace SpotifyRec
 		{
 			return new XElement(
 				"settings",
-				new XElement("adNames"   , s.AdNames.Select(x => new XElement("name"   , x))),
-				new XElement("adKeywords", s.AdNames.Select(x => new XElement("keyword", x))),
-				new XElement("songNames" , s.AdNames.Select(x => new XElement("name"   , x))),
+				new XElement("adNames"   , s.AdNames   .Select(x => new XElement("name"   , x))),
+				new XElement("adKeywords", s.AdKeywords.Select(x => new XElement("keyword", x))),
+				new XElement("songNames" , s.SongNames .Select(x => new XElement("name"   , x))),
 				new XElement("outputFormat", s.OutputFormat.ToString()),
 				new XElement("outputFolder", s.OutputFolder),
 				new XElement("tempFolder", s.TempFolder),
 				new XElement("songRefreshInterval", s.SongRefreshInterval)
 			);
 		}
+		public XElement ToXml() => ToXml(this);
 
 		public override string ToString()
 		{

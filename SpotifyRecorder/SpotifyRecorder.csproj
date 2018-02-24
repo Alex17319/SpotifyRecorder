@@ -85,6 +85,8 @@
     <Compile Include="RecordedSong.cs" />
     <Compile Include="RecordingHost.cs" />
     <Compile Include="SettingsHost.cs" />
+    <Compile Include="SettingsLoader.cs" />
+    <Compile Include="SettingsSaver.cs" />
     <Compile Include="SongBatchConverter.cs" />
     <Compile Include="RecordedSongGroup.cs" />
     <Compile Include="SongGroupSplitter.cs" />
@@ -156,7 +158,7 @@
     <Compile Include="UI\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="SongClassifier.cs" />
+    <Compile Include="SongClassificationInfo.cs" />
     <Compile Include="ISpotifySongInfo.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Program.cs" />
