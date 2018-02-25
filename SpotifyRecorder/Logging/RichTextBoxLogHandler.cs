@@ -9,11 +9,11 @@ using System.Drawing;
 
 namespace SpotifyRec.Logging
 {
-	public class RichTextBoxLogger : LoggerBase
+	public class RichTextBoxLogHandler : LogHandler
 	{
 		public RichTextBox TextBox { get; }
 
-		public RichTextBoxLogger(ILogProvider provider, RichTextBox textBox) : base(provider)
+		public RichTextBoxLogHandler(RichTextBox textBox, ILogProvider provider = null) : base(provider)
 		{
 			this.TextBox = textBox ?? throw new ArgumentNullException(nameof(textBox));
 		}

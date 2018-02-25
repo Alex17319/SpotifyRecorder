@@ -77,10 +77,10 @@
     <Compile Include="AttemptEventArgs.cs" />
     <Compile Include="AudioRecorder.cs" />
     <Compile Include="ConvertedSong.cs" />
-    <Compile Include="Logging\StreamLogger.cs" />
+    <Compile Include="Logging\StreamLogHandler.cs" />
     <Compile Include="Logging\ILogProvider.cs" />
-    <Compile Include="Logging\LoggerBase.cs" />
-    <Compile Include="Logging\RichTextBoxLogger.cs" />
+    <Compile Include="Logging\LogHandler.cs" />
+    <Compile Include="Logging\RichTextBoxLogHandler.cs" />
     <Compile Include="MainController.cs" />
     <Compile Include="RecordedSong.cs" />
     <Compile Include="RecordingHost.cs" />

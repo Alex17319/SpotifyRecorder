@@ -28,8 +28,17 @@ namespace SpotifyRec
 
 		public event Logger LogMessageReceived;
 
-		public MainController()
+		public MainController(params LogHandler[] logHandlers)
+			: this((IEnumerable<LogHandler>)logHandlers)
+		{ }
+
+		public MainController(IEnumerable<LogHandler> logHandlers)
 		{
+			foreach (var handler in logHandlers)
+			{
+				handler.AttachTo(this);
+			}
+
 			this._logger = (mesage, messageType) => LogMessageReceived?.Invoke(mesage, messageType);
 
 

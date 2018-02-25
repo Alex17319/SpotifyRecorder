@@ -15,14 +15,33 @@ namespace SpotifyRec
 	public partial class MainForm : Form
 	{
 		public MainController MainController { get; }
-		public RichTextBoxLogger RichTextBoxLogger { get; }
-		public StreamLogger FileLogger { get; }
+		public RichTextBoxLogHandler RichTextBoxLogger { get; }
+		public StreamLogHandler FileLogger { get; }
 
 		public MainForm()
 		{
 			InitializeComponent();
 
-			this.MainController = new MainController();
+			this.MainController = new MainController(
+				logHandlers: new LogHandler[] {
+					new RichTextBoxLogHandler(
+						textBox: this.LogTextBox
+					),
+					new StreamLogHandler(
+						streamWriter: new StreamWriter(
+							new FileStream(
+								Path.Combine(
+									MainController.SettingsHost.TempFolder, //TODO: Make this a setting
+									"Log " + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".log"
+								),
+								FileMode.CreateNew,
+								FileAccess.ReadWrite,
+								FileShare.Read
+							)
+						)
+					)
+				}
+			);
 
 			this.SettingsPage.MainController = this.MainController;
 			this.RecordingPage.MainController = this.MainController;
@@ -30,25 +49,6 @@ namespace SpotifyRec
 			this.MainTabs.SelectedIndexChanged += delegate { this.MainController.SettingsSaver.SaveNow(); };
 			this.Deactivate += delegate { this.MainController.SettingsSaver.SaveNow(); };
 			this.FormClosing += delegate { this.MainController.SettingsSaver.SaveNow(); };
-
-			this.RichTextBoxLogger = new RichTextBoxLogger(
-				provider: MainController,
-				textBox: this.LogTextBox
-			);
-			this.FileLogger = new StreamLogger(
-				provider: MainController,
-				streamWriter: new StreamWriter(
-					new FileStream(
-						Path.Combine(
-							MainController.SettingsHost.TempFolder, //TODO: Improve this
-							"Log " + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".log"
-						),
-						FileMode.CreateNew,
-						FileAccess.Write,
-						FileShare.Read
-					)
-				)
-			);
 		}
 
 		//Look at this when you add lyrics:

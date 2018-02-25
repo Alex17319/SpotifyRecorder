@@ -6,18 +6,27 @@ using System.Threading.Tasks;
 
 namespace SpotifyRec.Logging
 {
-	public abstract class LoggerBase : IDisposable
+	public abstract class LogHandler : IDisposable
 	{
-		public ILogProvider Provider { get; }
+		public ILogProvider Provider { get; private set; }
 
-		public LoggerBase(ILogProvider provider)
+		/// <param name="provider">Can be null</param>
+		public LogHandler(ILogProvider provider)
 		{
-			this.Provider = provider ?? throw new ArgumentNullException(nameof(provider));
-
-			this.Provider.LogMessageReceived += LogMessage;
+			AttachTo(provider);
 		}
 
 		protected abstract void LogFullMessage(string fullMessage, LogType messageType);
+
+		public void AttachTo(ILogProvider provider)
+		{
+			if (this.Provider != null) throw new InvalidOperationException($"{nameof(this.Provider)} has already been set");
+
+			if (provider == null) return;
+
+			this.Provider = provider;
+			this.Provider.LogMessageReceived += LogMessage;
+		}
 
 		private void LogMessage(string message, LogType messageType)
 		{
