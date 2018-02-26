@@ -11,13 +11,16 @@ namespace SpotifyRec.Logging
 	{
 		public StreamWriter StreamWriter { get; }
 
-		public StreamLogHandler(StreamWriter streamWriter, ILogProvider provider = null) : base(provider)
+		public StreamLogHandler(StreamWriter streamWriter, ILogProvider provider = null, IEnumerable<(string, LogType)> initialLogMessages = null)
+			: base(provider, initialLogMessages)
 		{
 			this.StreamWriter = streamWriter ?? throw new ArgumentNullException(nameof(streamWriter));
 		}
 
-		protected override void LogFullMessage(string fullMessage, LogType messageType)
+		protected override void LogMessage(string message, LogType messageType)
 		{
+			var fullMessage = ConstructFullMessage(message, messageType);
+
 			Console.WriteLine("Logging message \"" + fullMessage + "\" to disk");
 			StreamWriter.WriteLine(fullMessage);
 

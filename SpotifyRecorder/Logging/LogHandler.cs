@@ -11,12 +11,19 @@ namespace SpotifyRec.Logging
 		public ILogProvider Provider { get; private set; }
 
 		/// <param name="provider">Can be null</param>
-		public LogHandler(ILogProvider provider)
+		/// <param name="initialLogMessages">Can be null</param>
+		public LogHandler(ILogProvider provider, IEnumerable<(string, LogType)> initialLogMessages)
 		{
 			AttachTo(provider);
+
+			if (initialLogMessages != null) {
+				foreach (var message in initialLogMessages) {
+					LogMessage(message.Item1, message.Item2);
+				}
+			}
 		}
 
-		protected abstract void LogFullMessage(string fullMessage, LogType messageType);
+		protected abstract void LogMessage(string message, LogType messageType);
 
 		public void AttachTo(ILogProvider provider)
 		{
@@ -28,15 +35,16 @@ namespace SpotifyRec.Logging
 			this.Provider.LogMessageReceived += LogMessage;
 		}
 
-		private void LogMessage(string message, LogType messageType)
+
+		public static string ConstructFullMessage(string message, LogType messageType)
 		{
 			switch (messageType)
 			{
-				case LogType.Message:      LogFullMessage(FormatMessage(""                        ), messageType); break;
-				case LogType.MinorMessage: LogFullMessage(FormatMessage("Minor Message: "         ), messageType); break;
-				case LogType.Warning:      LogFullMessage(FormatMessage("Warning: "               ), messageType); break;
-				case LogType.Error:        LogFullMessage(FormatMessage("ERROR: "                 ), messageType); break;
-				default:                   LogFullMessage(FormatMessage("[UNKNOWN MESSAGE TYPE]: "), messageType); break;
+				case LogType.Message:      return FormatMessage(messagePrefix: ""                        );
+				case LogType.MinorMessage: return FormatMessage(messagePrefix: "Minor Message: "         );
+				case LogType.Warning:      return FormatMessage(messagePrefix: "Warning: "               );
+				case LogType.Error:        return FormatMessage(messagePrefix: "ERROR: "                 );
+				default:                   return FormatMessage(messagePrefix: "[UNKNOWN MESSAGE TYPE]: ");
 			}
 
 			string FormatMessage(string messagePrefix)

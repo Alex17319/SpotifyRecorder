@@ -23,6 +23,7 @@ namespace SpotifyRec
 		public SongGroupSplitterHost SongGroupSplitterHost { get; }
 		public SongConversionHost SongConversionHost { get; }
 
+
 		private readonly SpotifyProcessManager _spotifyProcessManager;
 		private readonly Logger _logger;
 
@@ -66,6 +67,11 @@ namespace SpotifyRec
 				this.SongGroupSplitterHost.Enqueue(sender.RecordedGroup);
 			};
 		}
+
+		//	bool ILogProvider.HasBuffer => false;
+		//	IEnumerable<(string, LogType)> ILogProvider.Buffer => Enumerable.Empty<(string, LogType)>();
+		//	bool ILogProvider.RerouteMesagesToBuffer { get => false; set { } }
+		//	void ILogProvider.ClearBuffer() { }
 
 		public void RefreshOngoingProcesses()
 		{

@@ -22,25 +22,14 @@ namespace SpotifyRec
 		{
 			InitializeComponent();
 
+			//The file log needs the temporary path, which is part of the settings,
+			//which are part of MainController, so it can't be created until later.
+			//This is used to store the messages logged before that point, and it
+			//might as well be used for all logs for consistency & neatness
+			var tempLog = new ListLogHandler();
+
 			this.MainController = new MainController(
-				logHandlers: new LogHandler[] {
-					new RichTextBoxLogHandler(
-						textBox: this.LogTextBox
-					),
-					new StreamLogHandler(
-						streamWriter: new StreamWriter(
-							new FileStream(
-								Path.Combine(
-									MainController.SettingsHost.TempFolder, //TODO: Make this a setting
-									"Log " + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".log"
-								),
-								FileMode.CreateNew,
-								FileAccess.ReadWrite,
-								FileShare.Read
-							)
-						)
-					)
-				}
+				logHandlers: new LogHandler[] { tempLog }
 			);
 
 			this.SettingsPage.MainController = this.MainController;
@@ -49,6 +38,27 @@ namespace SpotifyRec
 			this.MainTabs.SelectedIndexChanged += delegate { this.MainController.SettingsSaver.SaveNow(); };
 			this.Deactivate += delegate { this.MainController.SettingsSaver.SaveNow(); };
 			this.FormClosing += delegate { this.MainController.SettingsSaver.SaveNow(); };
+
+			this.RichTextBoxLogger = new RichTextBoxLogHandler(
+				provider: this.MainController,
+				initialLogMessages: tempLog.List,
+				textBox: this.LogTextBox
+			);
+			this.FileLogger = new StreamLogHandler(
+				provider: this.MainController,
+				initialLogMessages: tempLog.List,
+				streamWriter: new StreamWriter(
+					new FileStream(
+						Path.Combine(
+							MainController.SettingsHost.TempFolder, //TODO: Make this a separate setting
+							"Log " + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".log"
+						),
+						FileMode.CreateNew,
+						FileAccess.ReadWrite,
+						FileShare.Read
+					)
+				)
+			);
 		}
 
 		//Look at this when you add lyrics:

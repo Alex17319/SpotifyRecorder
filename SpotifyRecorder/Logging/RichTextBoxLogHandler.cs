@@ -13,13 +13,16 @@ namespace SpotifyRec.Logging
 	{
 		public RichTextBox TextBox { get; }
 
-		public RichTextBoxLogHandler(RichTextBox textBox, ILogProvider provider = null) : base(provider)
+		public RichTextBoxLogHandler(RichTextBox textBox, ILogProvider provider = null, IEnumerable<(string, LogType)> initialLogMessages = null)
+			: base(provider, initialLogMessages)
 		{
 			this.TextBox = textBox ?? throw new ArgumentNullException(nameof(textBox));
 		}
 
-		protected override void LogFullMessage(string fullMessage, LogType messageType)
+		protected override void LogMessage(string message, LogType messageType)
 		{
+			var fullMessage = ConstructFullMessage(message, messageType);
+
 			//Add a newline before the logged message, unless the textbox is empty
 			//This avoids having an extra leading or trailing empty line
 			if (TextBox.TextLength > 0) {
