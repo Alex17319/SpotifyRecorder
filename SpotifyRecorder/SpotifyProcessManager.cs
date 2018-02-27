@@ -11,9 +11,18 @@ namespace SpotifyRec
 	{
 		public Process CurrentSpotifyProcess {
 			get {
-				//If spotify wasn't found last time this was accessed, attempt to refresh.
-				//Return null if it still can't be found
-				if (_currentSpotifyProcess == null) SetSpotifyProcess(FindSpotifyProcess());
+				if (_currentSpotifyProcess == null)
+				{
+					//If spotify wasn't found last time this was accessed, attempt to refresh.
+					//Return null if it still can't be found
+					SetSpotifyProcess(FindSpotifyProcess());
+				}
+				else
+				{
+					//Make sure to refresh the window title etc if using the same process object as last time
+					_currentSpotifyProcess?.Refresh();
+				}
+
 				return _currentSpotifyProcess;
 			}
 		}
@@ -36,15 +45,19 @@ namespace SpotifyRec
 
 		private Process FindSpotifyProcess()
 		{
-			_logger.Log("Finding spotify process...");
+			//	_logger.Log("Finding spotify process...");
+			//	
+			//	_logger.Log("Spotify processes: " +
+			//		string.Join(
+			//			", ",
+			//			from process in Process.GetProcessesByName("Spotify")
+			//			let name = process.ProcessName
+			//			let id = process.Id
+			//			let windowTitle = process.MainWindowTitle
+			//			select $"{{name: {name}, id: {id}, windowTitle: {windowTitle}}}"
+			//		)
+			//	);
 
-			_logger.Log("Spotify processes: " +
-				from process in Process.GetProcessesByName("Spotify")
-				let name = process.ProcessName
-				let id = process.Id
-				let windowTitle = process.MainWindowTitle
-				select $"{{name: {name}, id: {id}, windowTitle: {windowTitle}}}, "
-			);
 			var spotify = Process.GetProcessesByName("Spotify").FirstOrDefault(x => !string.IsNullOrEmpty(x.MainWindowTitle));
 			if (spotify == null) _logger?.Log(
 				"Could not find the Spotify process. Please ensure that Spotify is running.",

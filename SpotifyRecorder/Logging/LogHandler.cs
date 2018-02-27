@@ -8,65 +8,53 @@ namespace SpotifyRec.Logging
 {
 	public abstract class LogHandler : IDisposable
 	{
-		bool _doneSetup;
-		public ILogProvider Provider { get; private set; }
-		private IEnumerable<(string, LogType)> _initialLogMessages;
+		//This class is highly mutable, as there needed to be a function to log an
+		//initial set of messages (which were taken from a ListLogHandler), and passing
+		//that into the constructor wouldn't work as that would involve calling an
+		//abstract method from a base constructor, which is dangerous (and in this
+		//case did cause errors). Instead, these messages are logged by external
+		//code by calling public functions, which can obviously only be called by
+		//that external code after all constructors have run.
+		//Similarly, subscribing to the provider's LogMessageRecieved event in a
+		//base constructor wouldn't work, as if a derived consrtuctor threw an error,
+		//then the event would stay subscribed to, and so LogMessage would be called
+		//*even though* the LogHandler wasn't sucessfully constructed.
+		//Note: This can't be fixed by simply doing this stuff in the derived
+		//constructors, as those classes shouldn't really be sealed, and so could
+		//have further derived constructors. I tried using a Setup() method
+		//and different constructors to be used publicly and by derived classes,
+		//but that was messy and ugly.
 
-		/// <param name="provider">Can be null</param>
-		protected LogHandler(ILogProvider provider, IEnumerable<(string, LogType)> initialLogMessages, bool autoSetup)
-		{
-			this.Provider = provider;
-			this._initialLogMessages = initialLogMessages;
-
-			if (autoSetup) Setup();
-		}
-
-		protected abstract void LogMessage(string message, LogType messageType);
-
-		/// <summary>
-		/// Attaching to the provider, and logging the initial messages,
-		/// both cannot be done until all derived constuctors have run:
-		/// <para/>
-		/// Attaching to the provider in the base constructor would mean
-		/// that exceptions thrown in derived constructors would leave
-		/// the event subscribed, which could later call LogMessage despite
-		/// the derived constructor having failed to run.
-		/// <para/>
-		/// Logging the initial messages from the base constructor would
-		/// call LogMessage before the derived constructor has had a chance
-		/// to check for invalid arguments and set up variables.
-		/// <para/>
-		/// Because of this, this methods must be called at the end
-		/// of the most derived constructor. To acheieve this when making
-		/// derived classes, make a public constructor that calls this
-		/// automatically (except if the derived class is abstract, then
-		/// that'd be useless), and a protected constructor that
-		/// only calls this if an 'autoSetup' argument is true.
-		/// </summary>
-		protected void Setup()
-		{
-			if (_doneSetup) return;
-			_doneSetup = true;
-
-			AttachTo(this.Provider);
-
-			if (_initialLogMessages != null) {
-				foreach (var message in _initialLogMessages) {
-					LogMessage(message.Item1, message.Item2);
-				}
+		private ILogProvider _provider;
+		public ILogProvider Provider {
+			get => _provider;
+			set {
+				if (this._provider != null) this._provider.LogMessageReceived -= LogMessage;
+				this._provider = value;
+				if (this._provider != null) this._provider.LogMessageReceived += LogMessage;
 			}
 		}
 
-		public void AttachTo(ILogProvider provider)
-		{
-			if (this.Provider != null) throw new InvalidOperationException($"{nameof(this.Provider)} has already been set");
-
-			if (provider == null) return;
-
-			this.Provider = provider;
-			this.Provider.LogMessageReceived += LogMessage;
+		/// <summary>Calls LogMessages(). Provided for ease of use with a more functional style when constructing LogHandlers.</summary>
+		public IEnumerable<(string message, LogType messageType)> MessagesToLog {
+			set => LogMessages(value);
+		}
+		/// <summary>Calls LogMessages(). Provided for ease of use with a more functional style when constructing LogHandlers.</summary>
+		public IEnumerable<(string fullMessage, LogType messageType)> FullMessagesToLog {
+			set => LogFullMessages(value);
 		}
 
+		protected LogHandler() { }
+
+		public abstract void LogMessage(string message, LogType messageType);
+		public abstract void LogFullMessage(string fullMessage, LogType messageType);
+
+		public void LogMessages(IEnumerable<(string message, LogType messageType)> messages) {
+			foreach (var m in messages) LogMessage(m.message, m.messageType);
+		}
+		public void LogFullMessages(IEnumerable<(string fullMessage, LogType messageType)> fullMessages) {
+			foreach (var m in fullMessages) LogFullMessage(m.fullMessage, m.messageType);
+		}
 
 		public static string ConstructFullMessage(string message, LogType messageType)
 		{

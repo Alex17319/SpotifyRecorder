@@ -14,8 +14,9 @@ namespace SpotifyRec
 		public const string OldSettingsFileName = "Settings.old.xml";
 		public const string IncompleteSettingsFileName = "Settings.incomplete.xml";
 
-		public static RawSettings Load(string settingsFolder)
+		public static RawSettings Load(string settingsFolder, Logger logger)
 		{
+			logger.Log("Loading settings from folder '" + settingsFolder + "'.");
 			if (settingsFolder == null) throw new ArgumentNullException(nameof(settingsFolder));
 
 			var settingsFilePath = Path.Combine(settingsFolder, SettingsFileName);
@@ -23,6 +24,7 @@ namespace SpotifyRec
 
 			if (!File.Exists(settingsFilePath)) {
 				if (!File.Exists(oldSettingsFilePath)) {
+					
 					return LoadDefaultSettings();
 				}
 				File.Move(oldSettingsFilePath, settingsFilePath);
@@ -30,15 +32,19 @@ namespace SpotifyRec
 
 			using (var fs = File.OpenRead(settingsFilePath))
 			{
-				return RawSettings.FromXml(
+				var res = RawSettings.FromXml(
 					XDocument.Load(fs).Root
 				);
+				logger.Log("Sucessfully loaded saved settings.");
+				return res;
 			}
 
 			RawSettings LoadDefaultSettings()
 			{
+				logger.Log("No saved settings found; reverting to default settings.");
 				var defaultSettings = RawSettings.Default;
 				RawSettings.ToXml(defaultSettings).Save(settingsFilePath);
+				logger.Log("Retrieved and saved default settings.");
 				return defaultSettings;
 			}
 		}

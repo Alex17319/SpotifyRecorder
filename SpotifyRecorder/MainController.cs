@@ -37,7 +37,7 @@ namespace SpotifyRec
 		{
 			foreach (var handler in logHandlers)
 			{
-				handler.AttachTo(this);
+				handler.Provider = this;
 			}
 
 			this._logger = (mesage, messageType) => LogMessageReceived?.Invoke(mesage, messageType);
@@ -46,7 +46,8 @@ namespace SpotifyRec
 			this.SettingsFolder = Application.StartupPath; //StartupPath is just the folder, not the actual exe file path
 			this.SettingsHost = new SettingsHost(
 				SettingsLoader.Load(
-					settingsFolder: this.SettingsFolder
+					settingsFolder: this.SettingsFolder,
+					logger: _logger
 				)
 			);
 			this.SettingsSaver = new SettingsSaver(

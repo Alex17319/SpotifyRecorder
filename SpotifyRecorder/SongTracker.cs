@@ -24,6 +24,8 @@ namespace SpotifyRec
 
 		public int RefreshInterval { get; }
 
+		private readonly Logger _logger;
+
 		private string _oldWindowTitle;
 
 		private Timer refreshTimer;
@@ -37,7 +39,7 @@ namespace SpotifyRec
 			Finished,
 		}
 
-		public SongTracker(SpotifyProcessManager spotifyProcessManager, SongClassificationInfo songClassificationInfo, int refreshInterval)
+		public SongTracker(SpotifyProcessManager spotifyProcessManager, SongClassificationInfo songClassificationInfo, int refreshInterval, Logger logger)
 		{
 			this._songs = new List<SongInfo>();
 			this.Songs = _songs.AsReadOnly();
@@ -46,6 +48,10 @@ namespace SpotifyRec
 			this.SongClassificationInfo = songClassificationInfo;
 
 			this.RefreshInterval = refreshInterval;
+
+			this._logger = logger;
+
+			this.State = TrackState.Unused;
 		}
 
 		public void StartTracking()

@@ -18,10 +18,10 @@ namespace SpotifyRec
 		public MainController MainController { get; private set; }
 
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public RichTextBoxLogHandler RichTextBoxLogger { get; private set; }
+		private RichTextBoxLogHandler _richTextBoxLogger;
 
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public StreamLogHandler FileLogger { get; private set; }
+		private StreamLogHandler _fileLogger;
 
 		public MainForm()
 		{
@@ -49,14 +49,14 @@ namespace SpotifyRec
 			this.Deactivate += delegate { this.MainController.SettingsSaver.SaveNow(); };
 			this.FormClosing += delegate { this.MainController.SettingsSaver.SaveNow(); };
 
-			this.RichTextBoxLogger = new RichTextBoxLogHandler(
-				provider: this.MainController,
-				initialLogMessages: tempLog.List,
+			this._richTextBoxLogger = new RichTextBoxLogHandler(
 				textBox: this.LogTextBox
-			);
-			this.FileLogger = new StreamLogHandler(
-				provider: this.MainController,
-				initialLogMessages: tempLog.List,
+			) {
+				Provider = this.MainController,
+				FullMessagesToLog = tempLog.List
+			};
+
+			this._fileLogger = new StreamLogHandler(
 				streamWriter: new StreamWriter(
 					new FileStream(
 						Path.Combine(
@@ -68,7 +68,10 @@ namespace SpotifyRec
 						FileShare.Read
 					)
 				)
-			);
+			) {
+				Provider = this.MainController,
+				FullMessagesToLog = tempLog.List
+			};
 		}
 
 		//Look at this when you add lyrics:
