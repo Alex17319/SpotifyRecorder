@@ -147,9 +147,7 @@
 			this.LogTextBox.ReadOnly = true;
 			this.LogTextBox.Size = new System.Drawing.Size(378, 130);
 			this.LogTextBox.TabIndex = 2;
-			this.LogTextBox.Text = "asdfasdf\nasd\n\nwuenrkawer\nuqeruoqnwe\n\nqweyxroqbw\n\nwqernoqynweuiry qwe rqw e rqcwer" +
-    " owqe orxqiowerio qwceo rqiowe xro wqer oqw eoxjqwioejrioqwer oqwc eo wqer \n\n\naf" +
-    "\na\nwe\nrcq\nwecr\nqwe\nr\nc\n\n\nqer\nwqecr\nwq\n";
+			this.LogTextBox.Text = "";
 			this.LogTextBox.WordWrap = false;
 			// 
 			// LogGroupBox

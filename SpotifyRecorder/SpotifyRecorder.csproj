@@ -77,6 +77,7 @@
     <Compile Include="AttemptEventArgs.cs" />
     <Compile Include="AudioRecorder.cs" />
     <Compile Include="ConvertedSong.cs" />
+    <Compile Include="Logging\ListLogHandler.cs" />
     <Compile Include="Logging\StreamLogHandler.cs" />
     <Compile Include="Logging\ILogProvider.cs" />
     <Compile Include="Logging\LogHandler.cs" />

@@ -25,7 +25,8 @@ namespace SpotifyRec
 		{
 			this._logger = logger;
 
-			_currentSpotifyProcess = null; //Initialize lazily for nicer error handling (the logger isn't set up at first)
+			//_currentSpotifyProcess = null;
+			ForceManualRefresh();
 		}
 
 		public void ForceManualRefresh()
@@ -35,13 +36,22 @@ namespace SpotifyRec
 
 		private Process FindSpotifyProcess()
 		{
+			_logger.Log("Finding spotify process...");
+
+			_logger.Log("Spotify processes: " +
+				from process in Process.GetProcessesByName("Spotify")
+				let name = process.ProcessName
+				let id = process.Id
+				let windowTitle = process.MainWindowTitle
+				select $"{{name: {name}, id: {id}, windowTitle: {windowTitle}}}, "
+			);
 			var spotify = Process.GetProcessesByName("Spotify").FirstOrDefault(x => !string.IsNullOrEmpty(x.MainWindowTitle));
-			if (spotify == null) {
-				_logger?.Invoke(
-					"Error: Could not find the Spotify process. Please ensure that Spotify is running",
-					LogType.Error
-				);
-			}
+			if (spotify == null) _logger?.Log(
+				"Could not find the Spotify process. Please ensure that Spotify is running.",
+				LogType.Error
+			);
+			else _logger.Log("Found spotify process with process ID '" + spotify.Id + "'.");
+
 			return spotify;
 		}
 

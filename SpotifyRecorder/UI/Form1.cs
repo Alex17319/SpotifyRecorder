@@ -14,13 +14,23 @@ namespace SpotifyRec
 {
 	public partial class MainForm : Form
 	{
-		public MainController MainController { get; }
-		public RichTextBoxLogHandler RichTextBoxLogger { get; }
-		public StreamLogHandler FileLogger { get; }
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public MainController MainController { get; private set; }
+
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public RichTextBoxLogHandler RichTextBoxLogger { get; private set; }
+
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public StreamLogHandler FileLogger { get; private set; }
 
 		public MainForm()
 		{
 			InitializeComponent();
+		}
+
+		protected override void OnLoad(EventArgs e)
+		{
+			base.OnLoad(e);
 
 			//The file log needs the temporary path, which is part of the settings,
 			//which are part of MainController, so it can't be created until later.
