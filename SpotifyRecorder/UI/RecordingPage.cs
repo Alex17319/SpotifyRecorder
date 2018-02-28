@@ -36,6 +36,13 @@ namespace SpotifyRec.UI
 			};
 		}
 
+		protected override void OnLoad(EventArgs e)
+		{
+			base.OnLoad(e);
+
+			this.ParentForm.FormClosing += OnParentFormClosing;
+		}
+
 		private void StartRecording()
 		{
 			IsRecording = true;
@@ -52,6 +59,11 @@ namespace SpotifyRec.UI
 
 			MainController?.RecordingHost.StopRecording();
 			RecordingStopped?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void OnParentFormClosing(object sender, FormClosingEventArgs e)
+		{
+			if (IsRecording) StopRecording();
 		}
 
 		private MainController _mainController;

@@ -25,6 +25,8 @@ namespace SpotifyRec.Logging
 
 		public override void LogFullMessage(string fullMessage, LogType messageType)
 		{
+			if (TextBox.IsDisposed) return;
+
 			//Add a newline before the logged message, unless the textbox is empty
 			//This avoids having an extra leading or trailing empty line
 			if (TextBox.TextLength > 0) {

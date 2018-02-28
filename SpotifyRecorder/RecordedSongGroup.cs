@@ -11,14 +11,14 @@ namespace SpotifyRec
 	public class RecordedSongGroup
 	{
 		public string Path { get; }
-		public Guid GroupID { get; }
+		public string GroupID { get; }
 		public DateTime StartTime { get; }
 		public TimeSpan Duration { get; }
 		public DateTime EndTime => StartTime + Duration;
 		public WaveFormat WaveFormat { get; }
 		public ImmutableList<SongInfo> Songs { get; }
 
-		public RecordedSongGroup(string path, Guid groupID, DateTime startTime, TimeSpan duration, WaveFormat waveFormat, ImmutableList<SongInfo> songs)
+		public RecordedSongGroup(string path, string groupID, DateTime startTime, TimeSpan duration, WaveFormat waveFormat, ImmutableList<SongInfo> songs)
 		{
 			this.Path = path;
 			this.GroupID = groupID;

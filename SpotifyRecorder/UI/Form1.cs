@@ -14,14 +14,13 @@ namespace SpotifyRec
 {
 	public partial class MainForm : Form
 	{
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public const int OngoingProcessesRefreshInterval = 10000;
+
 		public MainController MainController { get; private set; }
-
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		private RichTextBoxLogHandler _richTextBoxLogger;
-
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		private StreamLogHandler _fileLogger;
+
+		private Timer _ongoingProcessesRefreshTimer;
 
 		public MainForm()
 		{
@@ -37,6 +36,7 @@ namespace SpotifyRec
 			//This is used to store the messages logged before that point, and it
 			//might as well be used for all logs for consistency & neatness
 			var tempLog = new ListLogHandler();
+			tempLog.LogMessage("Starting up...", LogType.Message);
 
 			this.MainController = new MainController(
 				logHandlers: new LogHandler[] { tempLog }
@@ -48,6 +48,10 @@ namespace SpotifyRec
 			this.MainTabs.SelectedIndexChanged += delegate { this.MainController.SettingsSaver.SaveNow(); };
 			this.Deactivate += delegate { this.MainController.SettingsSaver.SaveNow(); };
 			this.FormClosing += delegate { this.MainController.SettingsSaver.SaveNow(); };
+
+			this._ongoingProcessesRefreshTimer = new Timer() { Interval = OngoingProcessesRefreshInterval };
+			this._ongoingProcessesRefreshTimer.Tick += delegate { MainController.RefreshOngoingProcesses(); };
+			this._ongoingProcessesRefreshTimer.Start();
 
 			this._richTextBoxLogger = new RichTextBoxLogHandler(
 				textBox: this.LogTextBox

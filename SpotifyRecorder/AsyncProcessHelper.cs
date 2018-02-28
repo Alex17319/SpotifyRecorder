@@ -9,26 +9,29 @@ namespace SpotifyRec.Utils
 {
 	public class AsyncProcessHelper<TPart, TFull> : AsyncProcessHelper
 	{
-		private readonly Task _task;
+		private Task _task;
 		private readonly Logger _logger;
 		public string ProcessName { get; }
 
 		private readonly object _lock;
 
-		public bool InProgress {
-			get { lock (_lock) return _inProgress; }
+		private AsyncProcessState _asyncProcessState;
+
+		public AsyncProcessState AsyncProcessState {
+			get { lock (_lock) return _asyncProcessState; }
 		}
-		private bool _inProgress;
+
+		public bool InProgress {
+			get { lock (_lock) return _asyncProcessState == AsyncProcessState.InProgress; }
+		}
 
 		public bool Completed {
-			get { lock (_lock) return _completed; }
+			get { lock (_lock) return _asyncProcessState == AsyncProcessState.InProgress; }
 		}
-		private bool _completed;
 
 		public bool Failed {
-			get { lock (_lock) return _failed; }
+			get { lock (_lock) return _asyncProcessState == AsyncProcessState.InProgress; }
 		}
-		private bool _failed;
 
 		public ImmutableList<TPart> PartialResults { get; private set; }
 		public TFull Result { get; private set; }
@@ -40,33 +43,44 @@ namespace SpotifyRec.Utils
 			this._logger = logger;
 			this.ProcessName = processName;
 
-			this._task = new Task(() => {
-				lock (_lock) {
-					try {
-						this.Result = function(new AsyncPartialResultCollectorImpl(this));
-						_completed = true;
-						_inProgress = false;
-					} catch (Exception e) {
-						_failed = true;
-						_inProgress = false;
-						_logger?.Invoke(
-							$"An error occurred during asynchronous process \"{ProcessName}\":\r\n{e}",
-							LogType.Error
-						);
-					}
-				}
-			});
+			this.PartialResults = ImmutableList.Create<TPart>();
+
+			this._asyncProcessState = AsyncProcessState.Unused;
 		}
 
 		public void RunTaskAsync()
 		{
+			_logger.Log($"#1");
 			lock (_lock)
 			{
+				_logger.Log($"#2");
 				if (this.Completed) return;
 				if (this.InProgress) return;
 
-				this._inProgress = true;
-				this._task.Start();
+				_logger.Log($"#3");
+				this._asyncProcessState = AsyncProcessState.InProgress;
+				this._task = Task.Run(action: TaskContents);
+				_logger.Log($"#4");
+			}
+		}
+
+		private void TaskContents()
+		{
+			_logger.Log($"#3.1");
+			lock (_lock) {
+				_logger.Log($"#3.2");
+				try {
+					_logger.Log($"#3.3");
+					//this.Result = function(new AsyncPartialResultCollectorImpl(this));
+					_asyncProcessState = AsyncProcessState.Completed;
+					_logger.Log($"Completed asyncrhonous process \"{ProcessName}\"");
+				} catch (Exception e) {
+					_asyncProcessState = AsyncProcessState.Failed;
+					_logger?.Invoke(
+						$"An error occurred during asynchronous process \"{ProcessName}\":\r\n{e}",
+						LogType.Error
+					);
+				}
 			}
 		}
 
@@ -98,6 +112,14 @@ namespace SpotifyRec.Utils
 				}
 			}
 		}
+	}
+
+	public enum AsyncProcessState
+	{
+		Unused,
+		InProgress,
+		Completed,
+		Failed,
 	}
 
 	public abstract class AsyncPartialResultCollector<TPart>

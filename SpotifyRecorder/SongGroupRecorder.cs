@@ -22,7 +22,7 @@ namespace SpotifyRec
 		//	public const string SongNumAndWinTitleSeparator = " = ";
 
 		public string TempFolder { get; }
-		public Guid GroupID { get; }
+		public string GroupID { get; }
 
 		private readonly SongTracker _songTracker;
 		private readonly AudioRecorder _audioRecorder;
@@ -50,13 +50,13 @@ namespace SpotifyRec
 		public SongGroupRecorder(string tempFolder, SpotifyProcessManager spotifyProcessManager, SongClassificationInfo songClassificationInfo, int songRefreshInterval, Logger logger)
 		{
 			this.TempFolder = tempFolder;
-			this.GroupID = Guid.NewGuid();
+			this.GroupID = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss.ffff");
 			this._logger = logger;
 
 			_logger.Log("Starting new song group with ID '" + this.GroupID + "'.");
 
 			_songTracker = new SongTracker(spotifyProcessManager, songClassificationInfo, songRefreshInterval, _logger);
-			_audioRecorder = new AudioRecorder(tempFolder, "TempGroupRec#" + this.GroupID);
+			_audioRecorder = new AudioRecorder(tempFolder, "TempGroupRec @ " + this.GroupID);
 
 			RecordingStartTime = DateTime.Now;
 

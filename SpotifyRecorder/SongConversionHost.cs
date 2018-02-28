@@ -52,15 +52,22 @@ namespace SpotifyRec
 				_completedSongs.AddRange(_currentConverter.ConvertedSongs);
 			}
 
-			_currentConverter = new SongBatchConverter(
-				songs: new List<RecordedSong>(_pendingSongs),
-				outputFolder: SettingProvider.OutputFolder,
-				songEncoder: SettingProvider.SongEncoder,
-				logger: _logger,
-				autostart: true
-			);
+			if (_pendingSongs.Count > 0)
+			{
+				_currentConverter = new SongBatchConverter(
+					songs: new List<RecordedSong>(_pendingSongs),
+					outputFolder: SettingProvider.OutputFolder,
+					songEncoder: SettingProvider.SongEncoder,
+					logger: _logger,
+					autostart: true
+				);
 
-			_pendingSongs.Clear();
+				_pendingSongs.Clear();
+			}
+			else
+			{
+				_currentConverter = null;
+			}
 		}
 
 		public void Enqueue(RecordedSong song)
@@ -71,9 +78,16 @@ namespace SpotifyRec
 
 		public void EnqueueAll(IEnumerable<RecordedSong> songs)
 		{
-			var oldCount = _pendingSongs.Count;
-			foreach (var s in songs) _pendingSongs.Enqueue(s);
-			_logger.Log($"Enqueued {_pendingSongs.Count - oldCount} songs for conversion.");
+			int newSongsCount = 0;
+
+			foreach (var s in songs) {
+				_pendingSongs.Enqueue(s);
+				newSongsCount++;
+			}
+
+			if (newSongsCount > 0) {
+				_logger.Log($"Enqueued {newSongsCount} songs for conversion.");
+			}
 		}
 	}
 }

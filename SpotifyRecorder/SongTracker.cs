@@ -91,6 +91,8 @@ namespace SpotifyRec
 				UpdateListWithNewSong(newWindowTitle: newWindowTitle);
 				var newSong = LastSong;
 
+				_oldWindowTitle = newWindowTitle;
+
 				SongChanged?.Invoke(this, new SongChangeEventArgs(oldSong, newSong));
 			}
 		}

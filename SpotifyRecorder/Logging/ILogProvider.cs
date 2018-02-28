@@ -8,6 +8,11 @@ namespace SpotifyRec.Logging
 {
 	public interface ILogProvider
 	{
+		/// <summary>
+		/// Implementations must ensure that this is invoked by only a single thread at a time,
+		/// i.e. an invocation by one thread must be completed before an invocation by another
+		/// can begin.
+		/// </summary>
 		event Logger LogMessageReceived;
 
 		//	bool HasBuffer { get; }

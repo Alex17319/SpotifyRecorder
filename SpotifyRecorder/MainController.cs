@@ -23,11 +23,17 @@ namespace SpotifyRec
 		public SongGroupSplitterHost SongGroupSplitterHost { get; }
 		public SongConversionHost SongConversionHost { get; }
 
-
 		private readonly SpotifyProcessManager _spotifyProcessManager;
 		private readonly Logger _logger;
 
 		public event Logger LogMessageReceived;
+		private void FireLogMessageReceived(string message, LogType logType) {
+			lock (_lock) {
+				LogMessageReceived.Invoke(message, logType);
+			}
+		}
+
+		private object _lock = new object();
 
 		public MainController(params LogHandler[] logHandlers)
 			: this((IEnumerable<LogHandler>)logHandlers)
@@ -41,7 +47,6 @@ namespace SpotifyRec
 			}
 
 			this._logger = (mesage, messageType) => LogMessageReceived?.Invoke(mesage, messageType);
-
 
 			this.SettingsFolder = Application.StartupPath; //StartupPath is just the folder, not the actual exe file path
 			this.SettingsHost = new SettingsHost(

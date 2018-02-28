@@ -17,6 +17,7 @@ namespace SpotifyRec
 		public static RawSettings Load(string settingsFolder, Logger logger)
 		{
 			logger.Log("Loading settings from folder '" + settingsFolder + "'.");
+
 			if (settingsFolder == null) throw new ArgumentNullException(nameof(settingsFolder));
 
 			var settingsFilePath = Path.Combine(settingsFolder, SettingsFileName);
@@ -42,9 +43,12 @@ namespace SpotifyRec
 			RawSettings LoadDefaultSettings()
 			{
 				logger.Log("No saved settings found; reverting to default settings.");
+
 				var defaultSettings = RawSettings.Default;
 				RawSettings.ToXml(defaultSettings).Save(settingsFilePath);
+
 				logger.Log("Retrieved and saved default settings.");
+
 				return defaultSettings;
 			}
 		}
