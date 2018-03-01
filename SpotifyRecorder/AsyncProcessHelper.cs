@@ -66,6 +66,7 @@ namespace SpotifyRec.Utils
 
 		private void TaskContents()
 		{
+			Console.WriteLine("aaaa");
 			_logger.Log($"#3.1");
 			lock (_lock) {
 				_logger.Log($"#3.2");

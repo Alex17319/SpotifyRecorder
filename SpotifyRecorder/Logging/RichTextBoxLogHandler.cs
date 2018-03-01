@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SpotifyRec.Utils;
 using System.Drawing;
+using System.Windows.Threading;
 
 namespace SpotifyRec.Logging
 {
@@ -25,20 +26,26 @@ namespace SpotifyRec.Logging
 
 		public override void LogFullMessage(string fullMessage, LogType messageType)
 		{
-			if (TextBox.IsDisposed) return;
+			if (TextBox.InvokeRequired) TextBox.Invoke(new MethodInvoker(LogFullMessageInternal));
+			else LogFullMessageInternal();
 
-			//Add a newline before the logged message, unless the textbox is empty
-			//This avoids having an extra leading or trailing empty line
-			if (TextBox.TextLength > 0) {
-				fullMessage = Environment.NewLine + fullMessage;
-			}
-
-			switch (messageType)
+			void LogFullMessageInternal()
 			{
-				case LogType.Message:      TextBox.AppendText(fullMessage); break;
-				case LogType.MinorMessage: TextBox.AppendFormattedText(fullMessage, tb => tb.SelectionColor = Color.Gray  ); break;
-				case LogType.Warning:      TextBox.AppendFormattedText(fullMessage, tb => tb.SelectionColor = Color.Orange); break;
-				case LogType.Error:        TextBox.AppendFormattedText(fullMessage, tb => tb.SelectionColor = Color.Red   ); break;
+				if (TextBox.IsDisposed) return;
+
+				//Add a newline before the logged message, unless the textbox is empty
+				//This avoids having an extra leading or trailing empty line
+				if (TextBox.TextLength > 0) {
+					fullMessage = Environment.NewLine + fullMessage;
+				}
+
+				switch (messageType)
+				{
+					case LogType.Message:      TextBox.AppendText(fullMessage); break;
+					case LogType.MinorMessage: TextBox.AppendFormattedText(fullMessage, tb => tb.SelectionColor = Color.Gray  ); break;
+					case LogType.Warning:      TextBox.AppendFormattedText(fullMessage, tb => tb.SelectionColor = Color.Orange); break;
+					case LogType.Error:        TextBox.AppendFormattedText(fullMessage, tb => tb.SelectionColor = Color.Red   ); break;
+				}
 			}
 		}
 	}
