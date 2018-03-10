@@ -91,6 +91,7 @@
     <Compile Include="SettingsSaver.cs" />
     <Compile Include="SongBatchConverter.cs" />
     <Compile Include="RecordedSongGroup.cs" />
+    <Compile Include="SongGroupSplitEventArgs.cs" />
     <Compile Include="SongGroupSplitter.cs" />
     <Compile Include="SongGroupSplitterHost.cs" />
     <Compile Include="UI\CornerResizerSizes.cs" />

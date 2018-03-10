@@ -72,6 +72,11 @@ namespace SpotifyRec
 			{
 				this.SongGroupSplitterHost.Enqueue(sender.RecordedGroup);
 			};
+
+			this.SongGroupSplitterHost.SongGroupSplit += (sender, e) =>
+			{
+				this.SongConversionHost.EnqueueAll(e.Splitter.CompletedSongs);
+			};
 		}
 
 		//	bool ILogProvider.HasBuffer => false;
@@ -81,9 +86,9 @@ namespace SpotifyRec
 
 		public void RefreshOngoingProcesses()
 		{
-			this.SongGroupSplitterHost.RefreshOngoingProcesses();
+			_logger.Log("Refreshing ongoing processes...");
 
-			this.SongConversionHost.EnqueueAll(this.SongGroupSplitterHost.CompletedSongs);
+			this.SongGroupSplitterHost.RefreshOngoingProcesses();
 
 			this.SongConversionHost.RefreshOngoingProcesses();
 		}

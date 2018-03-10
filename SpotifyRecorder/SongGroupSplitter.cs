@@ -53,13 +53,16 @@ namespace SpotifyRec
 				byte[] buffer = new byte[bufferSize];
 
 				int songNum = 1;
-				foreach (var song in Group.Songs.Where(s => s.IsSong && s.HasStopped))
+				_logger.Log("songs: " + string.Join(", ", Group.Songs.Select(x => x.CombinedName)));
+				foreach (var song in Group.Songs.Skip(1).Where(s => s.IsSong && s.HasStopped))
 				{
 					//Loop through songs, ignoring ads, durations where the music is paused, and incomplete songs
+					//Skip the first song as this will be incomplete (do this before filtering out ads etc
+					//as there's no point skipping a song after an ad)
 
 					string songPath = Path.Combine(
 						Path.GetDirectoryName(Group.Path), 
-						$"Song#{songNum} {song.CombinedName} (Group {Group.GroupID})"
+						$"Temp Group '{Group.GroupID}' - Song#{songNum} {song.CombinedName}"
 					);
 					// ^ Adding in the group id and song number avoids having to deal with
 					// duplicates (they'll be dealt with later)
@@ -79,9 +82,11 @@ namespace SpotifyRec
 
 			_logger.Log($"Finished splitting song group '{Group.GroupID}' into songs");
 
-			//TODO: Fix this as deleting later no longer works (due to setting mutation)
-			//Don't delete yet - clear up all the files later, where it's easier to make it customiseable etc.
-			//This also ensures that if there's an error above the file should still get deleted.
+			File.Delete(Group.Path);
+
+			//Deleting later no longer works (due to setting mutation)
+			//	Don't delete yet - clear up all the files later, where it's easier to make it customiseable etc.
+			//	This also ensures that if there's an error above the file should still get deleted.
 		}
 
 		private void ExtractSongToFile(byte[] reusedBuffer, WaveFileReader groupReader, WaveFileWriter songWriter, SongInfo song)
@@ -96,17 +101,21 @@ namespace SpotifyRec
 			//Stream variables use longs not ints, so use longs where possible/relevant
 			//However, Stream.Read() takes ints, so we have to cast back there (with a checked cast)
 
+			//_logger.Log($"songEndTime: {songEndTime}, songDuration: {songDuration}, bytesPerMillisecond: {bytesPerMillisecond}, songLength: {songLength}, songStartPos: {songStartPos}, songEndPos {songEndPos}.");
+
 			while (true)
 			{
 				long songBytesRemaining = songEndPos - groupReader.Position;
 				long readerBytesRemaining = groupReader.Length - groupReader.Position;
+
+				//_logger.Log($"songBytesRemaining: {songBytesRemaining}, readerBytesRemaining: {readerBytesRemaining}");
 
 				if (songBytesRemaining <= 0 || readerBytesRemaining <= 0) break;
 
 				int numRead = groupReader.Read(
 					reusedBuffer,
 					offset: 0,
-					count: checked((int)Math.Min(songBytesRemaining, readerBytesRemaining))
+					count: checked((int)Math.Min(Math.Min(songBytesRemaining, readerBytesRemaining), reusedBuffer.Length))
 				);
 				songWriter.Write(reusedBuffer, offset: 0, count: numRead);
 			}

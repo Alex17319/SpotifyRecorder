@@ -9,6 +9,7 @@ namespace SpotifyRec.Utils
 {
 	public class AsyncProcessHelper<TPart, TFull> : AsyncProcessHelper
 	{
+		private Func<AsyncPartialResultCollector<TPart>, TFull> _function;
 		private Task _task;
 		private readonly Logger _logger;
 		public string ProcessName { get; }
@@ -26,11 +27,11 @@ namespace SpotifyRec.Utils
 		}
 
 		public bool Completed {
-			get { lock (_lock) return _asyncProcessState == AsyncProcessState.InProgress; }
+			get { lock (_lock) return _asyncProcessState == AsyncProcessState.Completed; }
 		}
 
 		public bool Failed {
-			get { lock (_lock) return _asyncProcessState == AsyncProcessState.InProgress; }
+			get { lock (_lock) return _asyncProcessState == AsyncProcessState.Failed; }
 		}
 
 		public ImmutableList<TPart> PartialResults { get; private set; }
@@ -38,13 +39,12 @@ namespace SpotifyRec.Utils
 
 		public AsyncProcessHelper(Func<AsyncPartialResultCollector<TPart>, TFull> function, Logger logger, string processName)
 		{
-			this._lock = new object();
-
+			this._function = function ?? throw new ArgumentNullException(nameof(function));
 			this._logger = logger;
-			this.ProcessName = processName;
+			this.ProcessName = processName ?? "";
 
+			this._lock = new object();
 			this.PartialResults = ImmutableList.Create<TPart>();
-
 			this._asyncProcessState = AsyncProcessState.Unused;
 		}
 
@@ -66,22 +66,24 @@ namespace SpotifyRec.Utils
 
 		private void TaskContents()
 		{
-			Console.WriteLine("aaaa");
-			_logger.Log($"#3.1");
-			lock (_lock) {
-				_logger.Log($"#3.2");
-				try {
-					_logger.Log($"#3.3");
-					//this.Result = function(new AsyncPartialResultCollectorImpl(this));
-					_asyncProcessState = AsyncProcessState.Completed;
-					_logger.Log($"Completed asyncrhonous process \"{ProcessName}\"");
-				} catch (Exception e) {
-					_asyncProcessState = AsyncProcessState.Failed;
-					_logger?.Invoke(
-						$"An error occurred during asynchronous process \"{ProcessName}\":\r\n{e}",
-						LogType.Error
-					);
-				}
+			try
+			{
+				_logger.Log($"#3.3");
+
+				this.Result = _function(new AsyncPartialResultCollectorImpl(this));
+
+				lock (_lock) _asyncProcessState = AsyncProcessState.Completed;
+
+				_logger.Log($"Completed asyncrhonous process \"{ProcessName}\"");
+			}
+			catch (Exception e)
+			{
+				lock (_lock) _asyncProcessState = AsyncProcessState.Failed;
+
+				_logger?.Invoke(
+					$"An error occurred during asynchronous process \"{ProcessName}\":\r\n{e}",
+					LogType.Error
+				);
 			}
 		}
 

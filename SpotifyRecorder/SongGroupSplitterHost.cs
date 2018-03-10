@@ -24,6 +24,8 @@ namespace SpotifyRec
 		public ReadOnlyCollection<RecordedSong> CompletedSongs { get; }
 		private readonly List<RecordedSong> _completedSongs;
 
+		public event EventHandler<SongGroupSplitEventArgs> SongGroupSplit;
+
 		public SongGroupSplitterHost(ISettingProvider settingProvider, Logger logger)
 		{
 			this.SettingProvider = settingProvider;
@@ -46,11 +48,21 @@ namespace SpotifyRec
 			for (int i = _currentSplitters.Count - 1; i >= 0; i--)
 			{
 				var x = _currentSplitters[i];
-				if (x.Completed) {
+
+				if (x.Completed)
+				{
 					_completedGroups.Add(x.Group);
 					_completedSongs.AddRange(x.CompletedSongs);
 					_currentSplitters.RemoveAt(i);
-					_logger.Log($"Cleared successfully split song group '{x.Group.GroupID}'");
+
+					_logger.Log($"Found and moved successfully split song group '{x.Group.GroupID}', notifying other objects");
+
+					SongGroupSplit?.Invoke(this, new SongGroupSplitEventArgs(x));
+				}
+
+				if (x.Failed) {
+					//An error has already been logged by AsyncProcessHelper so just discard the splitter
+					_currentSplitters.RemoveAt(i);
 				}
 			}
 

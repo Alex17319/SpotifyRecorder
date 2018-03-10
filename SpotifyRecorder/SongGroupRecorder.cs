@@ -56,7 +56,7 @@ namespace SpotifyRec
 			_logger.Log("Starting new song group with ID '" + this.GroupID + "'.");
 
 			_songTracker = new SongTracker(spotifyProcessManager, songClassificationInfo, songRefreshInterval, _logger);
-			_audioRecorder = new AudioRecorder(tempFolder, "TempGroupRec @ " + this.GroupID);
+			_audioRecorder = new AudioRecorder(tempFolder, $"Temp Group '{this.GroupID}'");
 
 			RecordingStartTime = DateTime.Now;
 
