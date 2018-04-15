@@ -20,7 +20,7 @@ namespace SpotifyRec
 
 		public string CombinedName {
 			get {
-				if (Artist == null) return SongName;
+				if (Artist == null || SongName == null) return Artist ?? SongName;
 				else return Artist + SpotifySongInfo.ArtistAndNameSeparator + SongName;
 			}
 		}
