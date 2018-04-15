@@ -8,6 +8,7 @@ namespace SpotifyRec.Utils
 {
 	public static class AudioUtils
 	{
+		/* TODO
 		public static (int startTime, int duration) GetLongestSilenceInMilliseconds(int minMilliseconds, int bytesPerSecond, IEnumerable<byte> audio, int bitsPerSample)
 		{
 
@@ -22,5 +23,6 @@ namespace SpotifyRec.Utils
 		{
 
 		}
+		*/
 	}
 }

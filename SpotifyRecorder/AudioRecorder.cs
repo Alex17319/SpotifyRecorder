@@ -84,7 +84,7 @@ namespace SpotifyRec
 				_wavOut.Length / (_wavOut.WaveFormat.AverageBytesPerSecond/1000)
 			);
 
-			FillInUncapturedSilence(e);
+			//TODO: FillInUncapturedSilence(e);
 
 			//From original project:
 			//	//	int sample_count = e.BytesRecorded / (waveIn.WaveFormat.BitsPerSample / 8);
@@ -113,6 +113,7 @@ namespace SpotifyRec
 			//	//	}
 		}
 
+		/* TODO
 		//If the audio from the computer is silent for about 10 seconds, either NAudio or Wasapi Capture
 		//stops providing audio samples. This fixes this problem by:
 		//	Detect if there is more than <varNameHere=5s> of silence in the clip.
@@ -130,6 +131,7 @@ namespace SpotifyRec
 
 			_sampleDurationStopwatch.Restart();
 		}
+		*/
 
 		private void RecordingStopped(object sender, StoppedEventArgs e)
 		{
