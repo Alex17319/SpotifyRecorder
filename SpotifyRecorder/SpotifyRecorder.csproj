@@ -133,6 +133,7 @@
     <Compile Include="UI\UniaxualResizePanelDesigner.cs" />
     <Compile Include="Utils\AdvancedEvent.cs" />
     <Compile Include="AsyncProcessHelper.cs" />
+    <Compile Include="Utils\AudioUtils.cs" />
     <Compile Include="Utils\CustomEnum.cs" />
     <Compile Include="Utils\CustomEnumDefinition.cs" />
     <Compile Include="Utils\EnumerableExtensions.cs" />

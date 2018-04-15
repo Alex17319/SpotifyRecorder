@@ -8,9 +8,13 @@ using NAudio.CoreAudioApi;
 using NAudio.Wave;
 using NAudio.Gui;
 using System.IO;
+using System.Diagnostics;
 
 namespace SpotifyRec
 {
+	//TODO: Fix problem where some dependency times out and stops recording after 10s of silence
+	//(which will cause all the timings for when songs start and stop to be out of sync)
+
 	public class AudioRecorder : IDisposable
 	{
 		public string OutputFolder { get; }
@@ -40,6 +44,10 @@ namespace SpotifyRec
 
 		public WaveFormat WaveFormat { get; }
 
+		private Stopwatch _sampleDurationStopwatch;
+		//Safe to use Stopwatch (which is from System.Diagnostics) in production code:
+		//https://stackoverflow.com/questions/2805362/can-stopwatch-be-used-in-production-code
+
 		public AudioRecorder(string outputFolder, string recordingName)
 		{
 			this.OutputFolder = outputFolder;
@@ -64,6 +72,8 @@ namespace SpotifyRec
 			);
 
 			_wasapiIn.StartRecording();
+
+			_sampleDurationStopwatch = Stopwatch.StartNew();
 		}
 
 		private void AudioDataAvailable(object sender, WaveInEventArgs e)
@@ -74,6 +84,7 @@ namespace SpotifyRec
 				_wavOut.Length / (_wavOut.WaveFormat.AverageBytesPerSecond/1000)
 			);
 
+			FillInUncapturedSilence(e);
 
 			//From original project:
 			//	//	int sample_count = e.BytesRecorded / (waveIn.WaveFormat.BitsPerSample / 8);
@@ -100,6 +111,24 @@ namespace SpotifyRec
 			//	//		float sampleright = BitConverter.ToSingle(e.Buffer, i + 4);
 			//	//		WaveformPainter.AddLeftRight(sampleleft, sampleright);
 			//	//	}
+		}
+
+		//If the audio from the computer is silent for about 10 seconds, either NAudio or Wasapi Capture
+		//stops providing audio samples. This fixes this problem by:
+		//	Detect if there is more than <varNameHere=5s> of silence in the clip.
+		//	If so, check if the length of the current snippet is more than <varNameHere=0.2s> shorter
+		//	than the time since the last snippet.
+		//	If so, find the longest strech of silence within the current audio data snippet (this assumes
+		//	that there is only ever one timeout within an audio data snippet, i.e. snippets are shorter than 20s).
+		//	Then, insert the missing duration of silence into strech of silence (in the middle to be safe).
+		private void FillInUncapturedSilence(WaveInEventArgs e)
+		{
+			var realtimeSampleDuration = _sampleDurationStopwatch.ElapsedMilliseconds;
+			_sampleDurationStopwatch.Stop();
+
+			e.
+
+			_sampleDurationStopwatch.Restart();
 		}
 
 		private void RecordingStopped(object sender, StoppedEventArgs e)
