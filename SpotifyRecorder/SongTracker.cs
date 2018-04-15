@@ -87,6 +87,7 @@ namespace SpotifyRec
 
 			if (_oldWindowTitle != newWindowTitle)
 			{
+				_logger.Log($"Song changed: _oldWindowTitle = '{_oldWindowTitle}', newWindowTitle = '{newWindowTitle}'.");
 				var oldSong = LastSong;
 				UpdateListWithNewSong(newWindowTitle: newWindowTitle);
 				var newSong = LastSong;

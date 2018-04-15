@@ -57,6 +57,7 @@ namespace SpotifyRec
 
 			_songTracker = new SongTracker(spotifyProcessManager, songClassificationInfo, songRefreshInterval, _logger);
 			_audioRecorder = new AudioRecorder(tempFolder, $"Temp Group '{this.GroupID}'");
+			_logger.Log("Audio recorder created & automatically started", LogType.MinorMessage);
 
 			RecordingStartTime = DateTime.Now;
 
