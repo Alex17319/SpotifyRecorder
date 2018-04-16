@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SpotifyRec.Utils;
 using System.Drawing;
-using System.Windows.Threading;
+using System.Threading;
 
 namespace SpotifyRec.Logging
 {

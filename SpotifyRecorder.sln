@@ -5,6 +5,16 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyRecorder", "SpotifyRecorder\SpotifyRecorder.csproj", "{C9B06D6F-0884-4B8F-BC53-25E58711F020}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyRecorder.Full", "SpotifyRecorder.Full\SpotifyRecorder.Full.csproj", "{EA30697E-7690-43DC-976D-BE21F2AF8DD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyRecorder.Recorder", "SpotifyRecorder.Recorder\SpotifyRecorder.Recorder.csproj", "{897B140C-CFA1-4302-AF2F-89D5EF43E0B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyRecorder.Player", "SpotifyRecorder.Player\SpotifyRecorder.Player.csproj", "{FA8414C3-4D70-4293-AC83-5CA1A5E2B2BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyRecorder.UIComponents", "SpotifyRecorder.UIComponents\SpotifyRecorder.UIComponents.csproj", "{74749DB8-B5D9-48F0-8563-3BC43A48DC44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotifyRecorder.Utils", "SpotifyRecorder.Utils\SpotifyRecorder.Utils.csproj", "{D3A71A6B-A4F2-4C70-A26C-51D4DA372D05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +25,26 @@ Global
 		{C9B06D6F-0884-4B8F-BC53-25E58711F020}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9B06D6F-0884-4B8F-BC53-25E58711F020}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9B06D6F-0884-4B8F-BC53-25E58711F020}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA30697E-7690-43DC-976D-BE21F2AF8DD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA30697E-7690-43DC-976D-BE21F2AF8DD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA30697E-7690-43DC-976D-BE21F2AF8DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA30697E-7690-43DC-976D-BE21F2AF8DD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{897B140C-CFA1-4302-AF2F-89D5EF43E0B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{897B140C-CFA1-4302-AF2F-89D5EF43E0B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{897B140C-CFA1-4302-AF2F-89D5EF43E0B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{897B140C-CFA1-4302-AF2F-89D5EF43E0B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA8414C3-4D70-4293-AC83-5CA1A5E2B2BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA8414C3-4D70-4293-AC83-5CA1A5E2B2BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA8414C3-4D70-4293-AC83-5CA1A5E2B2BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA8414C3-4D70-4293-AC83-5CA1A5E2B2BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74749DB8-B5D9-48F0-8563-3BC43A48DC44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74749DB8-B5D9-48F0-8563-3BC43A48DC44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74749DB8-B5D9-48F0-8563-3BC43A48DC44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74749DB8-B5D9-48F0-8563-3BC43A48DC44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3A71A6B-A4F2-4C70-A26C-51D4DA372D05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3A71A6B-A4F2-4C70-A26C-51D4DA372D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3A71A6B-A4F2-4C70-A26C-51D4DA372D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3A71A6B-A4F2-4C70-A26C-51D4DA372D05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

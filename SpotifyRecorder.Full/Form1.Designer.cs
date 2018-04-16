@@ -1,6 +1,4 @@
-﻿/*
-
-namespace SpotifyRec
+﻿namespace SpotifyRec.Full
 {
 	partial class MainForm
 	{
@@ -233,4 +231,3 @@ namespace SpotifyRec
 	}
 }
 
-*/

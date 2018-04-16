@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{74749DB8-B5D9-48F0-8563-3BC43A48DC44}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SpotifyRec.UIComponents</RootNamespace>
+    <AssemblyName>SpotifyRecorder.UIComponents</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ResizablePanel\CornerResizerSizes.cs" />
+    <Compile Include="FolderBrowsePanel\FolderBrowsePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FolderBrowsePanel\FolderBrowsePanel.Designer.cs">
+      <DependentUpon>FolderBrowsePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResizablePanel\PanelDesigner.cs" />
+    <Compile Include="ResizablePanel\PanelResizeEventArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResizablePanel\ResizablePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ResizablePanel\ResizablePanel.Designer.cs">
+      <DependentUpon>ResizablePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResizablePanel\ResizablePanelDesigner.cs" />
+    <Compile Include="ResizablePanel\ResizableSides.cs" />
+    <Compile Include="ResizablePanel\ResizeAxis.cs" />
+    <Compile Include="ResizablePanel\ResizedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ResizablePanel\ResizedPanelDesigner.cs" />
+    <Compile Include="Old\SplitContainer.cs" />
+    <Compile Include="UniaxualResizePanel\UniaxualResizePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UniaxualResizePanel\UniaxualResizePanel.Designer.cs">
+      <DependentUpon>UniaxualResizePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UniaxualResizePanel\UniaxualResizePanelDesigner.cs" />
+    <Compile Include="ValidatedTextBox\ValidatedTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ValidatedTextBox\ValidatedTextBox.Designer.cs">
+      <DependentUpon>ValidatedTextBox.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FolderBrowsePanel\FolderBrowsePanel.resx">
+      <DependentUpon>FolderBrowsePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ResizablePanel\ResizablePanel.resx">
+      <DependentUpon>ResizablePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UniaxualResizePanel\UniaxualResizePanel.resx">
+      <DependentUpon>UniaxualResizePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpotifyRecorder.Utils\SpotifyRecorder.Utils.csproj">
+      <Project>{d3a71a6b-a4f2-4c70-a26c-51d4da372d05}</Project>
+      <Name>SpotifyRecorder.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

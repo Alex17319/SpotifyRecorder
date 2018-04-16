@@ -5,10 +5,10 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C9B06D6F-0884-4B8F-BC53-25E58711F020}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>SpotifyRec</RootNamespace>
     <AssemblyName>SpotifyRecorder</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.1</LangVersion>
+    <LangVersion>default</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -33,6 +33,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NAudio, Version=1.8.3.0, Culture=neutral, processorArchitecture=MSIL">
@@ -75,14 +78,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttemptEventArgs.cs" />
     <Compile Include="AudioRecorder.cs" />
     <Compile Include="ConvertedSong.cs" />
-    <Compile Include="Logging\ListLogHandler.cs" />
-    <Compile Include="Logging\StreamLogHandler.cs" />
-    <Compile Include="Logging\ILogProvider.cs" />
-    <Compile Include="Logging\LogHandler.cs" />
-    <Compile Include="Logging\RichTextBoxLogHandler.cs" />
     <Compile Include="MainController.cs" />
     <Compile Include="RecordedSong.cs" />
     <Compile Include="RecordingHost.cs" />
@@ -94,49 +91,14 @@
     <Compile Include="SongGroupSplitEventArgs.cs" />
     <Compile Include="SongGroupSplitter.cs" />
     <Compile Include="SongGroupSplitterHost.cs" />
-    <Compile Include="UI\CornerResizerSizes.cs" />
-    <Compile Include="UI\PanelDesigner.cs" />
-    <Compile Include="UI\PanelResizeEventArgs.cs" />
-    <Compile Include="UI\RecordingPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\RecordingPage.Designer.cs">
-      <DependentUpon>RecordingPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ResizablePanelDesigner.cs" />
-    <Compile Include="UI\ResizableSides.cs" />
-    <Compile Include="UI\ResizablePanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="UI\ResizablePanel.Designer.cs">
-      <DependentUpon>ResizablePanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ResizeAxis.cs" />
-    <Compile Include="UI\ResizedPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="UI\ResizedPanelDesigner.cs" />
-    <Compile Include="UI\Side.cs" />
-    <Compile Include="UI\UniaxualResizePanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\UniaxualResizePanel.Designer.cs">
-      <DependentUpon>UniaxualResizePanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\SettingsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\SettingsPage.Designer.cs">
       <DependentUpon>SettingsPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\SplitContainer.cs" />
-    <Compile Include="UI\UniaxualResizePanelDesigner.cs" />
-    <Compile Include="Utils\AdvancedEvent.cs" />
     <Compile Include="AsyncProcessHelper.cs" />
     <Compile Include="Utils\AudioUtils.cs" />
-    <Compile Include="Utils\CustomEnum.cs" />
-    <Compile Include="Utils\CustomEnumDefinition.cs" />
-    <Compile Include="Utils\EnumerableExtensions.cs" />
     <Compile Include="ISettingProvider.cs" />
     <Compile Include="MP3Duration.cs" />
     <Compile Include="OutputFormat.cs" />
@@ -152,10 +114,6 @@
     <Compile Include="SongEncoding\SongTags.cs" />
     <Compile Include="SongEncoding\WaveSongEncoder.cs" />
     <Compile Include="SongEncoding\WMASongEncoder.cs" />
-    <Compile Include="UI\FolderBrowsePanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UI\FolderBrowsePanel.Designer.cs" />
     <Compile Include="UI\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,8 +122,6 @@
     </Compile>
     <Compile Include="SongClassificationInfo.cs" />
     <Compile Include="ISpotifySongInfo.cs" />
-    <Compile Include="Logging\Logger.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SongChangeEventArgs.cs" />
     <Compile Include="SongGroupRecorder.cs" />
@@ -173,20 +129,6 @@
     <Compile Include="SongTracker.cs" />
     <Compile Include="SpotifyProcessManager.cs" />
     <Compile Include="SpotifySongInfo.cs" />
-    <Compile Include="UI\ValidatedTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="UI\ValidatedTextBox.Designer.cs" />
-    <Compile Include="Utils\EventExtensions.cs" />
-    <Compile Include="Utils\EventUtils.cs" />
-    <Compile Include="Utils\HashCodes.cs" />
-    <Compile Include="Utils\TextBoxExtensions.cs" />
-    <Compile Include="Utils\TryDelegate.cs" />
-    <Compile Include="Utils\UserErrorException.cs" />
-    <Compile Include="Utils\Validator.cs" />
-    <Compile Include="Utils\ValueChangeEventArgs.cs" />
-    <Compile Include="Utils\XLinqExtensions.cs" />
-    <EmbeddedResource Include="UI\FolderBrowsePanel.resx" />
     <EmbeddedResource Include="UI\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -200,15 +142,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UI\RecordingPage.resx">
-      <DependentUpon>RecordingPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\ResizablePanel.resx">
-      <DependentUpon>ResizablePanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\UniaxualResizePanel.resx">
-      <DependentUpon>UniaxualResizePanel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\SettingsPage.resx">
       <DependentUpon>SettingsPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -233,6 +166,16 @@
     <Content Include="libmp3lame.64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpotifyRecorder.UIComponents\SpotifyRecorder.UIComponents.csproj">
+      <Project>{74749db8-b5d9-48f0-8563-3bc43a48dc44}</Project>
+      <Name>SpotifyRecorder.UIComponents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpotifyRecorder.Utils\SpotifyRecorder.Utils.csproj">
+      <Project>{d3a71a6b-a4f2-4c70-a26c-51d4da372d05}</Project>
+      <Name>SpotifyRecorder.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

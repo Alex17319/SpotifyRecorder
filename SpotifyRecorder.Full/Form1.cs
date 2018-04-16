@@ -1,6 +1,4 @@
-﻿/*
-
-using SpotifyRec.Logging;
+﻿using SpotifyRec.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SpotifyRec
+namespace SpotifyRec.Full
 {
 	public partial class MainForm : Form
 	{
@@ -84,5 +82,3 @@ namespace SpotifyRec
 		//https://www.alfredforum.com/topic/5927-force-im-feeling-lucky/
 	}
 }
-
-*/
