@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CenteredPanel\CenteredPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CenteredPanel\CenteredPanel.Designer.cs">
+      <DependentUpon>CenteredPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="ResizablePanel\CornerResizerSizes.cs" />
     <Compile Include="FolderBrowsePanel\FolderBrowsePanel.cs">
       <SubType>UserControl</SubType>

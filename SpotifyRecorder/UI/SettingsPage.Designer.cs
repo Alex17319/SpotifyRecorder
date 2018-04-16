@@ -76,12 +76,12 @@
 			this.resizablePanel1.InnerPanel.Controls.Add(this.groupBox5);
 			this.resizablePanel1.InnerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.resizablePanel1.InnerPanel.Location = new System.Drawing.Point(0, 0);
-			this.resizablePanel1.InnerPanel.MinimumSize = new System.Drawing.Size(0, 285);
+			this.resizablePanel1.InnerPanel.MinimumSize = new System.Drawing.Size(0, 290);
 			this.resizablePanel1.InnerPanel.Name = "InnerPanel";
 			this.resizablePanel1.InnerPanel.Size = new System.Drawing.Size(364, 355);
 			this.resizablePanel1.InnerPanel.TabIndex = 0;
 			this.resizablePanel1.Location = new System.Drawing.Point(3, 3);
-			this.resizablePanel1.MinimumSize = new System.Drawing.Size(0, 290);
+			this.resizablePanel1.MinimumSize = new System.Drawing.Size(0, 295);
 			this.resizablePanel1.Name = "resizablePanel1";
 			this.resizablePanel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
 			this.resizablePanel1.ResizerSizes = new System.Windows.Forms.Padding(0, 0, 0, 5);
@@ -271,7 +271,7 @@
 			this.MinimumSize = new System.Drawing.Size(370, 100);
 			this.Name = "SettingsPage";
 			this.Padding = new System.Windows.Forms.Padding(3);
-			this.Size = new System.Drawing.Size(370, 448);
+			this.Size = new System.Drawing.Size(370, 438);
 			this.resizablePanel1.InnerPanel.ResumeLayout(false);
 			this.resizablePanel1.ResumeLayout(false);
 			this.groupBox5.ResumeLayout(false);

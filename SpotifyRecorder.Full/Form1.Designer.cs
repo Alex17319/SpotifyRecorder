@@ -33,6 +33,7 @@
 			this.RecordingPage = new SpotifyRec.UI.RecordingPage();
 			this.PlaylistsTab = new System.Windows.Forms.TabPage();
 			this.PlayerTab = new System.Windows.Forms.TabPage();
+			this.playerPage1 = new SpotifyRec.Player.PlayerPage();
 			this.AdsTab = new System.Windows.Forms.TabPage();
 			this.SettingsTab = new System.Windows.Forms.TabPage();
 			this.SettingsPage = new SpotifyRec.UI.SettingsPage();
@@ -43,6 +44,7 @@
 			this.MainHSplitter = new System.Windows.Forms.Splitter();
 			this.MainTabs.SuspendLayout();
 			this.RecorderTab.SuspendLayout();
+			this.PlayerTab.SuspendLayout();
 			this.SettingsTab.SuspendLayout();
 			this.LogGroupBox.SuspendLayout();
 			this.LogPanel.SuspendLayout();
@@ -89,27 +91,40 @@
 			this.PlaylistsTab.Location = new System.Drawing.Point(4, 22);
 			this.PlaylistsTab.Name = "PlaylistsTab";
 			this.PlaylistsTab.Padding = new System.Windows.Forms.Padding(3);
-			this.PlaylistsTab.Size = new System.Drawing.Size(384, 569);
+			this.PlaylistsTab.Size = new System.Drawing.Size(384, 274);
 			this.PlaylistsTab.TabIndex = 1;
 			this.PlaylistsTab.Text = "Playlists";
 			this.PlaylistsTab.UseVisualStyleBackColor = true;
 			// 
 			// PlayerTab
 			// 
+			this.PlayerTab.Controls.Add(this.playerPage1);
 			this.PlayerTab.Location = new System.Drawing.Point(4, 22);
 			this.PlayerTab.Name = "PlayerTab";
 			this.PlayerTab.Padding = new System.Windows.Forms.Padding(3);
-			this.PlayerTab.Size = new System.Drawing.Size(384, 569);
+			this.PlayerTab.Size = new System.Drawing.Size(384, 274);
 			this.PlayerTab.TabIndex = 5;
 			this.PlayerTab.Text = "Advanced Player";
 			this.PlayerTab.UseVisualStyleBackColor = true;
+			// 
+			// playerPage1
+			// 
+			this.playerPage1.AutoScroll = true;
+			this.playerPage1.BackColor = System.Drawing.SystemColors.Window;
+			this.playerPage1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.playerPage1.Location = new System.Drawing.Point(3, 3);
+			this.playerPage1.MinimumSize = new System.Drawing.Size(370, 100);
+			this.playerPage1.Name = "playerPage1";
+			this.playerPage1.Padding = new System.Windows.Forms.Padding(3);
+			this.playerPage1.Size = new System.Drawing.Size(378, 268);
+			this.playerPage1.TabIndex = 0;
 			// 
 			// AdsTab
 			// 
 			this.AdsTab.Location = new System.Drawing.Point(4, 22);
 			this.AdsTab.Name = "AdsTab";
 			this.AdsTab.Padding = new System.Windows.Forms.Padding(3);
-			this.AdsTab.Size = new System.Drawing.Size(384, 569);
+			this.AdsTab.Size = new System.Drawing.Size(384, 274);
 			this.AdsTab.TabIndex = 2;
 			this.AdsTab.Text = "Ads";
 			this.AdsTab.UseVisualStyleBackColor = true;
@@ -121,7 +136,7 @@
 			this.SettingsTab.Location = new System.Drawing.Point(4, 22);
 			this.SettingsTab.Name = "SettingsTab";
 			this.SettingsTab.Padding = new System.Windows.Forms.Padding(3);
-			this.SettingsTab.Size = new System.Drawing.Size(384, 569);
+			this.SettingsTab.Size = new System.Drawing.Size(384, 274);
 			this.SettingsTab.TabIndex = 3;
 			this.SettingsTab.Text = "Settings";
 			this.SettingsTab.UseVisualStyleBackColor = true;
@@ -136,7 +151,7 @@
 			this.SettingsPage.MinimumSize = new System.Drawing.Size(370, 100);
 			this.SettingsPage.Name = "SettingsPage";
 			this.SettingsPage.Padding = new System.Windows.Forms.Padding(3);
-			this.SettingsPage.Size = new System.Drawing.Size(378, 563);
+			this.SettingsPage.Size = new System.Drawing.Size(378, 268);
 			this.SettingsPage.TabIndex = 0;
 			// 
 			// AboutTab
@@ -144,7 +159,7 @@
 			this.AboutTab.Location = new System.Drawing.Point(4, 22);
 			this.AboutTab.Name = "AboutTab";
 			this.AboutTab.Padding = new System.Windows.Forms.Padding(3);
-			this.AboutTab.Size = new System.Drawing.Size(384, 569);
+			this.AboutTab.Size = new System.Drawing.Size(384, 274);
 			this.AboutTab.TabIndex = 4;
 			this.AboutTab.Text = "About";
 			this.AboutTab.UseVisualStyleBackColor = true;
@@ -206,6 +221,7 @@
 			this.Text = "Spotify Recorder";
 			this.MainTabs.ResumeLayout(false);
 			this.RecorderTab.ResumeLayout(false);
+			this.PlayerTab.ResumeLayout(false);
 			this.SettingsTab.ResumeLayout(false);
 			this.LogGroupBox.ResumeLayout(false);
 			this.LogPanel.ResumeLayout(false);
@@ -228,6 +244,7 @@
 		private UI.SettingsPage SettingsPage;
 		private UI.RecordingPage RecordingPage;
 		private System.Windows.Forms.TabPage PlayerTab;
+		private Player.PlayerPage playerPage1;
 	}
 }
 
