@@ -31,7 +31,7 @@
 			this.MainTabs = new System.Windows.Forms.TabControl();
 			this.RecorderTab = new System.Windows.Forms.TabPage();
 			this.RecordingPage = new SpotifyRec.UI.RecordingPage();
-			this.PlaylistSortTab = new System.Windows.Forms.TabPage();
+			this.PlaylistsTab = new System.Windows.Forms.TabPage();
 			this.AdsTab = new System.Windows.Forms.TabPage();
 			this.SettingsTab = new System.Windows.Forms.TabPage();
 			this.SettingsPage = new SpotifyRec.UI.SettingsPage();
@@ -40,6 +40,7 @@
 			this.LogGroupBox = new System.Windows.Forms.GroupBox();
 			this.LogPanel = new System.Windows.Forms.Panel();
 			this.MainHSplitter = new System.Windows.Forms.Splitter();
+			this.PlayerTab = new System.Windows.Forms.TabPage();
 			this.MainTabs.SuspendLayout();
 			this.RecorderTab.SuspendLayout();
 			this.SettingsTab.SuspendLayout();
@@ -50,7 +51,8 @@
 			// MainTabs
 			// 
 			this.MainTabs.Controls.Add(this.RecorderTab);
-			this.MainTabs.Controls.Add(this.PlaylistSortTab);
+			this.MainTabs.Controls.Add(this.PlaylistsTab);
+			this.MainTabs.Controls.Add(this.PlayerTab);
 			this.MainTabs.Controls.Add(this.AdsTab);
 			this.MainTabs.Controls.Add(this.SettingsTab);
 			this.MainTabs.Controls.Add(this.AboutTab);
@@ -58,7 +60,7 @@
 			this.MainTabs.Location = new System.Drawing.Point(0, 0);
 			this.MainTabs.Name = "MainTabs";
 			this.MainTabs.SelectedIndex = 0;
-			this.MainTabs.Size = new System.Drawing.Size(392, 266);
+			this.MainTabs.Size = new System.Drawing.Size(392, 595);
 			this.MainTabs.TabIndex = 0;
 			// 
 			// RecorderTab
@@ -67,7 +69,7 @@
 			this.RecorderTab.Location = new System.Drawing.Point(4, 22);
 			this.RecorderTab.Name = "RecorderTab";
 			this.RecorderTab.Padding = new System.Windows.Forms.Padding(3);
-			this.RecorderTab.Size = new System.Drawing.Size(384, 240);
+			this.RecorderTab.Size = new System.Drawing.Size(384, 569);
 			this.RecorderTab.TabIndex = 0;
 			this.RecorderTab.Text = "Recording";
 			this.RecorderTab.UseVisualStyleBackColor = true;
@@ -79,25 +81,25 @@
 			this.RecordingPage.Location = new System.Drawing.Point(3, 3);
 			this.RecordingPage.MainController = null;
 			this.RecordingPage.Name = "RecordingPage";
-			this.RecordingPage.Size = new System.Drawing.Size(378, 234);
+			this.RecordingPage.Size = new System.Drawing.Size(378, 563);
 			this.RecordingPage.TabIndex = 0;
 			// 
-			// PlaylistSortTab
+			// PlaylistsTab
 			// 
-			this.PlaylistSortTab.Location = new System.Drawing.Point(4, 22);
-			this.PlaylistSortTab.Name = "PlaylistSortTab";
-			this.PlaylistSortTab.Padding = new System.Windows.Forms.Padding(3);
-			this.PlaylistSortTab.Size = new System.Drawing.Size(384, 240);
-			this.PlaylistSortTab.TabIndex = 1;
-			this.PlaylistSortTab.Text = "Playlists";
-			this.PlaylistSortTab.UseVisualStyleBackColor = true;
+			this.PlaylistsTab.Location = new System.Drawing.Point(4, 22);
+			this.PlaylistsTab.Name = "PlaylistsTab";
+			this.PlaylistsTab.Padding = new System.Windows.Forms.Padding(3);
+			this.PlaylistsTab.Size = new System.Drawing.Size(384, 569);
+			this.PlaylistsTab.TabIndex = 1;
+			this.PlaylistsTab.Text = "Playlists";
+			this.PlaylistsTab.UseVisualStyleBackColor = true;
 			// 
 			// AdsTab
 			// 
 			this.AdsTab.Location = new System.Drawing.Point(4, 22);
 			this.AdsTab.Name = "AdsTab";
 			this.AdsTab.Padding = new System.Windows.Forms.Padding(3);
-			this.AdsTab.Size = new System.Drawing.Size(384, 240);
+			this.AdsTab.Size = new System.Drawing.Size(384, 569);
 			this.AdsTab.TabIndex = 2;
 			this.AdsTab.Text = "Ads";
 			this.AdsTab.UseVisualStyleBackColor = true;
@@ -109,7 +111,7 @@
 			this.SettingsTab.Location = new System.Drawing.Point(4, 22);
 			this.SettingsTab.Name = "SettingsTab";
 			this.SettingsTab.Padding = new System.Windows.Forms.Padding(3);
-			this.SettingsTab.Size = new System.Drawing.Size(384, 240);
+			this.SettingsTab.Size = new System.Drawing.Size(384, 569);
 			this.SettingsTab.TabIndex = 3;
 			this.SettingsTab.Text = "Settings";
 			this.SettingsTab.UseVisualStyleBackColor = true;
@@ -124,7 +126,7 @@
 			this.SettingsPage.MinimumSize = new System.Drawing.Size(370, 100);
 			this.SettingsPage.Name = "SettingsPage";
 			this.SettingsPage.Padding = new System.Windows.Forms.Padding(3);
-			this.SettingsPage.Size = new System.Drawing.Size(378, 234);
+			this.SettingsPage.Size = new System.Drawing.Size(378, 563);
 			this.SettingsPage.TabIndex = 0;
 			// 
 			// AboutTab
@@ -132,7 +134,7 @@
 			this.AboutTab.Location = new System.Drawing.Point(4, 22);
 			this.AboutTab.Name = "AboutTab";
 			this.AboutTab.Padding = new System.Windows.Forms.Padding(3);
-			this.AboutTab.Size = new System.Drawing.Size(384, 240);
+			this.AboutTab.Size = new System.Drawing.Size(384, 569);
 			this.AboutTab.TabIndex = 4;
 			this.AboutTab.Text = "About";
 			this.AboutTab.UseVisualStyleBackColor = true;
@@ -145,7 +147,7 @@
 			this.LogTextBox.Location = new System.Drawing.Point(3, 16);
 			this.LogTextBox.Name = "LogTextBox";
 			this.LogTextBox.ReadOnly = true;
-			this.LogTextBox.Size = new System.Drawing.Size(378, 130);
+			this.LogTextBox.Size = new System.Drawing.Size(378, 34);
 			this.LogTextBox.TabIndex = 2;
 			this.LogTextBox.Text = "";
 			this.LogTextBox.WordWrap = false;
@@ -156,7 +158,7 @@
 			this.LogGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.LogGroupBox.Location = new System.Drawing.Point(4, 4);
 			this.LogGroupBox.Name = "LogGroupBox";
-			this.LogGroupBox.Size = new System.Drawing.Size(384, 149);
+			this.LogGroupBox.Size = new System.Drawing.Size(384, 53);
 			this.LogGroupBox.TabIndex = 3;
 			this.LogGroupBox.TabStop = false;
 			this.LogGroupBox.Text = "Log";
@@ -165,27 +167,37 @@
 			// 
 			this.LogPanel.Controls.Add(this.LogGroupBox);
 			this.LogPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.LogPanel.Location = new System.Drawing.Point(0, 266);
+			this.LogPanel.Location = new System.Drawing.Point(0, 595);
 			this.LogPanel.MinimumSize = new System.Drawing.Size(100, 50);
 			this.LogPanel.Name = "LogPanel";
 			this.LogPanel.Padding = new System.Windows.Forms.Padding(4);
-			this.LogPanel.Size = new System.Drawing.Size(392, 157);
+			this.LogPanel.Size = new System.Drawing.Size(392, 61);
 			this.LogPanel.TabIndex = 4;
 			// 
 			// MainHSplitter
 			// 
 			this.MainHSplitter.Dock = System.Windows.Forms.DockStyle.Top;
-			this.MainHSplitter.Location = new System.Drawing.Point(0, 266);
+			this.MainHSplitter.Location = new System.Drawing.Point(0, 595);
 			this.MainHSplitter.Name = "MainHSplitter";
 			this.MainHSplitter.Size = new System.Drawing.Size(392, 3);
 			this.MainHSplitter.TabIndex = 5;
 			this.MainHSplitter.TabStop = false;
 			// 
+			// PlayerTab
+			// 
+			this.PlayerTab.Location = new System.Drawing.Point(4, 22);
+			this.PlayerTab.Name = "PlayerTab";
+			this.PlayerTab.Padding = new System.Windows.Forms.Padding(3);
+			this.PlayerTab.Size = new System.Drawing.Size(384, 569);
+			this.PlayerTab.TabIndex = 5;
+			this.PlayerTab.Text = "Advanced Player";
+			this.PlayerTab.UseVisualStyleBackColor = true;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(392, 423);
+			this.ClientSize = new System.Drawing.Size(392, 656);
 			this.Controls.Add(this.MainHSplitter);
 			this.Controls.Add(this.LogPanel);
 			this.Controls.Add(this.MainTabs);
@@ -205,7 +217,7 @@
 
 		private System.Windows.Forms.TabControl MainTabs;
 		private System.Windows.Forms.TabPage RecorderTab;
-		private System.Windows.Forms.TabPage PlaylistSortTab;
+		private System.Windows.Forms.TabPage PlaylistsTab;
 		private System.Windows.Forms.Panel LogPanel;
 		private System.Windows.Forms.GroupBox LogGroupBox;
 		private System.Windows.Forms.RichTextBox LogTextBox;
@@ -215,6 +227,7 @@
 		private System.Windows.Forms.TabPage AboutTab;
 		private UI.SettingsPage SettingsPage;
 		private UI.RecordingPage RecordingPage;
+		private System.Windows.Forms.TabPage PlayerTab;
 	}
 }
 

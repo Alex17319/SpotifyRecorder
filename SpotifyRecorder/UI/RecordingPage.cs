@@ -40,7 +40,9 @@ namespace SpotifyRec.UI
 		{
 			base.OnLoad(e);
 
-			this.ParentForm.FormClosing += OnParentFormClosing;
+			if (!DesignMode) { //This fails in design mode with an NRE for whatever reason
+				this.ParentForm.FormClosing += OnParentFormClosing;
+			}
 		}
 
 		private void StartRecording()
