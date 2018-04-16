@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpotifyRec.Utils
 {
-	public static class AudioUtils
+	public static class AudioSilenceFinder
 	{
 		/* TODO
 		public static (int startTime, int duration) GetLongestSilenceInMilliseconds(int minMilliseconds, int bytesPerSecond, IEnumerable<byte> audio, int bitsPerSample)

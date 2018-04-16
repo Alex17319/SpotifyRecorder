@@ -98,7 +98,7 @@
       <DependentUpon>SettingsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="AsyncProcessHelper.cs" />
-    <Compile Include="Utils\AudioUtils.cs" />
+    <Compile Include="AudioSilenceFinder.cs" />
     <Compile Include="ISettingProvider.cs" />
     <Compile Include="MP3Duration.cs" />
     <Compile Include="OutputFormat.cs" />
@@ -114,12 +114,6 @@
     <Compile Include="SongEncoding\SongTags.cs" />
     <Compile Include="SongEncoding\WaveSongEncoder.cs" />
     <Compile Include="SongEncoding\WMASongEncoder.cs" />
-    <Compile Include="UI\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="SongClassificationInfo.cs" />
     <Compile Include="ISpotifySongInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -129,9 +123,6 @@
     <Compile Include="SongTracker.cs" />
     <Compile Include="SpotifyProcessManager.cs" />
     <Compile Include="SpotifySongInfo.cs" />
-    <EmbeddedResource Include="UI\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
