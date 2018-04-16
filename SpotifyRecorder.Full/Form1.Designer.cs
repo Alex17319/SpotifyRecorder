@@ -32,6 +32,7 @@
 			this.RecorderTab = new System.Windows.Forms.TabPage();
 			this.RecordingPage = new SpotifyRec.UI.RecordingPage();
 			this.PlaylistsTab = new System.Windows.Forms.TabPage();
+			this.PlayerTab = new System.Windows.Forms.TabPage();
 			this.AdsTab = new System.Windows.Forms.TabPage();
 			this.SettingsTab = new System.Windows.Forms.TabPage();
 			this.SettingsPage = new SpotifyRec.UI.SettingsPage();
@@ -40,7 +41,6 @@
 			this.LogGroupBox = new System.Windows.Forms.GroupBox();
 			this.LogPanel = new System.Windows.Forms.Panel();
 			this.MainHSplitter = new System.Windows.Forms.Splitter();
-			this.PlayerTab = new System.Windows.Forms.TabPage();
 			this.MainTabs.SuspendLayout();
 			this.RecorderTab.SuspendLayout();
 			this.SettingsTab.SuspendLayout();
@@ -60,7 +60,7 @@
 			this.MainTabs.Location = new System.Drawing.Point(0, 0);
 			this.MainTabs.Name = "MainTabs";
 			this.MainTabs.SelectedIndex = 0;
-			this.MainTabs.Size = new System.Drawing.Size(392, 595);
+			this.MainTabs.Size = new System.Drawing.Size(392, 300);
 			this.MainTabs.TabIndex = 0;
 			// 
 			// RecorderTab
@@ -69,7 +69,7 @@
 			this.RecorderTab.Location = new System.Drawing.Point(4, 22);
 			this.RecorderTab.Name = "RecorderTab";
 			this.RecorderTab.Padding = new System.Windows.Forms.Padding(3);
-			this.RecorderTab.Size = new System.Drawing.Size(384, 569);
+			this.RecorderTab.Size = new System.Drawing.Size(384, 274);
 			this.RecorderTab.TabIndex = 0;
 			this.RecorderTab.Text = "Recording";
 			this.RecorderTab.UseVisualStyleBackColor = true;
@@ -81,7 +81,7 @@
 			this.RecordingPage.Location = new System.Drawing.Point(3, 3);
 			this.RecordingPage.MainController = null;
 			this.RecordingPage.Name = "RecordingPage";
-			this.RecordingPage.Size = new System.Drawing.Size(378, 563);
+			this.RecordingPage.Size = new System.Drawing.Size(378, 268);
 			this.RecordingPage.TabIndex = 0;
 			// 
 			// PlaylistsTab
@@ -93,6 +93,16 @@
 			this.PlaylistsTab.TabIndex = 1;
 			this.PlaylistsTab.Text = "Playlists";
 			this.PlaylistsTab.UseVisualStyleBackColor = true;
+			// 
+			// PlayerTab
+			// 
+			this.PlayerTab.Location = new System.Drawing.Point(4, 22);
+			this.PlayerTab.Name = "PlayerTab";
+			this.PlayerTab.Padding = new System.Windows.Forms.Padding(3);
+			this.PlayerTab.Size = new System.Drawing.Size(384, 569);
+			this.PlayerTab.TabIndex = 5;
+			this.PlayerTab.Text = "Advanced Player";
+			this.PlayerTab.UseVisualStyleBackColor = true;
 			// 
 			// AdsTab
 			// 
@@ -147,7 +157,7 @@
 			this.LogTextBox.Location = new System.Drawing.Point(3, 16);
 			this.LogTextBox.Name = "LogTextBox";
 			this.LogTextBox.ReadOnly = true;
-			this.LogTextBox.Size = new System.Drawing.Size(378, 34);
+			this.LogTextBox.Size = new System.Drawing.Size(378, 96);
 			this.LogTextBox.TabIndex = 2;
 			this.LogTextBox.Text = "";
 			this.LogTextBox.WordWrap = false;
@@ -158,7 +168,7 @@
 			this.LogGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.LogGroupBox.Location = new System.Drawing.Point(4, 4);
 			this.LogGroupBox.Name = "LogGroupBox";
-			this.LogGroupBox.Size = new System.Drawing.Size(384, 53);
+			this.LogGroupBox.Size = new System.Drawing.Size(384, 115);
 			this.LogGroupBox.TabIndex = 3;
 			this.LogGroupBox.TabStop = false;
 			this.LogGroupBox.Text = "Log";
@@ -167,37 +177,27 @@
 			// 
 			this.LogPanel.Controls.Add(this.LogGroupBox);
 			this.LogPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.LogPanel.Location = new System.Drawing.Point(0, 595);
+			this.LogPanel.Location = new System.Drawing.Point(0, 300);
 			this.LogPanel.MinimumSize = new System.Drawing.Size(100, 50);
 			this.LogPanel.Name = "LogPanel";
 			this.LogPanel.Padding = new System.Windows.Forms.Padding(4);
-			this.LogPanel.Size = new System.Drawing.Size(392, 61);
+			this.LogPanel.Size = new System.Drawing.Size(392, 123);
 			this.LogPanel.TabIndex = 4;
 			// 
 			// MainHSplitter
 			// 
 			this.MainHSplitter.Dock = System.Windows.Forms.DockStyle.Top;
-			this.MainHSplitter.Location = new System.Drawing.Point(0, 595);
+			this.MainHSplitter.Location = new System.Drawing.Point(0, 300);
 			this.MainHSplitter.Name = "MainHSplitter";
 			this.MainHSplitter.Size = new System.Drawing.Size(392, 3);
 			this.MainHSplitter.TabIndex = 5;
 			this.MainHSplitter.TabStop = false;
 			// 
-			// PlayerTab
-			// 
-			this.PlayerTab.Location = new System.Drawing.Point(4, 22);
-			this.PlayerTab.Name = "PlayerTab";
-			this.PlayerTab.Padding = new System.Windows.Forms.Padding(3);
-			this.PlayerTab.Size = new System.Drawing.Size(384, 569);
-			this.PlayerTab.TabIndex = 5;
-			this.PlayerTab.Text = "Advanced Player";
-			this.PlayerTab.UseVisualStyleBackColor = true;
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(392, 656);
+			this.ClientSize = new System.Drawing.Size(392, 423);
 			this.Controls.Add(this.MainHSplitter);
 			this.Controls.Add(this.LogPanel);
 			this.Controls.Add(this.MainTabs);
