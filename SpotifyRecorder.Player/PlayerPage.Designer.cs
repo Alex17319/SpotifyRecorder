@@ -309,16 +309,16 @@
 			this.resizablePanel2.InnerPanel.Controls.Add(this.FilteringGroupBox);
 			this.resizablePanel2.InnerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.resizablePanel2.InnerPanel.Location = new System.Drawing.Point(0, 0);
-			this.resizablePanel2.InnerPanel.MinimumSize = new System.Drawing.Size(0, 140);
+			this.resizablePanel2.InnerPanel.MinimumSize = new System.Drawing.Size(0, 145);
 			this.resizablePanel2.InnerPanel.Name = "InnerPanel";
-			this.resizablePanel2.InnerPanel.Size = new System.Drawing.Size(347, 140);
+			this.resizablePanel2.InnerPanel.Size = new System.Drawing.Size(347, 145);
 			this.resizablePanel2.InnerPanel.TabIndex = 0;
-			this.resizablePanel2.Location = new System.Drawing.Point(3, 260);
-			this.resizablePanel2.MinimumSize = new System.Drawing.Size(0, 145);
+			this.resizablePanel2.Location = new System.Drawing.Point(3, 265);
+			this.resizablePanel2.MinimumSize = new System.Drawing.Size(0, 150);
 			this.resizablePanel2.Name = "resizablePanel2";
 			this.resizablePanel2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
 			this.resizablePanel2.ResizerSizes = new System.Windows.Forms.Padding(0, 0, 0, 5);
-			this.resizablePanel2.Size = new System.Drawing.Size(347, 145);
+			this.resizablePanel2.Size = new System.Drawing.Size(347, 150);
 			this.resizablePanel2.TabIndex = 5;
 			this.resizablePanel2.Text = "resizablePanel2";
 			// 
@@ -330,7 +330,7 @@
 			this.FilteringGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.FilteringGroupBox.Location = new System.Drawing.Point(0, 0);
 			this.FilteringGroupBox.Name = "FilteringGroupBox";
-			this.FilteringGroupBox.Size = new System.Drawing.Size(347, 140);
+			this.FilteringGroupBox.Size = new System.Drawing.Size(347, 145);
 			this.FilteringGroupBox.TabIndex = 0;
 			this.FilteringGroupBox.TabStop = false;
 			this.FilteringGroupBox.Text = "Song Filtering";
@@ -341,7 +341,7 @@
 			this.FilterListGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.FilterListGroupBox.Location = new System.Drawing.Point(3, 33);
 			this.FilterListGroupBox.Name = "FilterListGroupBox";
-			this.FilterListGroupBox.Size = new System.Drawing.Size(341, 104);
+			this.FilterListGroupBox.Size = new System.Drawing.Size(341, 109);
 			this.FilterListGroupBox.TabIndex = 3;
 			this.FilterListGroupBox.TabStop = false;
 			this.FilterListGroupBox.Text = "Filters (using Microsoft\'s version of Regex)";
@@ -353,7 +353,7 @@
 			this.textBox2.Multiline = true;
 			this.textBox2.Name = "textBox2";
 			this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBox2.Size = new System.Drawing.Size(335, 85);
+			this.textBox2.Size = new System.Drawing.Size(335, 90);
 			this.textBox2.TabIndex = 0;
 			// 
 			// FilterCheckBox
@@ -379,16 +379,16 @@
 			this.resizablePanel1.InnerPanel.Controls.Add(this.DuplicateSkippingGroupBox);
 			this.resizablePanel1.InnerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.resizablePanel1.InnerPanel.Location = new System.Drawing.Point(0, 0);
-			this.resizablePanel1.InnerPanel.MinimumSize = new System.Drawing.Size(0, 175);
+			this.resizablePanel1.InnerPanel.MinimumSize = new System.Drawing.Size(0, 180);
 			this.resizablePanel1.InnerPanel.Name = "InnerPanel";
-			this.resizablePanel1.InnerPanel.Size = new System.Drawing.Size(347, 175);
+			this.resizablePanel1.InnerPanel.Size = new System.Drawing.Size(347, 180);
 			this.resizablePanel1.InnerPanel.TabIndex = 0;
 			this.resizablePanel1.Location = new System.Drawing.Point(3, 80);
-			this.resizablePanel1.MinimumSize = new System.Drawing.Size(0, 180);
+			this.resizablePanel1.MinimumSize = new System.Drawing.Size(0, 185);
 			this.resizablePanel1.Name = "resizablePanel1";
 			this.resizablePanel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
 			this.resizablePanel1.ResizerSizes = new System.Windows.Forms.Padding(0, 0, 0, 5);
-			this.resizablePanel1.Size = new System.Drawing.Size(347, 180);
+			this.resizablePanel1.Size = new System.Drawing.Size(347, 185);
 			this.resizablePanel1.TabIndex = 4;
 			this.resizablePanel1.Text = "resizablePanel1";
 			// 
@@ -402,7 +402,7 @@
 			this.DuplicateSkippingGroupBox.Location = new System.Drawing.Point(0, 0);
 			this.DuplicateSkippingGroupBox.Name = "DuplicateSkippingGroupBox";
 			this.DuplicateSkippingGroupBox.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-			this.DuplicateSkippingGroupBox.Size = new System.Drawing.Size(347, 175);
+			this.DuplicateSkippingGroupBox.Size = new System.Drawing.Size(347, 180);
 			this.DuplicateSkippingGroupBox.TabIndex = 2;
 			this.DuplicateSkippingGroupBox.TabStop = false;
 			this.DuplicateSkippingGroupBox.Text = "Duplicate Skipping";
@@ -413,7 +413,7 @@
 			this.HistoryGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.HistoryGroupBox.Location = new System.Drawing.Point(7, 60);
 			this.HistoryGroupBox.Name = "HistoryGroupBox";
-			this.HistoryGroupBox.Size = new System.Drawing.Size(333, 110);
+			this.HistoryGroupBox.Size = new System.Drawing.Size(333, 115);
 			this.HistoryGroupBox.TabIndex = 2;
 			this.HistoryGroupBox.TabStop = false;
 			this.HistoryGroupBox.Text = "History (Duplicates to Skip)";
@@ -425,7 +425,7 @@
 			this.textBox1.Multiline = true;
 			this.textBox1.Name = "textBox1";
 			this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBox1.Size = new System.Drawing.Size(327, 91);
+			this.textBox1.Size = new System.Drawing.Size(327, 96);
 			this.textBox1.TabIndex = 0;
 			// 
 			// RecordHistoryCheckBox
