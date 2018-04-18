@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{897B140C-CFA1-4302-AF2F-89D5EF43E0B2}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>SpotifyRec.Recorder</RootNamespace>
+    <RootNamespace>SpotifyRec.Recording</RootNamespace>
     <AssemblyName>SpotifyRecorder.Recorder</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -35,8 +35,29 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.8.4\lib\net35\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Flac, Version=1.0.5702.29018, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Flac.1.0.5702.29018\lib\net45\NAudio.Flac.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Lame, Version=1.0.5.22475, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Lame.1.0.7\lib\net20\NAudio.Lame.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Vorbis, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Vorbis.1.0.0.0\lib\net35\NAudio.Vorbis.dll</HintPath>
+    </Reference>
+    <Reference Include="NVorbis, Version=0.8.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NVorbis.0.8.4.0\lib\NVorbis.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.4.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,13 +69,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudioRecorder.cs" />
+    <Compile Include="ConvertedSong.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecordedSong.cs" />
+    <Compile Include="RecordedSongGroup.cs" />
+    <Compile Include="RecordingTabController.cs" />
+    <Compile Include="RecordingHost.cs" />
     <Compile Include="RecordingPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="RecordingPage.Designer.cs">
       <DependentUpon>RecordingPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="RecordingSession.cs" />
+    <Compile Include="SongBatchConverter.cs" />
+    <Compile Include="SongConversionHost.cs" />
+    <Compile Include="SongGroupRecorder.cs" />
+    <Compile Include="SongGroupSplitEventArgs.cs" />
+    <Compile Include="SongGroupSplitter.cs" />
+    <Compile Include="SongGroupSplitterHost.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -68,6 +102,7 @@
     <EmbeddedResource Include="RecordingPage.resx">
       <DependentUpon>RecordingPage.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -94,6 +129,14 @@
       <Project>{c9b06d6f-0884-4b8f-bc53-25e58711f020}</Project>
       <Name>SpotifyRecorder</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="libmp3lame.32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="libmp3lame.64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

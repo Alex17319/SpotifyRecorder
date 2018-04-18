@@ -43,7 +43,7 @@ namespace SpotifyRec.Full
 			);
 
 			this.SettingsPage.MainController = this.MainController;
-			this.RecordingPage.MainController = this.MainController;
+			this.RecordingPage.RecordingTabController = this.MainController;
 
 			this.MainTabs.SelectedIndexChanged += delegate { this.MainController.SettingsSaver.SaveNow(); };
 			this.Deactivate += delegate { this.MainController.SettingsSaver.SaveNow(); };

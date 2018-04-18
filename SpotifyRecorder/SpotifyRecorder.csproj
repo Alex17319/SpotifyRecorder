@@ -38,8 +38,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NAudio, Version=1.8.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NAudio.1.8.3\lib\net35\NAudio.dll</HintPath>
+    <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.8.4\lib\net35\NAudio.dll</HintPath>
     </Reference>
     <Reference Include="NAudio.Flac, Version=1.0.5702.29018, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.Flac.1.0.5702.29018\lib\net45\NAudio.Flac.dll</HintPath>
@@ -50,11 +50,8 @@
     <Reference Include="NAudio.Vorbis, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.Vorbis.1.0.0.0\lib\net35\NAudio.Vorbis.dll</HintPath>
     </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
-    </Reference>
-    <Reference Include="NVorbis, Version=0.8.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NVorbis.0.8.4.0\lib\NVorbis.dll</HintPath>
+    <Reference Include="NVorbis, Version=0.8.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NVorbis.0.8.5.0\lib\NVorbis.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
@@ -78,19 +75,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudioRecorder.cs" />
-    <Compile Include="ConvertedSong.cs" />
-    <Compile Include="MainController.cs" />
-    <Compile Include="RecordedSong.cs" />
-    <Compile Include="RecordingHost.cs" />
     <Compile Include="SettingsHost.cs" />
     <Compile Include="SettingsLoader.cs" />
     <Compile Include="SettingsSaver.cs" />
-    <Compile Include="SongBatchConverter.cs" />
-    <Compile Include="RecordedSongGroup.cs" />
-    <Compile Include="SongGroupSplitEventArgs.cs" />
-    <Compile Include="SongGroupSplitter.cs" />
-    <Compile Include="SongGroupSplitterHost.cs" />
+    <Compile Include="SpotifyController.cs" />
     <Compile Include="UI\SettingsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -103,9 +91,7 @@
     <Compile Include="MP3Duration.cs" />
     <Compile Include="OutputFormat.cs" />
     <Compile Include="RawSettings.cs" />
-    <Compile Include="RecordingSession.cs" />
     <Compile Include="SettingProvider.cs" />
-    <Compile Include="SongConversionHost.cs" />
     <Compile Include="SongEncoding\AACSongEncoder.cs" />
     <Compile Include="SongEncoding\AiffSongEncoder.cs" />
     <Compile Include="SongEncoding\FlacSongEncoder.cs" />
@@ -118,7 +104,6 @@
     <Compile Include="ISpotifySongInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SongChangeEventArgs.cs" />
-    <Compile Include="SongGroupRecorder.cs" />
     <Compile Include="SongInfo.cs" />
     <Compile Include="SongTracker.cs" />
     <Compile Include="SpotifyProcessManager.cs" />

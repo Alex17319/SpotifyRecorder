@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using SpotifyRec.Utils;
 using System.Collections.Immutable;
 
-namespace SpotifyRec
+namespace SpotifyRec.Recording
 {
 	/// <summary>
 	/// Converts a single batch of songs to the output format.

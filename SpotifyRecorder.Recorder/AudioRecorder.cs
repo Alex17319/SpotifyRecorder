@@ -10,7 +10,7 @@ using NAudio.Gui;
 using System.IO;
 using System.Diagnostics;
 
-namespace SpotifyRec
+namespace SpotifyRec.Recording
 {
 	//TODO: Fix problem where some dependency times out and stops recording after 10s of silence
 	//(which will cause all the timings for when songs start and stop to be out of sync)

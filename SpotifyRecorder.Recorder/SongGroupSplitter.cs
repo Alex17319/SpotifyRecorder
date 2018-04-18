@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SpotifyRec.Utils;
 
-namespace SpotifyRec
+namespace SpotifyRec.Recording
 {
 	public class SongGroupSplitter
 	{

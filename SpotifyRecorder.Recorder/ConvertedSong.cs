@@ -4,17 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpotifyRec
+namespace SpotifyRec.Recording
 {
-	public struct RecordedSong
+	public struct ConvertedSong
 	{
 		public SongInfo SongInfo { get; }
 		public string TempPath { get; }
-		
-		public RecordedSong(SongInfo songInfo, string tempPath)
+		public string OutputPath { get; }
+
+		public ConvertedSong(SongInfo songInfo, string tempPath, string outputPath)
 		{
 			this.SongInfo = songInfo;
 			this.TempPath = tempPath;
+			this.OutputPath = outputPath;
 		}
 	}
 }

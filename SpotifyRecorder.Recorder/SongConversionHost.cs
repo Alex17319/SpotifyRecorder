@@ -15,7 +15,7 @@ using NAudio.Vorbis;
 using NAudio.Flac;
 using SpotifyRec.SongEncoding;
 
-namespace SpotifyRec
+namespace SpotifyRec.Recording
 {
 	public class SongConversionHost
 	{

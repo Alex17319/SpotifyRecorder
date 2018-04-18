@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SpotifyRec.Recording;
 
 namespace SpotifyRec.UI
 {
@@ -17,7 +18,7 @@ namespace SpotifyRec.UI
 		public event EventHandler RecordingStarted;
 		public event EventHandler RecordingStopped;
 
-		public SettingsHost SettingsHost => MainController.SettingsHost;
+		public SettingsHost SettingsHost => RecordingTabController.SettingsHost;
 
 		public RecordingPage()
 		{
@@ -50,7 +51,7 @@ namespace SpotifyRec.UI
 			IsRecording = true;
 			StartStopButton.Text = "Stop Recording";
 
-			MainController?.RecordingHost.StartRecording();
+			RecordingTabController?.RecordingHost.StartRecording();
 			RecordingStarted?.Invoke(this, EventArgs.Empty);
 		}
 
@@ -59,7 +60,7 @@ namespace SpotifyRec.UI
 			IsRecording = false;
 			StartStopButton.Text = "Start Recording";
 
-			MainController?.RecordingHost.StopRecording();
+			RecordingTabController?.RecordingHost.StopRecording();
 			RecordingStopped?.Invoke(this, EventArgs.Empty);
 		}
 
@@ -68,8 +69,8 @@ namespace SpotifyRec.UI
 			if (IsRecording) StopRecording();
 		}
 
-		private MainController _mainController;
-		public MainController MainController {
+		private RecordingTabController _mainController;
+		public RecordingTabController RecordingTabController {
 			get => _mainController;
 			set {
 				if (_mainController != null)

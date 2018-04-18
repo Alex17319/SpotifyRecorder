@@ -54,6 +54,7 @@
     <Compile Include="PlayerPage.Designer.cs">
       <DependentUpon>PlayerPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="PlayerTabController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="PlayerPage.resx">
       <DependentUpon>PlayerPage.cs</DependentUpon>

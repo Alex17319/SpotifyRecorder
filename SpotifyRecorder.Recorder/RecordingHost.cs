@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpotifyRec
+namespace SpotifyRec.Recording
 {
 	public class RecordingHost
 	{

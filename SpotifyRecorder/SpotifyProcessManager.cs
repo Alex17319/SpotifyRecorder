@@ -22,6 +22,8 @@ namespace SpotifyRec
 					//Make sure to refresh the window title etc if using the same process object as last time
 					_currentSpotifyProcess?.Refresh();
 				}
+				//Note: The Process.Exited event isused in SetSpotifyProcess to handle the
+				//process exiting - no need to check for that here
 
 				return _currentSpotifyProcess;
 			}

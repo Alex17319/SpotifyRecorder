@@ -12,7 +12,7 @@ using NAudio.Gui;
 using System.Collections.Immutable;
 using SpotifyRec.Utils;
 
-namespace SpotifyRec
+namespace SpotifyRec.Recording
 {
 	public class SongGroupRecorder : IDisposable
 	{

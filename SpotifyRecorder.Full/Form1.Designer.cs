@@ -81,7 +81,7 @@
 			this.RecordingPage.BackColor = System.Drawing.SystemColors.Window;
 			this.RecordingPage.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.RecordingPage.Location = new System.Drawing.Point(3, 3);
-			this.RecordingPage.MainController = null;
+			this.RecordingPage.RecordingTabController = null;
 			this.RecordingPage.Name = "RecordingPage";
 			this.RecordingPage.Size = new System.Drawing.Size(378, 268);
 			this.RecordingPage.TabIndex = 0;

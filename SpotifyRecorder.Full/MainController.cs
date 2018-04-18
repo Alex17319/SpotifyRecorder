@@ -1,4 +1,6 @@
 ﻿using SpotifyRec.Logging;
+using SpotifyRec.Player;
+using SpotifyRec.Recording;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,9 +21,9 @@ namespace SpotifyRec
 
 		public SettingsHost SettingsHost { get; }
 		public SettingsSaver SettingsSaver { get; }
-		public RecordingHost RecordingHost { get; }
-		public SongGroupSplitterHost SongGroupSplitterHost { get; }
-		public SongConversionHost SongConversionHost { get; }
+
+		public RecordingTabController RecordingTabController { get; }
+		public PlayerTabController PlayerTabController { get; }
 
 		private readonly SpotifyProcessManager _spotifyProcessManager;
 		private readonly Logger _logger;
@@ -64,19 +66,9 @@ namespace SpotifyRec
 			this.SettingsHost.AnySettingChanged += delegate { this.SettingsSaver.SaveAfterWaiting(); };
 
 			this._spotifyProcessManager = new SpotifyProcessManager(_logger);
-			this.RecordingHost = new RecordingHost(SettingsHost, _spotifyProcessManager, _logger);
-			this.SongGroupSplitterHost = new SongGroupSplitterHost(SettingsHost, _logger);
-			this.SongConversionHost = new SongConversionHost(SettingsHost, _logger);
 
-			this.RecordingHost.GroupFinished += (sender, e) =>
-			{
-				this.SongGroupSplitterHost.Enqueue(sender.RecordedGroup);
-			};
-
-			this.SongGroupSplitterHost.SongGroupSplit += (sender, e) =>
-			{
-				this.SongConversionHost.EnqueueAll(e.Splitter.CompletedSongs);
-			};
+			this.RecordingTabController = new RecordingTabController(this.SettingsHost, this._spotifyProcessManager, this._logger);
+			this.PlayerTabController = new PlayerTabController(this.SettingsHost, this._spotifyProcessManager, this._logger);
 		}
 
 		//	bool ILogProvider.HasBuffer => false;
@@ -86,11 +78,7 @@ namespace SpotifyRec
 
 		public void RefreshOngoingProcesses()
 		{
-			_logger.Log("Refreshing ongoing processes...");
-
-			this.SongGroupSplitterHost.RefreshOngoingProcesses();
-
-			this.SongConversionHost.RefreshOngoingProcesses();
+			RecordingTabController.RefreshOngoingProcesses();
 		}
 	}
 }
