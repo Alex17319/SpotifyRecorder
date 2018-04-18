@@ -16,5 +16,28 @@ namespace SpotifyRec.Player
 		{
 			InitializeComponent();
 		}
+
+		private PlayerTabController _playerTabController;
+		public PlayerTabController PlayerTabController {
+			get => _playerTabController;
+			set {
+				if (_playerTabController != null)
+				{
+					//Unsubscribe settings events (see Recording Page)
+				}
+
+				_playerTabController = value;
+
+				if (_playerTabController != null)
+				{
+					//Subscribe settings events (see Recording Page)
+
+					//Update UI values to match settings
+					//(see Recording Page)
+				}
+
+				//Settings event eventhandler definitions (see Recording Page)
+			}
+		}
 	}
 }

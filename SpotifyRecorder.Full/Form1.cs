@@ -42,8 +42,9 @@ namespace SpotifyRec.Full
 				logHandlers: new LogHandler[] { tempLog }
 			);
 
-			this.SettingsPage.MainController = this.MainController;
-			this.RecordingPage.RecordingTabController = this.MainController;
+			this.SettingsPage.SettingsHost = this.MainController.SettingsHost;
+			this.RecordingPage.RecordingTabController = this.MainController.RecordingTabController;
+			this.PlayerPage.PlayerTabController = this.MainController.PlayerTabController;
 
 			this.MainTabs.SelectedIndexChanged += delegate { this.MainController.SettingsSaver.SaveNow(); };
 			this.Deactivate += delegate { this.MainController.SettingsSaver.SaveNow(); };

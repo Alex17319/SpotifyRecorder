@@ -33,7 +33,7 @@
 			this.RecordingPage = new SpotifyRec.UI.RecordingPage();
 			this.PlaylistsTab = new System.Windows.Forms.TabPage();
 			this.PlayerTab = new System.Windows.Forms.TabPage();
-			this.playerPage1 = new SpotifyRec.Player.PlayerPage();
+			this.PlayerPage = new SpotifyRec.Player.PlayerPage();
 			this.AdsTab = new System.Windows.Forms.TabPage();
 			this.SettingsTab = new System.Windows.Forms.TabPage();
 			this.SettingsPage = new SpotifyRec.UI.SettingsPage();
@@ -81,8 +81,8 @@
 			this.RecordingPage.BackColor = System.Drawing.SystemColors.Window;
 			this.RecordingPage.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.RecordingPage.Location = new System.Drawing.Point(3, 3);
-			this.RecordingPage.RecordingTabController = null;
 			this.RecordingPage.Name = "RecordingPage";
+			this.RecordingPage.RecordingTabController = null;
 			this.RecordingPage.Size = new System.Drawing.Size(378, 268);
 			this.RecordingPage.TabIndex = 0;
 			// 
@@ -98,7 +98,7 @@
 			// 
 			// PlayerTab
 			// 
-			this.PlayerTab.Controls.Add(this.playerPage1);
+			this.PlayerTab.Controls.Add(this.PlayerPage);
 			this.PlayerTab.Location = new System.Drawing.Point(4, 22);
 			this.PlayerTab.Name = "PlayerTab";
 			this.PlayerTab.Padding = new System.Windows.Forms.Padding(3);
@@ -107,17 +107,17 @@
 			this.PlayerTab.Text = "Advanced Player";
 			this.PlayerTab.UseVisualStyleBackColor = true;
 			// 
-			// playerPage1
+			// PlayerPage
 			// 
-			this.playerPage1.AutoScroll = true;
-			this.playerPage1.BackColor = System.Drawing.SystemColors.Window;
-			this.playerPage1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.playerPage1.Location = new System.Drawing.Point(3, 3);
-			this.playerPage1.MinimumSize = new System.Drawing.Size(370, 100);
-			this.playerPage1.Name = "playerPage1";
-			this.playerPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.playerPage1.Size = new System.Drawing.Size(378, 268);
-			this.playerPage1.TabIndex = 0;
+			this.PlayerPage.AutoScroll = true;
+			this.PlayerPage.BackColor = System.Drawing.SystemColors.Window;
+			this.PlayerPage.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.PlayerPage.Location = new System.Drawing.Point(3, 3);
+			this.PlayerPage.MinimumSize = new System.Drawing.Size(370, 100);
+			this.PlayerPage.Name = "PlayerPage";
+			this.PlayerPage.Padding = new System.Windows.Forms.Padding(3);
+			this.PlayerPage.Size = new System.Drawing.Size(378, 268);
+			this.PlayerPage.TabIndex = 0;
 			// 
 			// AdsTab
 			// 
@@ -147,10 +147,10 @@
 			this.SettingsPage.BackColor = System.Drawing.SystemColors.Window;
 			this.SettingsPage.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.SettingsPage.Location = new System.Drawing.Point(3, 3);
-			this.SettingsPage.MainController = null;
 			this.SettingsPage.MinimumSize = new System.Drawing.Size(370, 100);
 			this.SettingsPage.Name = "SettingsPage";
 			this.SettingsPage.Padding = new System.Windows.Forms.Padding(3);
+			this.SettingsPage.SettingsHost = null;
 			this.SettingsPage.Size = new System.Drawing.Size(378, 268);
 			this.SettingsPage.TabIndex = 0;
 			// 
@@ -244,7 +244,7 @@
 		private UI.SettingsPage SettingsPage;
 		private UI.RecordingPage RecordingPage;
 		private System.Windows.Forms.TabPage PlayerTab;
-		private Player.PlayerPage playerPage1;
+		private Player.PlayerPage PlayerPage;
 	}
 }
 

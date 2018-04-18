@@ -19,13 +19,11 @@ namespace SpotifyRec.UI
 		}
 
 
-		public SettingsHost SettingsHost => MainController.SettingsHost;
-
-		private MainController _mainController;
-		public MainController MainController {
-			get => _mainController;
+		private SettingsHost _settingsHost;
+		public SettingsHost SettingsHost {
+			get => _settingsHost;
 			set {
-				if (_mainController != null)
+				if (_settingsHost != null)
 				{
 					//Note: Use Leave not LostFocus as it apparently works more sensibly
 					//Source: https://social.msdn.microsoft.com/Forums/en-US/dd023378-d700-4c5f-a5b5-072fd4de7903/lostfocus-vs-leave-events?forum=Vsexpressvb
@@ -43,9 +41,9 @@ namespace SpotifyRec.UI
 					SettingsHost.OutputFormatChanged     -= OnOutputFormatSettingChanged;
 				}
 
-				_mainController = value;
+				_settingsHost = value;
 
-				if (_mainController != null)
+				if (_settingsHost != null)
 				{
 					AdNamesTextBox.Leave        += OnAdNamesUIChanged;
 					SettingsHost.AdNamesChanged += OnAdNamesSettingChanged;

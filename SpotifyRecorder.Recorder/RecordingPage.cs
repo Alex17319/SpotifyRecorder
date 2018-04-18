@@ -69,19 +69,19 @@ namespace SpotifyRec.UI
 			if (IsRecording) StopRecording();
 		}
 
-		private RecordingTabController _mainController;
+		private RecordingTabController _recordingTabController;
 		public RecordingTabController RecordingTabController {
-			get => _mainController;
+			get => _recordingTabController;
 			set {
-				if (_mainController != null)
+				if (_recordingTabController != null)
 				{
-					OuputFolderPanel.PathChanged     += OnOutputFolderUIChanged;
-					SettingsHost.OutputFolderChanged += OnOutputFolderSettingChanged;
+					OuputFolderPanel.PathChanged     -= OnOutputFolderUIChanged;
+					SettingsHost.OutputFolderChanged -= OnOutputFolderSettingChanged;
 				}
 
-				_mainController = value;
+				_recordingTabController = value;
 
-				if (_mainController != null)
+				if (_recordingTabController != null)
 				{
 					OuputFolderPanel.PathChanged     += OnOutputFolderUIChanged;
 					SettingsHost.OutputFolderChanged += OnOutputFolderSettingChanged;
