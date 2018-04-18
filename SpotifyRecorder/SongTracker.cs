@@ -152,7 +152,7 @@ namespace SpotifyRec
 			};
 
 			//Remove the first song if MaxSongs has been reached
-			if (_songs.Count > MaxSongs) {
+			if (MaxSongs >= 0 && _songs.Count > MaxSongs) {
 				_songs.RemoveAt(0); //Inefficient but I can't think of a more efficient EASY way to do this
 			}
 		}
