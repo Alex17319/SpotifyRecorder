@@ -20,6 +20,33 @@ namespace SpotifyRec.UI
 
 		public SettingsHost SettingsHost => RecordingTabController.SettingsHost;
 
+		private RecordingTabController _recordingTabController;
+		public RecordingTabController RecordingTabController {
+			get => _recordingTabController;
+			set {
+				if (_recordingTabController != null)
+				{
+					//Unsubscribe <controller>, <controller>.<whatever> (eg. SettingsHost), etc based events
+					SettingsHost.OutputFolderChanged -= OnOutputFolderSettingChanged;
+				}
+
+				_recordingTabController = value;
+
+				if (_recordingTabController != null)
+				{
+					//Subscribe to events of type above
+					SettingsHost.OutputFolderChanged += OnOutputFolderSettingChanged;
+
+					//Update UI values to match backing data (the event only gets fired when it *changes*)
+					//Only needed for some events
+					OnOutputFolderSettingChanged(this, EventArgs.Empty);
+				}
+
+				//Define very simple one-line handlers for the events of the type above
+				void OnOutputFolderSettingChanged(object sender, EventArgs e) => OuputFolderPanel.Path     = SettingsHost.OutputFolder;
+			}
+		}
+
 		public RecordingPage()
 		{
 			InitializeComponent();
@@ -34,6 +61,10 @@ namespace SpotifyRec.UI
 				{
 					StartRecording();
 				}
+			};
+
+			OuputFolderPanel.PathChanged += delegate {
+				SettingsHost.OutputFolder = OuputFolderPanel.Path;
 			};
 		}
 
@@ -67,32 +98,6 @@ namespace SpotifyRec.UI
 		private void OnParentFormClosing(object sender, FormClosingEventArgs e)
 		{
 			if (IsRecording) StopRecording();
-		}
-
-		private RecordingTabController _recordingTabController;
-		public RecordingTabController RecordingTabController {
-			get => _recordingTabController;
-			set {
-				if (_recordingTabController != null)
-				{
-					OuputFolderPanel.PathChanged     -= OnOutputFolderUIChanged;
-					SettingsHost.OutputFolderChanged -= OnOutputFolderSettingChanged;
-				}
-
-				_recordingTabController = value;
-
-				if (_recordingTabController != null)
-				{
-					OuputFolderPanel.PathChanged     += OnOutputFolderUIChanged;
-					SettingsHost.OutputFolderChanged += OnOutputFolderSettingChanged;
-
-					//Update UI values to match settings
-					OnOutputFolderSettingChanged(this, EventArgs.Empty);
-				}
-
-				void OnOutputFolderUIChanged     (object sender, EventArgs e) => SettingsHost.OutputFolder = OuputFolderPanel.Path;
-				void OnOutputFolderSettingChanged(object sender, EventArgs e) => OuputFolderPanel.Path     = SettingsHost.OutputFolder;
-			}
 		}
 	}
 }

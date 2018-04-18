@@ -13,6 +13,7 @@ namespace SpotifyRec.Player
 		public Logger Logger { get; }
 
 		public SpotifyController SpotifyController { get; }
+		public SongHistoryTracker SongHistoryTracker { get; }
 
 		public PlayerTabController(SettingsHost settingsHost, SpotifyProcessManager spotifyProcessManager, Logger logger)
 		{
@@ -21,6 +22,12 @@ namespace SpotifyRec.Player
 			this.Logger = logger;
 
 			this.SpotifyController = new SpotifyController(spotifyProcessManager);
+
+			this.SongHistoryTracker = new SongHistoryTracker(
+				spotifyProcessManager,
+				settingsHost,
+				logger
+			);
 		}
 
 		public void RefreshOngoingProcesses()
