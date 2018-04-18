@@ -79,6 +79,7 @@ namespace SpotifyRec
 		public void RefreshOngoingProcesses()
 		{
 			RecordingTabController.RefreshOngoingProcesses();
+			PlayerTabController.RefreshOngoingProcesses();
 		}
 	}
 }

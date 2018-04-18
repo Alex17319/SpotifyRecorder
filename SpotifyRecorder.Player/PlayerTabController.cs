@@ -13,7 +13,7 @@ namespace SpotifyRec.Player
 		public Logger Logger { get; }
 
 		public SpotifyController SpotifyController { get; }
-		public SongHistoryTracker SongHistoryTracker { get; }
+		public SongTracker SongTracker { get; }
 
 		public PlayerTabController(SettingsHost settingsHost, SpotifyProcessManager spotifyProcessManager, Logger logger)
 		{
@@ -23,10 +23,13 @@ namespace SpotifyRec.Player
 
 			this.SpotifyController = new SpotifyController(spotifyProcessManager);
 
-			this.SongHistoryTracker = new SongHistoryTracker(
+			this.SongTracker = new SongTracker(
 				spotifyProcessManager,
-				settingsHost,
-				logger
+				settingsHost.SongClassificationInfo,
+				settingsHost.SongRefreshInterval,
+				logger,
+				maxSongs: 11 //Minimum suported non-infinite value
+				//There's no need to store songs for the player, just get notified when they change
 			);
 		}
 

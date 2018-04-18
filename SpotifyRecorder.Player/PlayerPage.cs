@@ -25,7 +25,7 @@ namespace SpotifyRec.Player
 				if (_playerTabController != null)
 				{
 					//Unsubscribe <controller>, <controller>.<whatever> (eg. SettingsHost), etc based events
-					PlayerTabController.SongHistoryTracker.SongChanged -= OnHistoryTrackerSongChanged;
+					PlayerTabController.SongTracker.SongChanged -= OnSongChanged;
 				}
 
 				_playerTabController = value;
@@ -33,7 +33,7 @@ namespace SpotifyRec.Player
 				if (_playerTabController != null)
 				{
 					//Subscribe to events of type above
-					PlayerTabController.SongHistoryTracker.SongChanged += OnHistoryTrackerSongChanged;
+					PlayerTabController.SongTracker.SongChanged += OnSongChanged;
 
 					//Update UI values to match backing data (the event only gets fired when it *changes*)
 					//Only needed for some events
@@ -55,25 +55,25 @@ namespace SpotifyRec.Player
 			this.VolUpButton    .Click += delegate { PlayerTabController.SpotifyController.VolumeUp  (  ); };
 			this.VolDownButton  .Click += delegate { PlayerTabController.SpotifyController.VolumeDown(  ); };
 			this.MuteButton     .Click += delegate { PlayerTabController.SpotifyController.MuteUnmute(  ); };
-
-			this.RecordHistoryCheckBox.CheckedChanged += delegate
-			{
-				if (this.RecordHistoryCheckBox.Checked) {
-					PlayerTabController.SongHistoryTracker.StartHistoryRecordingSession();
-				} else {
-					PlayerTabController.SongHistoryTracker.StopHistoryRecordingSession();
-				}
-			};
 		}
 
-		private void OnHistoryTrackerSongChanged(object sender, SongChangeEventArgs e)
+		private void OnSongChanged(object sender, SongChangeEventArgs e)
 		{
+			this.PlayerTabController.Logger.Log("Song changed. New song: " + e.NewSong?.CombinedName);
+
 			var combinedNewSongName = e.NewSong?.CombinedName;
 			if (string.IsNullOrEmpty(combinedNewSongName)) return;
 
-			AddToHistory(combinedNewSongName);
+			if (this.RecordHistoryCheckBox.Checked)
+			{
+				AddToHistory(combinedNewSongName);
+			}
 
-			if (IsInHistory(combinedNewSongName)) {
+			if (
+				(this.SkipDuplicatesCheckBox.Checked && IsInHistory(combinedNewSongName))
+				||
+				(this.FilterSongsCheckBox.Checked && IsInFilters(combinedNewSongName))
+			) {
 				this.PlayerTabController.SpotifyController.NextTrack();
 			}
 		}
@@ -87,9 +87,18 @@ namespace SpotifyRec.Player
 			}
 		}
 
-		private bool IsInHistory(string combinedNewSongName)
+		private bool IsInHistory(string combinedNewSongName) {
+			return SongNameIsLineInString(this.HistoryTextBox.Text, combinedNewSongName);
+		}
+
+		private bool IsInFilters(string combinedNewSongName) {
+			return SongNameIsLineInString(this.FiltersTextBox.Text, combinedNewSongName);
+		}
+
+		private bool SongNameIsLineInString(string str, string combinedNewSongName)
 		{
-			return Regex.IsMatch(combinedNewSongName, @"[\r\n]", RegexOptions.Multiline);
+			var sn = combinedNewSongName;
+			return Regex.IsMatch(str, $@"(^{sn}$|{sn}[\r\n]|[\r\n]{sn})", RegexOptions.Multiline);
 		}
 	}
 }

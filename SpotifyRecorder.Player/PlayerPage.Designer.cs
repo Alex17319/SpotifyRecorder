@@ -50,7 +50,7 @@
 			this.FilteringGroupBox = new System.Windows.Forms.GroupBox();
 			this.FiltersGroupBox = new System.Windows.Forms.GroupBox();
 			this.FiltersTextBox = new System.Windows.Forms.TextBox();
-			this.FilterCheckBox = new System.Windows.Forms.CheckBox();
+			this.FilterSongsCheckBox = new System.Windows.Forms.CheckBox();
 			this.DuplicateSkippingResizablePanel = new SpotifyRec.UI.ResizablePanel();
 			this.DuplicateSkippingGroupBox = new System.Windows.Forms.GroupBox();
 			this.HistoryGroupBox = new System.Windows.Forms.GroupBox();
@@ -309,16 +309,16 @@
 			this.SongFilteringResizablePanel.InnerPanel.Controls.Add(this.FilteringGroupBox);
 			this.SongFilteringResizablePanel.InnerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.SongFilteringResizablePanel.InnerPanel.Location = new System.Drawing.Point(0, 0);
-			this.SongFilteringResizablePanel.InnerPanel.MinimumSize = new System.Drawing.Size(0, 155);
+			this.SongFilteringResizablePanel.InnerPanel.MinimumSize = new System.Drawing.Size(0, 160);
 			this.SongFilteringResizablePanel.InnerPanel.Name = "InnerPanel";
-			this.SongFilteringResizablePanel.InnerPanel.Size = new System.Drawing.Size(347, 155);
+			this.SongFilteringResizablePanel.InnerPanel.Size = new System.Drawing.Size(347, 160);
 			this.SongFilteringResizablePanel.InnerPanel.TabIndex = 0;
-			this.SongFilteringResizablePanel.Location = new System.Drawing.Point(3, 275);
-			this.SongFilteringResizablePanel.MinimumSize = new System.Drawing.Size(0, 160);
+			this.SongFilteringResizablePanel.Location = new System.Drawing.Point(3, 280);
+			this.SongFilteringResizablePanel.MinimumSize = new System.Drawing.Size(0, 165);
 			this.SongFilteringResizablePanel.Name = "SongFilteringResizablePanel";
 			this.SongFilteringResizablePanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
 			this.SongFilteringResizablePanel.ResizerSizes = new System.Windows.Forms.Padding(0, 0, 0, 5);
-			this.SongFilteringResizablePanel.Size = new System.Drawing.Size(347, 160);
+			this.SongFilteringResizablePanel.Size = new System.Drawing.Size(347, 165);
 			this.SongFilteringResizablePanel.TabIndex = 5;
 			this.SongFilteringResizablePanel.Text = "resizablePanel2";
 			// 
@@ -326,11 +326,11 @@
 			// 
 			this.FilteringGroupBox.BackColor = System.Drawing.Color.Transparent;
 			this.FilteringGroupBox.Controls.Add(this.FiltersGroupBox);
-			this.FilteringGroupBox.Controls.Add(this.FilterCheckBox);
+			this.FilteringGroupBox.Controls.Add(this.FilterSongsCheckBox);
 			this.FilteringGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.FilteringGroupBox.Location = new System.Drawing.Point(0, 0);
 			this.FilteringGroupBox.Name = "FilteringGroupBox";
-			this.FilteringGroupBox.Size = new System.Drawing.Size(347, 155);
+			this.FilteringGroupBox.Size = new System.Drawing.Size(347, 160);
 			this.FilteringGroupBox.TabIndex = 0;
 			this.FilteringGroupBox.TabStop = false;
 			this.FilteringGroupBox.Text = "Song Filtering";
@@ -341,7 +341,7 @@
 			this.FiltersGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.FiltersGroupBox.Location = new System.Drawing.Point(3, 33);
 			this.FiltersGroupBox.Name = "FiltersGroupBox";
-			this.FiltersGroupBox.Size = new System.Drawing.Size(341, 119);
+			this.FiltersGroupBox.Size = new System.Drawing.Size(341, 124);
 			this.FiltersGroupBox.TabIndex = 3;
 			this.FiltersGroupBox.TabStop = false;
 			this.FiltersGroupBox.Text = "Filters (using Microsoft\'s version of Regex)";
@@ -353,19 +353,19 @@
 			this.FiltersTextBox.Multiline = true;
 			this.FiltersTextBox.Name = "FiltersTextBox";
 			this.FiltersTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.FiltersTextBox.Size = new System.Drawing.Size(335, 100);
+			this.FiltersTextBox.Size = new System.Drawing.Size(335, 105);
 			this.FiltersTextBox.TabIndex = 0;
 			// 
-			// FilterCheckBox
+			// FilterSongsCheckBox
 			// 
-			this.FilterCheckBox.AutoSize = true;
-			this.FilterCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.FilterCheckBox.Location = new System.Drawing.Point(3, 16);
-			this.FilterCheckBox.Name = "FilterCheckBox";
-			this.FilterCheckBox.Size = new System.Drawing.Size(341, 17);
-			this.FilterCheckBox.TabIndex = 0;
-			this.FilterCheckBox.Text = "Filter Songs";
-			this.FilterCheckBox.UseVisualStyleBackColor = true;
+			this.FilterSongsCheckBox.AutoSize = true;
+			this.FilterSongsCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.FilterSongsCheckBox.Location = new System.Drawing.Point(3, 16);
+			this.FilterSongsCheckBox.Name = "FilterSongsCheckBox";
+			this.FilterSongsCheckBox.Size = new System.Drawing.Size(341, 17);
+			this.FilterSongsCheckBox.TabIndex = 0;
+			this.FilterSongsCheckBox.Text = "Filter Songs";
+			this.FilterSongsCheckBox.UseVisualStyleBackColor = true;
 			// 
 			// DuplicateSkippingResizablePanel
 			// 
@@ -379,16 +379,16 @@
 			this.DuplicateSkippingResizablePanel.InnerPanel.Controls.Add(this.DuplicateSkippingGroupBox);
 			this.DuplicateSkippingResizablePanel.InnerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.DuplicateSkippingResizablePanel.InnerPanel.Location = new System.Drawing.Point(0, 0);
-			this.DuplicateSkippingResizablePanel.InnerPanel.MinimumSize = new System.Drawing.Size(0, 190);
+			this.DuplicateSkippingResizablePanel.InnerPanel.MinimumSize = new System.Drawing.Size(0, 195);
 			this.DuplicateSkippingResizablePanel.InnerPanel.Name = "InnerPanel";
-			this.DuplicateSkippingResizablePanel.InnerPanel.Size = new System.Drawing.Size(347, 190);
+			this.DuplicateSkippingResizablePanel.InnerPanel.Size = new System.Drawing.Size(347, 195);
 			this.DuplicateSkippingResizablePanel.InnerPanel.TabIndex = 0;
 			this.DuplicateSkippingResizablePanel.Location = new System.Drawing.Point(3, 80);
-			this.DuplicateSkippingResizablePanel.MinimumSize = new System.Drawing.Size(0, 195);
+			this.DuplicateSkippingResizablePanel.MinimumSize = new System.Drawing.Size(0, 200);
 			this.DuplicateSkippingResizablePanel.Name = "DuplicateSkippingResizablePanel";
 			this.DuplicateSkippingResizablePanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
 			this.DuplicateSkippingResizablePanel.ResizerSizes = new System.Windows.Forms.Padding(0, 0, 0, 5);
-			this.DuplicateSkippingResizablePanel.Size = new System.Drawing.Size(347, 195);
+			this.DuplicateSkippingResizablePanel.Size = new System.Drawing.Size(347, 200);
 			this.DuplicateSkippingResizablePanel.TabIndex = 4;
 			this.DuplicateSkippingResizablePanel.Text = "resizablePanel1";
 			// 
@@ -402,7 +402,7 @@
 			this.DuplicateSkippingGroupBox.Location = new System.Drawing.Point(0, 0);
 			this.DuplicateSkippingGroupBox.Name = "DuplicateSkippingGroupBox";
 			this.DuplicateSkippingGroupBox.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-			this.DuplicateSkippingGroupBox.Size = new System.Drawing.Size(347, 190);
+			this.DuplicateSkippingGroupBox.Size = new System.Drawing.Size(347, 195);
 			this.DuplicateSkippingGroupBox.TabIndex = 2;
 			this.DuplicateSkippingGroupBox.TabStop = false;
 			this.DuplicateSkippingGroupBox.Text = "Duplicate Skipping";
@@ -413,7 +413,7 @@
 			this.HistoryGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.HistoryGroupBox.Location = new System.Drawing.Point(7, 60);
 			this.HistoryGroupBox.Name = "HistoryGroupBox";
-			this.HistoryGroupBox.Size = new System.Drawing.Size(333, 125);
+			this.HistoryGroupBox.Size = new System.Drawing.Size(333, 130);
 			this.HistoryGroupBox.TabIndex = 2;
 			this.HistoryGroupBox.TabStop = false;
 			this.HistoryGroupBox.Text = "History (Duplicates to Skip)";
@@ -425,7 +425,7 @@
 			this.HistoryTextBox.Multiline = true;
 			this.HistoryTextBox.Name = "HistoryTextBox";
 			this.HistoryTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.HistoryTextBox.Size = new System.Drawing.Size(327, 106);
+			this.HistoryTextBox.Size = new System.Drawing.Size(327, 111);
 			this.HistoryTextBox.TabIndex = 0;
 			// 
 			// RecordHistoryCheckBox
@@ -514,7 +514,7 @@
 		private System.Windows.Forms.GroupBox FilteringGroupBox;
 		private System.Windows.Forms.GroupBox FiltersGroupBox;
 		private System.Windows.Forms.TextBox FiltersTextBox;
-		private System.Windows.Forms.CheckBox FilterCheckBox;
+		private System.Windows.Forms.CheckBox FilterSongsCheckBox;
 		private System.Windows.Forms.Panel panel6;
 		private UIComponents.CenteredPanel centeredPanel2;
 		private System.Windows.Forms.Panel panel9;
