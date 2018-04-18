@@ -11,6 +11,10 @@ namespace SpotifyRec
 {
 	public class SongTracker : IDisposable
 	{
+		/// <summary>
+		/// The maximum number of songs that will be stored at a given time. -1 if infinite.
+		/// Cannot be between 0 and 10 inclusive for internal functionality reasons.
+		/// </summary>
 		public int MaxSongs { get; }
 		public ReadOnlyCollection<SongInfo> Songs { get; }
 		private readonly List<SongInfo> _songs;
@@ -40,6 +44,15 @@ namespace SpotifyRec
 			Finished,
 		}
 
+		/// <summary></summary>
+		/// <param name="spotifyProcessManager"></param>
+		/// <param name="songClassificationInfo"></param>
+		/// <param name="refreshInterval"></param>
+		/// <param name="logger"></param>
+		/// <param name="maxSongs">
+		/// Note: -1 == infinite, and numbers between 0 and 10 inclusive are not allowed
+		/// (in order to guarantee current and future internal functionality)
+		/// </param>
 		public SongTracker(SpotifyProcessManager spotifyProcessManager, SongClassificationInfo songClassificationInfo, int refreshInterval, Logger logger, int maxSongs = -1)
 		{
 			if (maxSongs >= 0 && maxSongs <= 10) {
