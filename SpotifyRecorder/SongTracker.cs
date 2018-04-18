@@ -11,6 +11,7 @@ namespace SpotifyRec
 {
 	public class SongTracker : IDisposable
 	{
+		public int MaxSongs { get; }
 		public ReadOnlyCollection<SongInfo> Songs { get; }
 		private readonly List<SongInfo> _songs;
 
@@ -39,8 +40,19 @@ namespace SpotifyRec
 			Finished,
 		}
 
-		public SongTracker(SpotifyProcessManager spotifyProcessManager, SongClassificationInfo songClassificationInfo, int refreshInterval, Logger logger)
+		public SongTracker(SpotifyProcessManager spotifyProcessManager, SongClassificationInfo songClassificationInfo, int refreshInterval, Logger logger, int maxSongs = -1)
 		{
+			if (maxSongs >= 0 && maxSongs <= 10) {
+				throw new ArgumentOutOfRangeException(
+					nameof(maxSongs),
+					maxSongs,
+					"To guarantee correctness of current and any future internal functionality, "
+					+ nameof(maxSongs) + " cannot be between 0 and 10 inclusive"
+				);
+			}
+
+			this.MaxSongs = maxSongs;
+
 			this._songs = new List<SongInfo>();
 			this.Songs = _songs.AsReadOnly();
 
@@ -125,6 +137,11 @@ namespace SpotifyRec
 					)
 				);
 			};
+
+			//Remove the first song if MaxSongs has been reached
+			if (_songs.Count > MaxSongs) {
+				_songs.RemoveAt(0); //Inefficient but I can't think of a more efficient EASY way to do this
+			}
 		}
 
 		public void FinishTracking()
