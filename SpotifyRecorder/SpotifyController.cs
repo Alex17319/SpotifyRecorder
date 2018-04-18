@@ -64,14 +64,11 @@ namespace SpotifyRec
 			}
 		}
 
-		public void Play()
+		public void PlayPause()
 		{
-			PressKey(Keys.Play);
-		}
-
-		public void Pause()
-		{
-			PressKey(Keys.Pause);
+			//The Keys.Play and Keys.Pause keys have no effect on spotify,
+			//so we just have to use Keys.MediaPlayPause
+			PressKey(Keys.MediaPlayPause);
 		}
 
 		public void NextTrack(int num = 1)
