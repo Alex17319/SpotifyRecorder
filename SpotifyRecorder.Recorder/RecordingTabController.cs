@@ -10,7 +10,7 @@ namespace SpotifyRec.Recording
 	{
 		public SettingsHost SettingsHost { get; }
 		public SpotifyProcessManager SpotifyProcessManager { get; }
-		private readonly Logger _logger;
+		public Logger Logger { get; }
 
 		public RecordingHost RecordingHost { get; }
 		public SongGroupSplitterHost SongGroupSplitterHost { get; }
@@ -21,7 +21,7 @@ namespace SpotifyRec.Recording
 		{
 			this.SettingsHost = settingsHost;
 			this.SpotifyProcessManager = spotifyProcessManager;
-			this._logger = logger;
+			this.Logger = logger;
 
 			this.RecordingHost = new RecordingHost(settingsHost, spotifyProcessManager, logger);
 			this.SongGroupSplitterHost = new SongGroupSplitterHost(settingsHost, logger);
@@ -40,7 +40,7 @@ namespace SpotifyRec.Recording
 
 		public void RefreshOngoingProcesses()
 		{
-			_logger.Log("Refreshing recording tab's ongoing processes...", LogType.MinorMessage);
+			Logger.Log("Refreshing recording tab's ongoing processes...", LogType.MinorMessage);
 
 			this.SongGroupSplitterHost.RefreshOngoingProcesses();
 

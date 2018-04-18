@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Delegates\TryDelegate.cs" />
     <Compile Include="EnumerableExtensions.cs" />
+    <Compile Include="Enums\PlayState.cs" />
     <Compile Include="Events\AttemptEventArgs.cs" />
     <Compile Include="HashCodes.cs" />
     <Compile Include="Logging\ILogProvider.cs" />

@@ -10,7 +10,7 @@ namespace SpotifyRec.Player
 	{
 		public SettingsHost SettingsHost { get; }
 		public SpotifyProcessManager SpotifyProcessManager { get; }
-		private readonly Logger _logger;
+		public Logger Logger { get; }
 
 		public SpotifyController SpotifyController { get; }
 
@@ -18,14 +18,14 @@ namespace SpotifyRec.Player
 		{
 			this.SettingsHost = settingsHost;
 			this.SpotifyProcessManager = spotifyProcessManager;
-			this._logger = logger;
+			this.Logger = logger;
 
 			this.SpotifyController = new SpotifyController(spotifyProcessManager);
 		}
 
 		public void RefreshOngoingProcesses()
 		{
-			_logger.Log("Refreshing player tab's ongoing processes... (none to refresh)", LogType.MinorMessage);
+			Logger.Log("Refreshing player tab's ongoing processes... (none to refresh)", LogType.MinorMessage);
 		}
 	}
 }

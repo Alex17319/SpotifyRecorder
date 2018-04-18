@@ -26,7 +26,7 @@ namespace SpotifyRec
 		public PlayerTabController PlayerTabController { get; }
 
 		private readonly SpotifyProcessManager _spotifyProcessManager;
-		private readonly Logger _logger;
+		public Logger Logger { get; }
 
 		public event Logger LogMessageReceived;
 		private void FireLogMessageReceived(string message, LogType logType) {
@@ -48,27 +48,27 @@ namespace SpotifyRec
 				handler.Provider = this;
 			}
 
-			this._logger = (mesage, messageType) => LogMessageReceived?.Invoke(mesage, messageType);
+			this.Logger = (mesage, messageType) => LogMessageReceived?.Invoke(mesage, messageType);
 
 			this.SettingsFolder = Application.StartupPath; //StartupPath is just the folder, not the actual exe file path
 			this.SettingsHost = new SettingsHost(
 				SettingsLoader.Load(
 					settingsFolder: this.SettingsFolder,
-					logger: _logger
+					logger: Logger
 				)
 			);
 			this.SettingsSaver = new SettingsSaver(
 				settingsHost: this.SettingsHost,
 				settingsFolder: this.SettingsFolder,
 				saveDelay: 60000,
-				logger: _logger
+				logger: Logger
 			);
 			this.SettingsHost.AnySettingChanged += delegate { this.SettingsSaver.SaveAfterWaiting(); };
 
-			this._spotifyProcessManager = new SpotifyProcessManager(_logger);
+			this._spotifyProcessManager = new SpotifyProcessManager(Logger);
 
-			this.RecordingTabController = new RecordingTabController(this.SettingsHost, this._spotifyProcessManager, this._logger);
-			this.PlayerTabController = new PlayerTabController(this.SettingsHost, this._spotifyProcessManager, this._logger);
+			this.RecordingTabController = new RecordingTabController(this.SettingsHost, this._spotifyProcessManager, this.Logger);
+			this.PlayerTabController = new PlayerTabController(this.SettingsHost, this._spotifyProcessManager, this.Logger);
 		}
 
 		//	bool ILogProvider.HasBuffer => false;

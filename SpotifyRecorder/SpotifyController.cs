@@ -74,14 +74,39 @@ namespace SpotifyRec
 			PressKey(Keys.Pause);
 		}
 
-		public void NextTrack()
+		public void NextTrack(int num = 1)
 		{
-			PressKey(Keys.MediaNextTrack);
+			for (int i = 0; i < num; i++) {
+				PressKey(Keys.MediaNextTrack);
+			}
 		}
 
-		public void PrevTrack()
+		public void PrevTrack(int num = 1)
 		{
-			PressKey(Keys.MediaPreviousTrack);
+			for (int i = 0; i < num; i++) {
+				PressKey(Keys.MediaPreviousTrack);
+			}
+		}
+
+		public void VolumeUp(int num = 1)
+		{
+			for (int i = 0; i < num; i++) {
+				PressKey(Keys.VolumeUp);
+			}
+		}
+
+		public void VolumeDown(int num = 1)
+		{
+			for (int i = 0; i < num; i++) {
+				PressKey(Keys.VolumeDown);
+			}
+		}
+
+		public void MuteUnmute(int num = 1)
+		{
+			for (int i = 0; i < num; i++) {
+				PressKey(Keys.VolumeMute);
+			}
 		}
 	}
 }
