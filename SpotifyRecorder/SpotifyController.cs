@@ -64,6 +64,46 @@ namespace SpotifyRec
 			}
 		}
 
+		private void PressKeySequence(IEnumerable<Keys> keys)
+		{
+			const int PressIntervalMilliseconds = 100;
+			//When skipping songs in spotify:
+			//10ms fails completely (just acts like one press) (at least, the one time I tried it)
+			//50ms is sometimes slightly unreliable with just 10 song skips
+			//100ms can be off by a few with 80 skips but that's acceptable
+			//Also, whatever the setting there's lag from spotify trying to catch up,
+			//but that seems to mostly occur after all the presses have been done.
+
+			using (var e = keys.GetEnumerator())
+			{
+				if (e.MoveNext())
+				{
+					PressKey(e.Current);
+				}
+
+				if (e.MoveNext())
+				{
+					Task.Run(
+						async delegate
+						{
+							do
+							{
+								await Task.Delay(PressIntervalMilliseconds);
+								PressKey(e.Current);
+							} while (e.MoveNext());
+						}
+					);
+				}
+			}
+		}
+
+		private void PressKeyRepeatedly(Keys key, int num)
+		{
+			if (num < 1) return;
+			else if (num == 1) PressKey(key);
+			else PressKeySequence(Enumerable.Repeat(key, num));
+		}
+
 		public void PlayPause()
 		{
 			//The Keys.Play and Keys.Pause keys have no effect on spotify,
@@ -73,37 +113,27 @@ namespace SpotifyRec
 
 		public void NextTrack(int num = 1)
 		{
-			for (int i = 0; i < num; i++) {
-				PressKey(Keys.MediaNextTrack);
-			}
+			PressKeyRepeatedly(Keys.MediaNextTrack, num);
 		}
 
 		public void PrevTrack(int num = 1)
 		{
-			for (int i = 0; i < num; i++) {
-				PressKey(Keys.MediaPreviousTrack);
-			}
+			PressKeyRepeatedly(Keys.MediaPreviousTrack, num);
 		}
 
 		public void VolumeUp(int num = 1)
 		{
-			for (int i = 0; i < num; i++) {
-				PressKey(Keys.VolumeUp);
-			}
+			PressKeyRepeatedly(Keys.VolumeUp, num);
 		}
 
 		public void VolumeDown(int num = 1)
 		{
-			for (int i = 0; i < num; i++) {
-				PressKey(Keys.VolumeDown);
-			}
+			PressKeyRepeatedly(Keys.VolumeDown, num);
 		}
 
 		public void MuteUnmute(int num = 1)
 		{
-			for (int i = 0; i < num; i++) {
-				PressKey(Keys.VolumeMute);
-			}
+			PressKeyRepeatedly(Keys.VolumeMute, num);
 		}
 	}
 }

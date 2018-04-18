@@ -20,7 +20,7 @@ namespace SpotifyRec.Player
 			this.PlayPauseButton.Click += delegate { PlayerTabController.SpotifyController.PlayPause (  ); };
 			this.NextButton     .Click += delegate { PlayerTabController.SpotifyController.NextTrack (  ); };
 			this.PrevButton     .Click += delegate { PlayerTabController.SpotifyController.PrevTrack (  ); };
-			this.ReshuffleButton.Click += delegate { PlayerTabController.SpotifyController.NextTrack (50); };
+			this.ReshuffleButton.Click += delegate { PlayerTabController.SpotifyController.NextTrack (80); };
 			this.SkipManyButton .Click += delegate { PlayerTabController.SpotifyController.NextTrack (10); };
 			this.VolUpButton    .Click += delegate { PlayerTabController.SpotifyController.VolumeUp  (  ); };
 			this.VolDownButton  .Click += delegate { PlayerTabController.SpotifyController.VolumeDown(  ); };
