@@ -96,18 +96,22 @@ namespace SpotifyRec.Player
 			}
 		}
 
-		private bool IsInHistory(string combinedNewSongName) {
-			return SongNameIsLineInString(this.HistoryTextBox.Text, combinedNewSongName);
-		}
-
-		private bool IsInFilters(string combinedNewSongName) {
-			return SongNameIsLineInString(this.FiltersTextBox.Text, combinedNewSongName);
-		}
-
-		private bool SongNameIsLineInString(string str, string combinedNewSongName)
+		private bool IsInHistory(string combinedNewSongName)
 		{
 			var sn = combinedNewSongName;
-			return Regex.IsMatch(str, $@"(^{sn}$|{sn}[\r\n]|[\r\n]{sn})", RegexOptions.Multiline);
+			return Regex.IsMatch(
+				input: this.HistoryTextBox.Text,
+				pattern: $@"(^{sn}$|{sn}[\r\n]|[\r\n]{sn})",
+				options: RegexOptions.Multiline
+			);
+		}
+
+		private bool IsInFilters(string combinedNewSongName)
+		{
+			foreach (var filter in this.FiltersTextBox.Lines) {
+				if (Regex.IsMatch(combinedNewSongName, pattern: filter)) return true;
+			}
+			return false;
 		}
 	}
 }
