@@ -37,6 +37,9 @@ namespace SpotifyRec.Player
 
 					//Update UI values to match backing data (the event only gets fired when it *changes*)
 					//Only needed for some events
+					//Would be nice, but doesn't work, just have to pause and play again to add the first song
+					//	var currentSong = PlayerTabController.SongTracker.CurrentSong;
+					//	if (currentSong != null) AddToHistory(currentSong.Value.CombinedName);
 				}
 
 				//Define very simple one-line handlers for the events of the type above
@@ -60,6 +63,11 @@ namespace SpotifyRec.Player
 		private void OnSongChanged(object sender, SongChangeEventArgs e)
 		{
 			this.PlayerTabController.Logger.Log("Song changed. New song: " + e.NewSong?.CombinedName);
+
+			if (e.NewSong?.IsSong != true) return;
+			//No point attempting to skip ads, and definitely don't want to press skip when
+			//when someone pauses and the song changes to "Spotify" as skipping makes it start
+			//playing again...
 
 			var combinedNewSongName = e.NewSong?.CombinedName;
 			if (string.IsNullOrEmpty(combinedNewSongName)) return;
