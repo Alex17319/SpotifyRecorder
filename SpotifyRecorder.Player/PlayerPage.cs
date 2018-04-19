@@ -72,13 +72,16 @@ namespace SpotifyRec.Player
 			var combinedNewSongName = e.NewSong?.CombinedName;
 			if (string.IsNullOrEmpty(combinedNewSongName)) return;
 
-			if (
-				(this.SkipDuplicatesCheckBox.Checked && IsInHistory(combinedNewSongName))
-				||
-				(this.FilterSongsCheckBox.Checked && IsInFilters(combinedNewSongName))
-			) {
-				this.PlayerTabController.SpotifyController.NextTrack();
-				this.PlayerTabController.Logger.Log("Skipped duplicate song '" + combinedNewSongName + "'.");
+			if (e.OldSong?.CombinedName != "Spotify") //Don't skip after the user has just paused the music
+			{
+				if (
+					(this.SkipDuplicatesCheckBox.Checked && IsInHistory(combinedNewSongName))
+					||
+					(this.FilterSongsCheckBox.Checked && IsInFilters(combinedNewSongName))
+				) {
+					this.PlayerTabController.SpotifyController.NextTrack();
+					this.PlayerTabController.Logger.Log("Skipped duplicate song '" + combinedNewSongName + "'.");
+				}
 			}
 
 			//Make sure to do this AFTER checking to see if it should be skipped, otherwise every song gets skipped (oops)
