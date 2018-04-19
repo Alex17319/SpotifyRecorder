@@ -54,12 +54,12 @@ namespace SpotifyRec.UIComponents
 			}
 			this._oldParent = this.Parent;
 
-			//ApplyAlignment();
+			ApplyAlignment();
 		}
 
 		private void OnParentClientSizeChanged(object sender, EventArgs e)
 		{
-			//ApplyAlignment();
+			ApplyAlignment();
 		}
 
 		protected override void OnValidating(CancelEventArgs e)
@@ -71,7 +71,6 @@ namespace SpotifyRec.UIComponents
 
 		private void ApplyAlignment()
 		{
-			return;
 			if (this.Parent == null) return; //Occurs I think during initial deserialization, and maybe also in design time
 
 			if (_fractionalSize.Width  > 0.001) this.Width  = (int)Math.Round(this.Parent.ClientSize.Width  * _fractionalSize.Width );
