@@ -78,6 +78,7 @@ namespace SpotifyRec.Player
 				(this.FilterSongsCheckBox.Checked && IsInFilters(combinedNewSongName))
 			) {
 				this.PlayerTabController.SpotifyController.NextTrack();
+				this.PlayerTabController.Logger.Log("Skipped duplicate song '" + combinedNewSongName + "'.");
 			}
 
 			//Make sure to do this AFTER checking to see if it should be skipped, otherwise every song gets skipped (oops)
