@@ -125,7 +125,6 @@ namespace SpotifyRec.Player
 				var line = history.Substring(startIndex: i, length: lineLength);
 
 				if (line == combinedNewSongName) return true;
-				else this.PlayerTabController.Logger.Log("Line: '" + line + "' != song '" + combinedNewSongName + "'.");
 
 				i = eolPos + 1;
 
