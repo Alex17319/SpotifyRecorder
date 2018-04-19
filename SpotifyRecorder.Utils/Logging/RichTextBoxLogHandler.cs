@@ -42,11 +42,20 @@ namespace SpotifyRec.Logging
 				switch (messageType)
 				{
 					case LogType.Message:      TextBox.AppendText(fullMessage); break;
-					case LogType.MinorMessage: TextBox.AppendFormattedText(fullMessage, tb => tb.SelectionColor = Color.Gray  ); break;
-					case LogType.Warning:      TextBox.AppendFormattedText(fullMessage, tb => tb.SelectionColor = Color.Orange); break;
-					case LogType.Error:        TextBox.AppendFormattedText(fullMessage, tb => tb.SelectionColor = Color.Red   ); break;
+					case LogType.MinorMessage: TextBox.AppendFormattedText(fullMessage, GetColourFormatter(Color.Gray  )); break;
+					case LogType.Warning:      TextBox.AppendFormattedText(fullMessage, GetColourFormatter(Color.Orange)); break;
+					case LogType.Error:        TextBox.AppendFormattedText(fullMessage, GetColourFormatter(Color.Red   )); break;
 				}
 			}
+		}
+
+		private Func<RichTextBox, Action> GetColourFormatter(Color color)
+		{
+			return tb => {
+				var prevColor = tb.SelectionColor;
+				tb.SelectionColor = color;
+				return new Action(() => tb.SelectionColor = prevColor);
+			};
 		}
 	}
 }
