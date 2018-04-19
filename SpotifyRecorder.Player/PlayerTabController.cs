@@ -31,6 +31,7 @@ namespace SpotifyRec.Player
 				maxSongs: 11 //Minimum suported non-infinite value
 				//There's no need to store songs for the player, just get notified when they change
 			);
+			this.SongTracker.StartTracking();
 		}
 
 		public void RefreshOngoingProcesses()
