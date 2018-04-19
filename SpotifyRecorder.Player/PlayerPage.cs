@@ -72,17 +72,18 @@ namespace SpotifyRec.Player
 			var combinedNewSongName = e.NewSong?.CombinedName;
 			if (string.IsNullOrEmpty(combinedNewSongName)) return;
 
-			if (this.RecordHistoryCheckBox.Checked)
-			{
-				AddToHistory(combinedNewSongName);
-			}
-
 			if (
 				(this.SkipDuplicatesCheckBox.Checked && IsInHistory(combinedNewSongName))
 				||
 				(this.FilterSongsCheckBox.Checked && IsInFilters(combinedNewSongName))
 			) {
 				this.PlayerTabController.SpotifyController.NextTrack();
+			}
+
+			//Make sure to do this AFTER checking to see if it should be skipped, otherwise every song gets skipped (oops)
+			if (this.RecordHistoryCheckBox.Checked)
+			{
+				AddToHistory(combinedNewSongName);
 			}
 		}
 
