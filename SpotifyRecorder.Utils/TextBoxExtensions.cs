@@ -37,16 +37,6 @@ namespace SpotifyRec.Utils
 				length: textBox.TextLength - oldLength,
 				formatter: formatter
 			);
-
-			//	textBox.AppendText(text);
-			//	FormatRange(
-			//		textBox: textBox,
-			//		start: textBox.TextLength - text.Length,
-			//		length: text.Length,
-			//		formatter: formatter
-			//	);
-
-			textBox.AppendText($" oldLength: {oldLength}, textBox.TextLength: {textBox.TextLength}, text.Length: {text.Length}, textBox.TextLength - oldLength: {textBox.TextLength - oldLength}, textBox.TextLength - text.Length: {textBox.TextLength - text.Length}.");
 		}
 
 		/// <summary>
