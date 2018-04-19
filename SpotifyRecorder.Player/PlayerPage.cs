@@ -102,12 +102,35 @@ namespace SpotifyRec.Player
 
 		private bool IsInHistory(string combinedNewSongName)
 		{
-			var sn = combinedNewSongName;
-			return Regex.IsMatch(
-				input: this.HistoryTextBox.Text,
-				pattern: $@"(^{sn}$|{sn}[\r\n]|[\r\n]{sn})",
-				options: RegexOptions.Multiline
-			);
+			//Was using :
+			//	var sn = combinedNewSongName;
+			//	return Regex.IsMatch(
+			//		input: this.HistoryTextBox.Text,
+			//		pattern: $@"(^{sn}$|{sn}[\r\n]|[\r\n]{sn})",
+			//		options: RegexOptions.Multiline
+			//	);
+			//But this has a problem where it wouldn't match songs that had brackets (i.e. '(' or ')')
+			//in the name (didn't test other symbols). Idk how to fix the regex, will just do something
+			//else instead
+
+			var history = this.HistoryTextBox.Text; //Idk if this has to build stuff on every call but cache just in case
+			int i = 0;
+			while (true)
+			{
+				var eolPos = history.IndexOfAny(new[] { '\n', '\r' }, startIndex: i); //Find next end-of-line char
+
+				if (eolPos == -1) eolPos = history.Length;
+
+				var lineLength = eolPos - i;
+				var line = history.Substring(startIndex: i, length: lineLength);
+
+				if (line == combinedNewSongName) return true;
+				else this.PlayerTabController.Logger.Log("Line: '" + line + "' != song '" + combinedNewSongName + "'.");
+
+				i = eolPos + 1;
+
+				if (i >= history.Length) return false;
+			}
 		}
 
 		private bool IsInFilters(string combinedNewSongName)
