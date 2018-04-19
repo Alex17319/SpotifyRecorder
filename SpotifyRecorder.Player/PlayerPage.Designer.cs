@@ -302,6 +302,8 @@
 			// FilterSongsCheckBox
 			// 
 			this.FilterSongsCheckBox.AutoSize = true;
+			this.FilterSongsCheckBox.Checked = true;
+			this.FilterSongsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.FilterSongsCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
 			this.FilterSongsCheckBox.Location = new System.Drawing.Point(3, 16);
 			this.FilterSongsCheckBox.Name = "FilterSongsCheckBox";
@@ -388,6 +390,8 @@
 			// SkipDuplicatesCheckBox
 			// 
 			this.SkipDuplicatesCheckBox.AutoSize = true;
+			this.SkipDuplicatesCheckBox.Checked = true;
+			this.SkipDuplicatesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.SkipDuplicatesCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
 			this.SkipDuplicatesCheckBox.Location = new System.Drawing.Point(7, 18);
 			this.SkipDuplicatesCheckBox.Name = "SkipDuplicatesCheckBox";
