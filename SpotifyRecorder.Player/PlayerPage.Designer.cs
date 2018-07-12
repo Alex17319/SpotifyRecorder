@@ -31,6 +31,9 @@
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.MuteButton = new System.Windows.Forms.Button();
+			this.VolDownButton = new System.Windows.Forms.Button();
+			this.VolUpButton = new System.Windows.Forms.Button();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.panel4 = new System.Windows.Forms.Panel();
 			this.panel6 = new System.Windows.Forms.Panel();
@@ -53,9 +56,6 @@
 			this.HistoryTextBox = new System.Windows.Forms.TextBox();
 			this.RecordHistoryCheckBox = new System.Windows.Forms.CheckBox();
 			this.SkipDuplicatesCheckBox = new System.Windows.Forms.CheckBox();
-			this.MuteButton = new System.Windows.Forms.Button();
-			this.VolDownButton = new System.Windows.Forms.Button();
-			this.VolUpButton = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.panel2.SuspendLayout();
@@ -104,6 +104,45 @@
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(331, 21);
 			this.panel2.TabIndex = 13;
+			// 
+			// MuteButton
+			// 
+			this.MuteButton.AutoSize = true;
+			this.MuteButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.MuteButton.Dock = System.Windows.Forms.DockStyle.Left;
+			this.MuteButton.Location = new System.Drawing.Point(103, 0);
+			this.MuteButton.Margin = new System.Windows.Forms.Padding(0);
+			this.MuteButton.Name = "MuteButton";
+			this.MuteButton.Size = new System.Drawing.Size(101, 21);
+			this.MuteButton.TabIndex = 15;
+			this.MuteButton.Text = "Mute/Unmute 🔇 ";
+			this.MuteButton.UseVisualStyleBackColor = true;
+			// 
+			// VolDownButton
+			// 
+			this.VolDownButton.AutoSize = true;
+			this.VolDownButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.VolDownButton.Dock = System.Windows.Forms.DockStyle.Left;
+			this.VolDownButton.Location = new System.Drawing.Point(46, 0);
+			this.VolDownButton.Margin = new System.Windows.Forms.Padding(0);
+			this.VolDownButton.Name = "VolDownButton";
+			this.VolDownButton.Size = new System.Drawing.Size(57, 21);
+			this.VolDownButton.TabIndex = 16;
+			this.VolDownButton.Text = "Down 🔈-";
+			this.VolDownButton.UseVisualStyleBackColor = true;
+			// 
+			// VolUpButton
+			// 
+			this.VolUpButton.AutoSize = true;
+			this.VolUpButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.VolUpButton.Dock = System.Windows.Forms.DockStyle.Left;
+			this.VolUpButton.Location = new System.Drawing.Point(0, 0);
+			this.VolUpButton.Margin = new System.Windows.Forms.Padding(0);
+			this.VolUpButton.Name = "VolUpButton";
+			this.VolUpButton.Size = new System.Drawing.Size(46, 21);
+			this.VolUpButton.TabIndex = 17;
+			this.VolUpButton.Text = "Up 🔈+";
+			this.VolUpButton.UseVisualStyleBackColor = true;
 			// 
 			// panel3
 			// 
@@ -252,16 +291,16 @@
 			this.SongFilteringResizablePanel.InnerPanel.Controls.Add(this.FilteringGroupBox);
 			this.SongFilteringResizablePanel.InnerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.SongFilteringResizablePanel.InnerPanel.Location = new System.Drawing.Point(0, 0);
-			this.SongFilteringResizablePanel.InnerPanel.MinimumSize = new System.Drawing.Size(0, 175);
+			this.SongFilteringResizablePanel.InnerPanel.MinimumSize = new System.Drawing.Size(0, 180);
 			this.SongFilteringResizablePanel.InnerPanel.Name = "InnerPanel";
-			this.SongFilteringResizablePanel.InnerPanel.Size = new System.Drawing.Size(347, 175);
+			this.SongFilteringResizablePanel.InnerPanel.Size = new System.Drawing.Size(347, 180);
 			this.SongFilteringResizablePanel.InnerPanel.TabIndex = 0;
-			this.SongFilteringResizablePanel.Location = new System.Drawing.Point(3, 295);
-			this.SongFilteringResizablePanel.MinimumSize = new System.Drawing.Size(0, 180);
+			this.SongFilteringResizablePanel.Location = new System.Drawing.Point(3, 300);
+			this.SongFilteringResizablePanel.MinimumSize = new System.Drawing.Size(0, 185);
 			this.SongFilteringResizablePanel.Name = "SongFilteringResizablePanel";
 			this.SongFilteringResizablePanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
 			this.SongFilteringResizablePanel.ResizerSizes = new System.Windows.Forms.Padding(0, 0, 0, 5);
-			this.SongFilteringResizablePanel.Size = new System.Drawing.Size(347, 180);
+			this.SongFilteringResizablePanel.Size = new System.Drawing.Size(347, 185);
 			this.SongFilteringResizablePanel.TabIndex = 5;
 			this.SongFilteringResizablePanel.Text = "resizablePanel2";
 			// 
@@ -273,7 +312,7 @@
 			this.FilteringGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.FilteringGroupBox.Location = new System.Drawing.Point(0, 0);
 			this.FilteringGroupBox.Name = "FilteringGroupBox";
-			this.FilteringGroupBox.Size = new System.Drawing.Size(347, 175);
+			this.FilteringGroupBox.Size = new System.Drawing.Size(347, 180);
 			this.FilteringGroupBox.TabIndex = 0;
 			this.FilteringGroupBox.TabStop = false;
 			this.FilteringGroupBox.Text = "Song Filtering";
@@ -284,7 +323,7 @@
 			this.FiltersGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.FiltersGroupBox.Location = new System.Drawing.Point(3, 33);
 			this.FiltersGroupBox.Name = "FiltersGroupBox";
-			this.FiltersGroupBox.Size = new System.Drawing.Size(341, 139);
+			this.FiltersGroupBox.Size = new System.Drawing.Size(341, 144);
 			this.FiltersGroupBox.TabIndex = 3;
 			this.FiltersGroupBox.TabStop = false;
 			this.FiltersGroupBox.Text = "Filters (using Microsoft\'s version of Regex)";
@@ -296,7 +335,7 @@
 			this.FiltersTextBox.Multiline = true;
 			this.FiltersTextBox.Name = "FiltersTextBox";
 			this.FiltersTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.FiltersTextBox.Size = new System.Drawing.Size(335, 120);
+			this.FiltersTextBox.Size = new System.Drawing.Size(335, 125);
 			this.FiltersTextBox.TabIndex = 0;
 			// 
 			// FilterSongsCheckBox
@@ -324,16 +363,16 @@
 			this.DuplicateSkippingResizablePanel.InnerPanel.Controls.Add(this.DuplicateSkippingGroupBox);
 			this.DuplicateSkippingResizablePanel.InnerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.DuplicateSkippingResizablePanel.InnerPanel.Location = new System.Drawing.Point(0, 0);
-			this.DuplicateSkippingResizablePanel.InnerPanel.MinimumSize = new System.Drawing.Size(0, 210);
+			this.DuplicateSkippingResizablePanel.InnerPanel.MinimumSize = new System.Drawing.Size(0, 215);
 			this.DuplicateSkippingResizablePanel.InnerPanel.Name = "InnerPanel";
-			this.DuplicateSkippingResizablePanel.InnerPanel.Size = new System.Drawing.Size(347, 210);
+			this.DuplicateSkippingResizablePanel.InnerPanel.Size = new System.Drawing.Size(347, 215);
 			this.DuplicateSkippingResizablePanel.InnerPanel.TabIndex = 0;
 			this.DuplicateSkippingResizablePanel.Location = new System.Drawing.Point(3, 80);
-			this.DuplicateSkippingResizablePanel.MinimumSize = new System.Drawing.Size(0, 215);
+			this.DuplicateSkippingResizablePanel.MinimumSize = new System.Drawing.Size(0, 220);
 			this.DuplicateSkippingResizablePanel.Name = "DuplicateSkippingResizablePanel";
 			this.DuplicateSkippingResizablePanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
 			this.DuplicateSkippingResizablePanel.ResizerSizes = new System.Windows.Forms.Padding(0, 0, 0, 5);
-			this.DuplicateSkippingResizablePanel.Size = new System.Drawing.Size(347, 215);
+			this.DuplicateSkippingResizablePanel.Size = new System.Drawing.Size(347, 220);
 			this.DuplicateSkippingResizablePanel.TabIndex = 4;
 			this.DuplicateSkippingResizablePanel.Text = "resizablePanel1";
 			// 
@@ -347,7 +386,7 @@
 			this.DuplicateSkippingGroupBox.Location = new System.Drawing.Point(0, 0);
 			this.DuplicateSkippingGroupBox.Name = "DuplicateSkippingGroupBox";
 			this.DuplicateSkippingGroupBox.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
-			this.DuplicateSkippingGroupBox.Size = new System.Drawing.Size(347, 210);
+			this.DuplicateSkippingGroupBox.Size = new System.Drawing.Size(347, 215);
 			this.DuplicateSkippingGroupBox.TabIndex = 2;
 			this.DuplicateSkippingGroupBox.TabStop = false;
 			this.DuplicateSkippingGroupBox.Text = "Duplicate Skipping";
@@ -358,7 +397,7 @@
 			this.HistoryGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.HistoryGroupBox.Location = new System.Drawing.Point(7, 60);
 			this.HistoryGroupBox.Name = "HistoryGroupBox";
-			this.HistoryGroupBox.Size = new System.Drawing.Size(333, 145);
+			this.HistoryGroupBox.Size = new System.Drawing.Size(333, 150);
 			this.HistoryGroupBox.TabIndex = 2;
 			this.HistoryGroupBox.TabStop = false;
 			this.HistoryGroupBox.Text = "History (Duplicates to Skip)";
@@ -370,14 +409,12 @@
 			this.HistoryTextBox.Multiline = true;
 			this.HistoryTextBox.Name = "HistoryTextBox";
 			this.HistoryTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.HistoryTextBox.Size = new System.Drawing.Size(327, 126);
+			this.HistoryTextBox.Size = new System.Drawing.Size(327, 131);
 			this.HistoryTextBox.TabIndex = 0;
 			// 
 			// RecordHistoryCheckBox
 			// 
 			this.RecordHistoryCheckBox.AutoSize = true;
-			this.RecordHistoryCheckBox.Checked = true;
-			this.RecordHistoryCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.RecordHistoryCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
 			this.RecordHistoryCheckBox.Location = new System.Drawing.Point(7, 39);
 			this.RecordHistoryCheckBox.Name = "RecordHistoryCheckBox";
@@ -390,8 +427,6 @@
 			// SkipDuplicatesCheckBox
 			// 
 			this.SkipDuplicatesCheckBox.AutoSize = true;
-			this.SkipDuplicatesCheckBox.Checked = true;
-			this.SkipDuplicatesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.SkipDuplicatesCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
 			this.SkipDuplicatesCheckBox.Location = new System.Drawing.Point(7, 18);
 			this.SkipDuplicatesCheckBox.Name = "SkipDuplicatesCheckBox";
@@ -400,45 +435,6 @@
 			this.SkipDuplicatesCheckBox.TabIndex = 0;
 			this.SkipDuplicatesCheckBox.Text = "Skip Duplicates";
 			this.SkipDuplicatesCheckBox.UseVisualStyleBackColor = true;
-			// 
-			// MuteButton
-			// 
-			this.MuteButton.AutoSize = true;
-			this.MuteButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.MuteButton.Dock = System.Windows.Forms.DockStyle.Left;
-			this.MuteButton.Location = new System.Drawing.Point(103, 0);
-			this.MuteButton.Margin = new System.Windows.Forms.Padding(0);
-			this.MuteButton.Name = "MuteButton";
-			this.MuteButton.Size = new System.Drawing.Size(101, 21);
-			this.MuteButton.TabIndex = 15;
-			this.MuteButton.Text = "Mute/Unmute 🔇 ";
-			this.MuteButton.UseVisualStyleBackColor = true;
-			// 
-			// VolDownButton
-			// 
-			this.VolDownButton.AutoSize = true;
-			this.VolDownButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.VolDownButton.Dock = System.Windows.Forms.DockStyle.Left;
-			this.VolDownButton.Location = new System.Drawing.Point(46, 0);
-			this.VolDownButton.Margin = new System.Windows.Forms.Padding(0);
-			this.VolDownButton.Name = "VolDownButton";
-			this.VolDownButton.Size = new System.Drawing.Size(57, 21);
-			this.VolDownButton.TabIndex = 16;
-			this.VolDownButton.Text = "Down 🔈-";
-			this.VolDownButton.UseVisualStyleBackColor = true;
-			// 
-			// VolUpButton
-			// 
-			this.VolUpButton.AutoSize = true;
-			this.VolUpButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.VolUpButton.Dock = System.Windows.Forms.DockStyle.Left;
-			this.VolUpButton.Location = new System.Drawing.Point(0, 0);
-			this.VolUpButton.Margin = new System.Windows.Forms.Padding(0);
-			this.VolUpButton.Name = "VolUpButton";
-			this.VolUpButton.Size = new System.Drawing.Size(46, 21);
-			this.VolUpButton.TabIndex = 17;
-			this.VolUpButton.Text = "Up 🔈+";
-			this.VolUpButton.UseVisualStyleBackColor = true;
 			// 
 			// PlayerPage
 			// 
